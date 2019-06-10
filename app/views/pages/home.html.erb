@@ -1,2 +1,5 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>Blackjack</h1>
+<p>Create a new game</p>
+<% if logged_in? %>
+  <%= render "users/edit_profile" %>
+<% end %>

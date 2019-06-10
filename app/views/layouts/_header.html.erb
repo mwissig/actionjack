@@ -1,0 +1,13 @@
+<header><ul>
+  <li><%= link_to "home", root_path %></li>
+  <% if logged_in? %>
+  <li><%= link_to logout_path, method: :delete do %>
+        log out
+ <% end %>
+</li>
+ <% else %>
+ <li><%= link_to "log in", login_path %></li>
+<li><%= link_to "sign up", register_path %></li>
+ <% end %>
+ </ul>
+</header>

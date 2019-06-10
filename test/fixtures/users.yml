@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  username: MyString
+  password_digest: MyString
+  time_zone: MyString
+  email_confirmed: false
+  confirm_token: MyString
+  reset_digest: MyString
+  reset_sent_at: 2019-06-08 13:13:51
+  admin: false
+  banned_from_chat: false
+  ban_until: 2019-06-08 13:13:51
+  points: 1
+  wins: 1
+  losses: 1
+  time_since_daily_bonus: 2019-06-08 13:13:51
+  color: MyString
+
+two:
+  email: MyString
+  username: MyString
+  password_digest: MyString
+  time_zone: MyString
+  email_confirmed: false
+  confirm_token: MyString
+  reset_digest: MyString
+  reset_sent_at: 2019-06-08 13:13:51
+  admin: false
+  banned_from_chat: false
+  ban_until: 2019-06-08 13:13:51
+  points: 1
+  wins: 1
+  losses: 1
+  time_since_daily_bonus: 2019-06-08 13:13:51
+  color: MyString

@@ -1,0 +1,12 @@
+<div class="box">
+<h1>Sign up</h1>
+<%= simple_form_for User.new do |f| %>
+<small>Please enter a valid email address. We will not share this information with anyone.</small><br>
+  <%= f.email_field :email, placeholder: 'Enter your email address', require: true %><br>
+  <small>We will send you a confirmation email to activate your account.</small><br>
+<%= f.hidden_field(:time_zone, value: nil) %>
+  <%= f.password_field :password, placeholder: 'Create a password', require: true, minlength: 6 %><br>
+  <%= f.password_field :password_confirmation, placeholder: 'Repeat password to confirm', require: true, minlength: 6 %><br>
+  <%= f.submit 'Register' %>
+<% end %>
+</div>

@@ -1,0 +1,10 @@
+<div class="editprofile">
+<h1>Edit your profile</h1>
+<%= simple_form_for @current_user do |f| %>
+  <%= f.text_field :username %><br>
+<%= f.hidden_field(:time_zone, value: nil) %>
+Change chat text color<br>
+<%= f.input :color, require: true, as: :minicolors %>
+  <%= f.submit 'Edit' %>
+<% end %>
+</div>

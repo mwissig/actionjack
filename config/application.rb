@@ -17,3 +17,7 @@ module Actionblackjack
     # the framework and any gems in your application.
   end
 end
+
+Raven.configure do |config|
+  config.dsn = 'https://beb773556d764a4486c94c22d372013a:96fd75e6da64446e91b6cfb8cce30c09@sentry.io/1478151'
+end
