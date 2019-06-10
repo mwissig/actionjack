@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'lobbychats/new'
+  get 'lobbychats/edit'
+  get 'lobbychats/index'
+  get 'lobbychats/show'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
     delete 'logout' => 'sessions#destroy'

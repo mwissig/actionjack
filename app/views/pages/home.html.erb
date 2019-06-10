@@ -1,5 +1,21 @@
 <h1>Blackjack</h1>
 <p>Create a new game</p>
 <% if logged_in? %>
+Hello <%= @current_user.username %><br>
   <%= render "users/edit_profile" %>
 <% end %>
+<div id="lobby">
+  <div id='lobbychats'>
+<% @lobbychats.each do |chat| %>
+<div class="chat" style="color:<%= chat.user.color %>"><strong><%= chat.user.username %>: </strong><%= chat.body %></div>
+<% end %>
+</div>
+<div id="lobbyform">
+<%= form_for @lobbychat do |f| %>
+<%= f.text_field :body %>
+<%= f.button :submit do %>
+Send &#9166
+<% end %>
+<% end %>
+</div>
+</div>

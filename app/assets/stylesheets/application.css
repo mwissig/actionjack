@@ -14,7 +14,7 @@
  *= require_self
  *= require jquery.minicolors
  */
- 
+
  html {
    background-color: #1d0f0b;
    display: flex;
@@ -58,7 +58,19 @@ header {
    background-color: #062709;
    font-family: 'Roboto Condensed', sans-serif;
  }
-
+#lobby {
+  max-width: 40%;
+  height: 500px;
+  width: 400px;
+  background-color: white;
+  color: black;
+  float:right;
+}
+.chat {
+  border-bottom: 1px solid gray;
+  padding: 5px;
+  width: 100%;
+}
  header ul {
    display: flex;
    justify-content: space-around;

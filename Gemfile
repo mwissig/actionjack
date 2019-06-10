@@ -28,8 +28,8 @@ gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem "figaro"
-gem 'jquery-ui-rails'
-gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'jquery-rails'
+gem 'jquery-colorpicker-rails'
 gem 'jquery-minicolors-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
