@@ -1,4 +1,4 @@
-class Aclass UserMailer < ApplicationMailer
+class UserMailer < ApplicationMailer
   default :from => "auto.mailer.for.development@gmail.com"
 
 def registration_confirmation(user)

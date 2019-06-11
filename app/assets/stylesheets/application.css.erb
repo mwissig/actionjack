@@ -1,0 +1,132 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require jquery.minicolors
+ */
+html {
+  background-color: #c0c5dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  color: black;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.content {
+  margin-top: 3em;
+}
+
+h1, h2, h3 {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+}
+
+input {
+  border-radius: 3px;
+  padding: 3px 5px;
+  border: 1px solid gray;
+  margin: 3px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+header {
+  top: 0;
+  width: 100%;
+  margin: 0 auto;
+  position: fixed;
+  overflow: hidden;
+  border-bottom: 1px solid gray;
+  color: white;
+  background-color: #040e23;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+#lobby {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;S
+  max-width: 40%;
+  height: 500px;
+  width: 400px;
+  background-color: white;
+  color: black;
+  border: 1px solid gray;
+}
+
+#lobbyheader {
+  background-color: #040e23;
+  color: white;
+  padding: 5px;
+}
+
+#lobbyform {
+  position: absolute;
+  bottom: 20px;
+}
+
+#lobbyform input {
+  width: 300px;
+  border-radius: 3px;
+  padding: 3px 5px;
+  border: 1px solid gray;
+}
+
+#lobbyform button {
+  background-color: #040e23;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 3px 5px;
+}
+
+.chat {
+  border-bottom: 1px solid gray;
+  padding: 5px;
+  width: 90%;
+}
+
+header ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  height: 150px;
+  width: 100px;
+}
+
+.club, .spade {
+  color: black;
+}
+
+.heart, .diamond {
+  color: red;
+}

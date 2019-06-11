@@ -14,79 +14,169 @@
  *= require_self
  *= require jquery.minicolors
  */
+html {
+  background-color: #c0c5dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
- html {
-   background-color: #1d0f0b;
-   display: flex;
-   align-items: center;
-   justify-content: center;
- }
- body {
-   width: 100%;
-   height: 100%;
-   margin: 0 auto;
-   color: white;
- }
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  color: black;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
 .content {
-  margin-top:3em;
- }
- h1, h2, h3 {
-   font-family: 'Fascinate Inline', cursive;
-   color: white;
- }
- a {
-   text-decoration: none;
-   font-weight: bold;
-   color: white;
- }
- input {
-   border-radius: 3px;
-   padding: 5px;
-   margin: 3px;
-     font-family: 'Roboto Condensed', sans-serif;
- }
+  margin-top: 3em;
+}
+
+h1 {
+  font-family: 'Sedgwick Ave Display', cursive;
+  color: black;
+  font-weight: normal;
+}
+
+.headertext {
+  color: white;
+  margin: 0;
+  margin-top: -8px;
+  font-size: 22px;
+}
+
+h2, h3 {
+  font-family: 'Fascinate Inline', cursive;
+  color: black;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+}
+
+input {
+  border-radius: 3px;
+  padding: 3px 5px;
+  border: 1px solid gray;
+  margin: 3px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
 header {
-   top: 0;
-   width: 100%;
-   margin: 0 auto;
-   position: fixed;
-   background-color: white;
-   overflow: hidden;
-   border-bottom: 2px solid white;
-   border-radius: 10px;
-   color: white;
-   background-color: #062709;
-   font-family: 'Roboto Condensed', sans-serif;
- }
+  top: 0;
+  width: 100%;
+  height: 40px;
+  max-height: 40px;
+  margin: 0 auto;
+  position: fixed;
+  overflow: hidden;
+  border-bottom: 1px solid gray;
+  color: white;
+  background-color: #040e23;
+  background-image: url('nightjar.png');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
 #lobby {
-  max-width: 40%;
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+  S max-width: 40%;
   height: 500px;
   width: 400px;
   background-color: white;
   color: black;
-  float:right;
+  border: 1px solid gray;
+  overflow: hidden;
 }
+
+#lobbyheader {
+  height: 20px;
+  max-height: 20px;
+  overflow: hidden;
+}
+
+#lobbylist {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 442px;
+}
+#lobbylist::-webkit-scrollbar {
+  width: 10px;
+}
+
+#lobbylist::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#lobbylist::-webkit-scrollbar-thumb {
+  background: #040e23;
+}
+#lobbylist::-webkit-scrollbar-thumb:hover {
+  background: rgba(57, 87, 150, 0.35);
+}
+#lobbyheader {
+  background-color: #040e23;
+  color: white;
+  padding: 5px;
+}
+
+#lobbyform {
+  background-color: #040e23;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 28px;
+  max-height: 28px;
+  overflow: hidden;
+}
+
+#lobbyform input {
+  width: 310px;
+  border-radius: 3px;
+  padding: 3px 5px;
+  border: none;
+}
+
+#lobbyform button {
+  background-color: #040e23;
+  color: white;
+  border: none;
+  padding: 3px 5px;
+}
+
 .chat {
   border-bottom: 1px solid gray;
   padding: 5px;
   width: 100%;
 }
- header ul {
-   display: flex;
-   justify-content: space-around;
-   list-style: none;
- }
- .card {
-   background-color: white;
-   border: 1px solid black;
-   padding: 5px;
-   border-radius: 5px;
-   height: 150px;
-   width: 100px;
- }
- .club, .spade {
-   color: black;
- }
- .heart, .diamond {
-   color: red;
- }
+
+header ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  height: 150px;
+  width: 100px;
+}
+
+.club, .spade {
+  color: black;
+}
+
+.heart, .diamond {
+  color: red;
+}

@@ -1,0 +1,28 @@
+<div id="lobby">
+  <div id='lobbychats'>
+      <div id="lobbyheader">Lobby</div>
+      <div id="lobbylist">
+<% @lobbychats.each do |chat| %>
+<div class="chat" style="color:#<%= chat.user.color %>"><strong><%= chat.user.username %>: </strong><%= chat.body %></div>
+<% end %>
+</div>
+</div>
+
+<div id="lobbyform">
+  <% if logged_in? %>
+<%= form_for(@lobbychat, remote: true ) do |f| %>
+<%# f.hidden_field :user_id, value: @current_user.id %>
+<%= f.text_field :body %>
+<%= f.button :submit do %>
+Send &#9166
+<% end %>
+<% end %>
+
+</div>
+<% else %>
+<span style="color:white">You must be logged in to chat.</span>
+<% end %>
+</div>
+<script>
+  dragElement(document.getElementById("lobby"));
+  </script>

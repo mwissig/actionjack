@@ -10,11 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_08_171351) do
+ActiveRecord::Schema.define(version: 2019_06_11_201959) do
+
+  create_table "blackjacks", force: :cascade do |t|
+    t.integer "player_id"
+    t.string "room_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lobbychats", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "body"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "username"
+    t.string "color"
+    t.text "desc"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "username"
     t.string "password_digest"
     t.string "time_zone"
     t.boolean "email_confirmed", default: false
@@ -27,8 +50,7 @@ ActiveRecord::Schema.define(version: 2019_06_08_171351) do
     t.integer "points", default: 1000
     t.integer "wins", default: 0
     t.integer "losses", default: 0
-    t.datetime "time_since_daily_bonus", default: "2019-06-09 18:40:44"
-    t.string "color", default: "#000000"
+    t.datetime "time_since_daily_bonus", default: "2019-06-11 20:41:34"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

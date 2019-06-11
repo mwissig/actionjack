@@ -1,2 +1,9 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h2><%= @user.username %>'s profile</h2>
+<p>
+<%= @user.points %> points
+</p>
+<% if logged_in? %>
+<% if @user == @current_user %>
+  <%= render "users/edit_profile" %>
+  <% end %>
+    <% end %>

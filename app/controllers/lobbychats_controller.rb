@@ -4,22 +4,31 @@ class LobbychatsController < ApplicationController
   def index
   end
 
+  def new
+  end
+
   def create
-    @lobbychat = Lobbychat.new(lobbychat_params)
+          if logged_in?
+    @lobbychat = @current_user.lobbychats.build(lobbychat_params)
     if @lobbychat.save
       ActionCable.server.broadcast 'makelobbychat_channel',
-                                   body:  @lobbychat.body
+                                   body:  @lobbychat.body,
+                                   username: @lobbychat.user.username
      end
+    end
   end
 
   private
 
     def get_lobbychats
       @lobbychats = Lobbychat.all
-      @lobbychat = Lobbychat.new
+      if logged_in?
+        @lobbychat = @current_user.lobbychats.build(lobbychat_params)
+        @lobbychat.user_id = @current_user.id
+    end
     end
 
-    def post_params
-      params.require(:post).permit(:body)
+    def lobbychat_params
+      params.require(:lobbychat).permit(:body)
     end
 end

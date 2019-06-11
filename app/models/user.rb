@@ -1,12 +1,14 @@
 require 'bcrypt'
 class User < ApplicationRecord
     attr_accessor :remember_token, :activation_token, :reset_token
+    has_many :lobbychats
+    has_one :profile
   before_save :default_values
   before_save { self.email = email.downcase }
   def default_values
     self.time_zone ||= "Eastern Time (US & Canada)"
-    self.username ||= "Player" + self.id.to_s
   end
+
   has_secure_password
   validates :time_zone, presence: true, length: { minimum: 3 }
   validates :password, presence: true, length: { maximum: 32, minimum: 6 }

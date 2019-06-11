@@ -102,4 +102,8 @@ config.action_mailer.smtp_settings = {
 :enable_starttls_auto => true
 }
 config.action_mailer.default_url_options = { :host => 'crepuscular.herokuapp.com' }
+
+config.action_cable.url = 'wss://crepuscular.herokuapp.com/cable'
+config.action_cable.allowed_request_origins = [
+'https://crepuscular.herokuapp.com' ]
 end
