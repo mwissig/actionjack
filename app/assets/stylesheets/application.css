@@ -91,6 +91,55 @@ header {
   color: #caa741;
   font-size: 18px;
 }
+#slotmachine {
+text-align: center;
+margin: 0 auto;
+}
+#slotmachine button {
+  width: 400px;
+  height: 100px;
+  font-size: 50px;
+  text-align: center;
+}
+.big {
+  font-size: 30px;
+}
+#slotreel {
+  width: 80%;
+  background-color: gray;
+  margin: 0 auto;
+  padding: 1em 0;
+}
+#slotreel h3 {
+  font-size: 50px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+#slotreel p {
+  font-weight: normal;
+  color: black;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.bar {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: 0 5px;
+}
+.yellow {
+  color: yellow;
+}
+.gold {
+  color: #caa741;
+}
+.purple {
+  color: purple;
+}
+.red {
+  color: red;
+}
+.green {
+  color:green;
+}
 #lobby {
   position: absolute;
   right: 50px;
@@ -200,3 +249,28 @@ header ul {
 .heart, .diamond {
   color: red;
 }
+#games ul     	     {
+		list-style: none;
+    color: black;
+	     }
+
+#games ul li:nth-child(4n-3):before {
+		content: "\2660 \0020";
+    color: black;
+	     }
+#games ul li:nth-child(4n-2):before {
+       		content: "\2665 \0020";
+           color: red;
+       	     }
+ #games ul li:nth-child(4n-1):before {
+             		content: "\2663 \0020";
+                 color: black;
+             	     }
+#games ul li:nth-child(4n-0):before {
+                   		content: "\2666 \0020";
+                       color: red;
+                   	     }
+
+.box a {
+         color: black;
+       }

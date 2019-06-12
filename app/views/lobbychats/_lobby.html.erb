@@ -1,3 +1,7 @@
+<% if logged_in? %>
+    <%  @lobbychat = @current_user.lobbychats.new %>
+    <% end %>
+
 <div id="lobby">
   <div id='lobbychats'>
       <div id="lobbyheader">Lobby</div>

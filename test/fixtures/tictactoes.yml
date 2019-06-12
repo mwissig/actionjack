@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  x_id: 1
+  o_id: 1
+  a1: MyString
+  b1: MyString
+  c1: MyString
+  a2: MyString
+  b2: MyString
+  c2: MyString
+  a3: MyString
+  b3: MyString
+  c3: MyString
+  x_wins: 1
+  o_wins: 1
+
+two:
+  x_id: 1
+  o_id: 1
+  a1: MyString
+  b1: MyString
+  c1: MyString
+  a2: MyString
+  b2: MyString
+  c2: MyString
+  a3: MyString
+  b3: MyString
+  c3: MyString
+  x_wins: 1
+  o_wins: 1
