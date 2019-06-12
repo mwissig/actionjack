@@ -7,6 +7,14 @@
  <% end %>
 </li>
  <li><%= link_to "profile", user_path(@current_user) %></li>
+  <li><%= link_to inbox_path do %>
+    inbox
+    <% @notecount = @current_user.notifications.where(read: false).count %>
+    <% if @notecount > 0 %>
+    <sup class="notecount" id="notecount"><%= @notecount %></sup>
+  <% end %>
+    <% end %>
+</li>
  <li><%= link_to shop_path do %>
    shop <span class="points"><%= @current_user.points %> <i class="fas fa-coins"></i></span>
     <% end %>

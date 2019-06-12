@@ -2,6 +2,7 @@ require 'bcrypt'
 class User < ApplicationRecord
     attr_accessor :remember_token, :activation_token, :reset_token
     has_many :lobbychats
+    has_many :notifications
     has_one :profile
   before_save :default_values
   before_save { self.email = email.downcase }

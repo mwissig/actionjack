@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  sender_id: 1
+  body: MyText
+  game: MyString
+  game_id: 1
+  points: 1
+
+two:
+  user_id: 1
+  sender_id: 1
+  body: MyText
+  game: MyString
+  game_id: 1
+  points: 1

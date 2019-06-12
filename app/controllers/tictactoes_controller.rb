@@ -8,8 +8,23 @@ class TictactoesController < ApplicationController
   end
 
     def create
+      if logged_in?
       @tictactoe = Tictactoe.new(tictactoe_params)
       if @tictactoe.save
+        @notification = Notification.create(
+          user_id: @tictactoe.o_id,
+          sender_id: @tictactoe.x_id,
+          body: 'A new tic-tac-toe game has been created.',
+          game: 'tictactoe',
+          game_id: @tictactoe.id,
+          points: 0
+        )
+        if logged_in?
+      end
+      @to_user = User.find_by(id: @notification.user_id)
+      @notecount = @to_user.notifications.where(read: false).count
+          ActionCable.server.broadcast 'notifications_channel',
+                          notecount: @notecount
             redirect_to tictacto_path(@tictactoe)
       else
         render 'new'
@@ -17,6 +32,7 @@ class TictactoesController < ApplicationController
   flash.now[:error] = msg
       end
     end
+  end
 
   def edit
   end
@@ -116,7 +132,8 @@ p @winner
     @tictactoe.a1 = "o"
     @tictactoe.turn = "x"
     @tictactoe.save!
-    ActionCable.server.broadcast 'tictactoe_channel'
+        if @tictactoe.save
+    ActionCable.server.broadcast 'tictactoe_channel',
                            a1: @tictactoe.a1
  end
   else
@@ -138,6 +155,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.a2 = "x"
     @tictactoe.turn = "o"
     @tictactoe.save!
+            if @tictactoe.save
+    ActionCable.server.broadcast 'tictactoe_channel',
+                           a2: @tictactoe.a2
+ end
       else
     flash[:tictactoe] = "not valid move"
       end
@@ -150,6 +171,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.a2 = "o"
     @tictactoe.turn = "x"
     @tictactoe.save!
+            if @tictactoe.save
+    ActionCable.server.broadcast 'tictactoe_channel',
+                           a2: @tictactoe.a2
+ end
   else
 flash[:tictactoe] = "not valid move"
   end
@@ -169,6 +194,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.a3 = "x"
     @tictactoe.turn = "o"
     @tictactoe.save!
+            if @tictactoe.save
+    ActionCable.server.broadcast 'tictactoe_channel',
+                           a3: @tictactoe.a3
+ end
       else
     flash[:tictactoe] = "not valid move"
       end
@@ -181,6 +210,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.a3 = "o"
     @tictactoe.turn = "x"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   a3: @tictactoe.a3
+end
   else
 flash[:tictactoe] = "not valid move"
   end
@@ -200,6 +233,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.b1 = "x"
     @tictactoe.turn = "o"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   b1: @tictactoe.b1
+end
       else
     flash[:tictactoe] = "not valid move"
       end
@@ -212,6 +249,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.b1 = "o"
     @tictactoe.turn = "x"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   b1: @tictactoe.b1
+end
   else
 flash[:tictactoe] = "not valid move"
   end
@@ -231,6 +272,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.b2 = "x"
     @tictactoe.turn = "o"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   b2: @tictactoe.b2
+end
       else
     flash[:tictactoe] = "not valid move"
       end
@@ -243,6 +288,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.b2 = "o"
     @tictactoe.turn = "x"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   b2: @tictactoe.b2
+end
   else
 flash[:tictactoe] = "not valid move"
   end
@@ -262,6 +311,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.b3 = "x"
     @tictactoe.turn = "o"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   b3: @tictactoe.b3
+end
       else
     flash[:tictactoe] = "not valid move"
       end
@@ -274,6 +327,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.b3 = "o"
     @tictactoe.turn = "x"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   b3: @tictactoe.b3
+end
   else
 flash[:tictactoe] = "not valid move"
   end
@@ -293,6 +350,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.c1 = "x"
     @tictactoe.turn = "o"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   c1: @tictactoe.c1
+end
       else
     flash[:tictactoe] = "not valid move"
       end
@@ -305,6 +366,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.c1 = "o"
     @tictactoe.turn = "x"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   c1: @tictactoe.c1
+end
   else
 flash[:tictactoe] = "not valid move"
   end
@@ -324,6 +389,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.c2 = "x"
     @tictactoe.turn = "o"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   c2: @tictactoe.c2
+end
       else
     flash[:tictactoe] = "not valid move"
       end
@@ -336,6 +405,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.c2 = "o"
     @tictactoe.turn = "x"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   c2: @tictactoe.c2
+end
   else
 flash[:tictactoe] = "not valid move"
   end
@@ -355,6 +428,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.c3 = "x"
     @tictactoe.turn = "o"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   c3: @tictactoe.c3
+end
       else
     flash[:tictactoe] = "not valid move"
       end
@@ -367,6 +444,10 @@ flash[:tictactoe] = "not valid move"
     @tictactoe.c3 = "o"
     @tictactoe.turn = "x"
     @tictactoe.save!
+    if @tictactoe.save
+ActionCable.server.broadcast 'tictactoe_channel',
+                   c3: @tictactoe.c3
+end
   else
 flash[:tictactoe] = "not valid move"
   end

@@ -1,0 +1,13 @@
+<% if logged_in? %>
+  <div class="box cardsuits">
+  <h2>Notifications</h2>
+<ul>
+<% @notifications.each do |note| %>
+<% if note.game == 'tictactoe' %>
+<li>
+<%= link_to User.find_by(id: note.sender_id).profile.username, user_path(User.find_by(id: note.sender_id)) %> started <%= link_to "a game of tic-tac-toe with you", tictacto_path(note.game_id) %>.</li>
+<% end %>
+<% end %>
+</ul>
+</div>
+<% end %>

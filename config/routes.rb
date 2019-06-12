@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'notifications/new'
+  get 'inbox' => 'notifications#index'
+  get 'notifications/edit'
+  get 'notifications/show'
   get 'tictactoes/:id/a1' => 'tictactoes#a1'
   get 'tictactoes/:id/a2' => 'tictactoes#a2'
   get 'tictactoes/:id/a3' => 'tictactoes#a3'
