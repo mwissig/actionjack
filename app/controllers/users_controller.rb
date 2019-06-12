@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       @user.save(validate: false)
       UserMailer.registration_confirmation(@user).deliver
       flash[:success] = "Please confirm your email address to continue"
-      redirect_to login_path
+      redirect_to login_path(fallback_location: root_path)
     else
       render 'new'
       msg = @user.errors.full_messages
