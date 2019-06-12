@@ -1,10 +1,12 @@
 <div class="box cardsuits">
   <h2>Play Tic Tac Toe</h2>
 <%= render 'tictactoes/new' %>
+<% if @tictactoes.first != nil %>
 Play and watch ongoing games
 <ul>
 <% @tictactoes.each do |tic| %>
 <li><%= link_to User.find_by(id: tic.x_id).profile.username + ' vs ' + User.find_by(id: tic.o_id).profile.username, tictacto_path(tic) %></li>
+<% end %>
 <% end %>
 </ul>
 </div>
