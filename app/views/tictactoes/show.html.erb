@@ -5,7 +5,7 @@
       <% if @tictactoe.a1 != nil %>
         <%= @tictactoe.a1 %>
       <% else %>
-        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/a1', method: 'get') do %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/a1', method: 'get', remote: true) do %>
         <%= button_tag :submit do %>
           Play
           <% end %>

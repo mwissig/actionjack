@@ -100,6 +100,10 @@ p @winner
     @tictactoe.a1 = "x"
     @tictactoe.turn = "o"
     @tictactoe.save!
+    if @tictactoe.save
+       ActionCable.server.broadcast 'tictactoe_channel',
+                              a1: @tictactoe.a1
+    end
       else
     flash[:tictactoe] = "not valid move"
       end
@@ -112,6 +116,9 @@ p @winner
     @tictactoe.a1 = "o"
     @tictactoe.turn = "x"
     @tictactoe.save!
+    ActionCable.server.broadcast 'tictactoe_channel'
+                           a1: @tictactoe.a1
+ end
   else
 flash[:tictactoe] = "not valid move"
   end
