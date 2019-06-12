@@ -11,7 +11,7 @@ App.makelobbychat = App.cable.subscriptions.create "MakelobbychatChannel",
 
   received: (data) ->
     unless data.body.blank?
-      $('#lobbylist').append '<div class="chat"><strong>' + data.username + ':</strong> ' + data.body + '</div>'
+      $('#lobbylist').append '<div class="chat" style="color:#' + data.color + '"><strong>' + data.username + ':</strong> ' + data.body + '</div>'
     scroll_bottom()
     clear()
 

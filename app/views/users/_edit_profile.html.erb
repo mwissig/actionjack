@@ -1,10 +1,10 @@
-<div class="editprofile">
-<h1>Edit your profile</h1>
+<div id="editprofile" class="box">
+<h2>Edit your profile</h2>
 <%= form_for([@user, @user.profile]) do |f| %>
+Change display name <br>
   <%= f.text_field :username %><br>
-<%= f.hidden_field :time_zone, value: nil, required: true%>
-Change chat text color<br>
-<%= f.text_field :color, required: true %><br>
+Change chat text color
+<%= f.text_field :color, required: true, class: 'jscolor {mode:"HVS",position:"right"}' %><br>
   <%= f.submit 'Edit' %>
 <% end %>
 </div>

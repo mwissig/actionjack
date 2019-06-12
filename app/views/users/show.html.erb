@@ -1,7 +1,16 @@
-<h2><%= @user.username %>'s profile</h2>
-<p>
+<div class="box">
+  <h2><%= @user.profile.username %>'s profile</h2>
+<ul>
+  <li>
+  Account created <%= @user.created_at.strftime("%B %-d, %Y") %>
+  </li>
+
+  <li>
 <%= @user.points %> points
-</p>
+</li>
+
+</ul>
+</div>
 <% if logged_in? %>
 <% if @user == @current_user %>
   <%= render "users/edit_profile" %>

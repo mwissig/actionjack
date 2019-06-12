@@ -30,13 +30,16 @@ body {
 }
 
 .content {
+    margin: 5px;
   margin-top: 3em;
+
 }
 
 h1 {
   font-family: 'Sedgwick Ave Display', cursive;
   color: black;
   font-weight: normal;
+    margin: 2px auto;
 }
 
 .headertext {
@@ -47,9 +50,9 @@ h1 {
 }
 
 h2, h3 {
-  font-family: 'Fascinate Inline', cursive;
+  font-family: 'Roboto Condensed', sans-serif;
   color: black;
-  font-weight: normal;
+  margin: 2px auto;
 }
 
 a {
@@ -83,7 +86,11 @@ header {
   background-size: contain;
   font-family: 'Roboto Condensed', sans-serif;
 }
-
+.points {
+  font-weight: bold;
+  color: #caa741;
+  font-size: 18px;
+}
 #lobby {
   position: absolute;
   right: 50px;
@@ -151,7 +158,20 @@ header {
   border: none;
   padding: 3px 5px;
 }
-
+.box {
+  border: 1px solid gray;
+  padding: 5px;
+  width: 500px;
+  background-color: white;
+  position: relative;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+.jscolor {
+  width: 20px;
+  height: 20px;
+  color: transparent !important;
+}
 .chat {
   border-bottom: 1px solid gray;
   padding: 5px;

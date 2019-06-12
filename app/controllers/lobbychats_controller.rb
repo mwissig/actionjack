@@ -13,7 +13,8 @@ class LobbychatsController < ApplicationController
     if @lobbychat.save
       ActionCable.server.broadcast 'makelobbychat_channel',
                                    body:  @lobbychat.body,
-                                   username: @lobbychat.user.username
+                                   username: @lobbychat.user.profile.username,
+                                   color: @lobbychat.user.profile.color
      end
     end
   end

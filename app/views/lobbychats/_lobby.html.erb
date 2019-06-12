@@ -3,7 +3,7 @@
       <div id="lobbyheader">Lobby</div>
       <div id="lobbylist">
 <% @lobbychats.each do |chat| %>
-<div class="chat" style="color:#<%= chat.user.color %>"><strong><%= chat.user.username %>: </strong><%= chat.body %></div>
+<div class="chat" style="color:#<%= chat.user.profile.color %>"><strong><%= chat.user.profile.username %>: </strong><%= chat.body %></div>
 <% end %>
 </div>
 </div>

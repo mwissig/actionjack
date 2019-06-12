@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   resources :lobbychats do
   end
   resources :users do
+      resources :profiles do
+        
+      end
 
  delete 'delete' => 'users#destroy'
  member do
