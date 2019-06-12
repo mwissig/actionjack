@@ -1,0 +1,120 @@
+<div id="tictactoe" class="box">
+  <%= flash[:tictactoe].html_safe unless flash[:tictactoe].blank? %>
+  <div id="tictactoegrid">
+    <div class="tic" id="a1">
+      <% if @tictactoe.a1 != nil %>
+        <%= @tictactoe.a1 %>
+      <% else %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/a1', method: 'get') do %>
+        <%= button_tag :submit do %>
+          Play
+          <% end %>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="tic" id="a2">
+      <% if @tictactoe.a2 != nil %>
+        <%= @tictactoe.a2 %>
+      <% else %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/a2', method: 'get') do %>
+        <%= button_tag :submit do %>
+          Play
+          <% end %>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="tic" id="a3">
+      <% if @tictactoe.a3 != nil %>
+        <%= @tictactoe.a3 %>
+      <% else %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/a3', method: 'get') do %>
+        <%= button_tag :submit do %>
+          Play
+          <% end %>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="tic" id="b1">
+      <% if @tictactoe.b1 != nil %>
+        <%= @tictactoe.b1 %>
+      <% else %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/b1', method: 'get') do %>
+        <%= button_tag :submit do %>
+          Play
+          <% end %>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="tic" id="b2">
+      <% if @tictactoe.b2 != nil %>
+        <%= @tictactoe.b2 %>
+      <% else %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/b2', method: 'get') do %>
+        <%= button_tag :submit do %>
+          Play
+          <% end %>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="tic" id="b3">
+      <% if @tictactoe.b3 != nil %>
+        <%= @tictactoe.b3 %>
+      <% else %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/b3', method: 'get') do %>
+        <%= button_tag :submit do %>
+          Play
+          <% end %>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="tic" id="c1">
+      <% if @tictactoe.c1 != nil %>
+        <%= @tictactoe.c1 %>
+      <% else %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/c1', method: 'get') do %>
+        <%= button_tag :submit do %>
+          Play
+          <% end %>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="tic" id="c2">
+      <% if @tictactoe.c2 != nil %>
+        <%= @tictactoe.c2 %>
+      <% else %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/c2', method: 'get') do %>
+        <%= button_tag :submit do %>
+          Play
+          <% end %>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="tic" id="c3">
+      <% if @tictactoe.c3 != nil %>
+        <%= @tictactoe.c3 %>
+      <% else %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/c3', method: 'get') do %>
+        <%= button_tag :submit do %>
+          Play
+          <% end %>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="winschart">
+    <div>  <%= User.find_by(id: @tictactoe.x_id).profile.username %> (X)
+</div><div><%= User.find_by(id: @tictactoe.o_id).profile.username %> (O)</div>
+<div><%= @tictactoe.x_wins %> wins</div>
+    <div> <%= @tictactoe.o_wins %> wins</div>
+    </div>
+  <% if logged_in? %>
+  <% if @current_user.id == @tictactoe.x_id %>
+  You are playing as X
+  <% elsif @current_user.id == @tictactoe.o_id %>
+    You are playing as O
+      <% else %>
+      You are a spectator in this game
+      <% end %>
+      <% end %>
+</div>
+      <%= render "lobbychats/lobby" %>

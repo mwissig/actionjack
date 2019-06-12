@@ -47,7 +47,7 @@ end
       end
         redirect_to games_slots_path
       else
-      flash[:notice] = "You do not have enough points."
+      flash[:slots] = "You do not have enough points."
     end
   end
 end

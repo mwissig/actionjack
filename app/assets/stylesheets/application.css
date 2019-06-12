@@ -213,7 +213,7 @@ margin: 0 auto;
   width: 500px;
   background-color: white;
   position: relative;
-  margin-left: 20px;
+  margin: 0 auto;
   margin-bottom: 10px;
 }
 .jscolor {
@@ -249,24 +249,24 @@ header ul {
 .heart, .diamond {
   color: red;
 }
-#games ul     	     {
+.cardsuits ul     	     {
 		list-style: none;
     color: black;
 	     }
 
-#games ul li:nth-child(4n-3):before {
+.cardsuits ul li:nth-child(4n-3):before {
 		content: "\2660 \0020";
     color: black;
 	     }
-#games ul li:nth-child(4n-2):before {
+.cardsuits ul li:nth-child(4n-2):before {
        		content: "\2665 \0020";
            color: red;
        	     }
- #games ul li:nth-child(4n-1):before {
+ .cardsuits ul li:nth-child(4n-1):before {
              		content: "\2663 \0020";
                  color: black;
              	     }
-#games ul li:nth-child(4n-0):before {
+.cardsuits ul li:nth-child(4n-0):before {
                    		content: "\2666 \0020";
                        color: red;
                    	     }
@@ -274,3 +274,48 @@ header ul {
 .box a {
          color: black;
        }
+       #tictactoe {
+         text-align: center;
+         width: 310px;
+       }
+
+       #tictactoegrid {
+         display: grid;
+         grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(3, 100px);
+         grid-gap: 5px;
+         width: 500px;
+         margin: 0 auto;
+       }
+
+
+       .tic {
+         background-color: white;
+         border: 1px solid gray;
+         width: 100px;
+         height: 100px;
+         max-width: 100px;
+         max-height: 100px;
+         display: flex;
+align-items: center;
+justify-content: center;
+font-size: 50px;
+       }
+
+.tic button {
+  border: none;
+  background: transparent;
+  width: 100px;
+  height: 100px;
+  font-size: 20px;
+}
+.tic button:hover {
+  background-color: green;
+}
+.winschart {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  background-color: #e6d6d1;
+  padding: 3px;
+  width: 300px;
+}

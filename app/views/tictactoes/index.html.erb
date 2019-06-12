@@ -1,0 +1,10 @@
+<div class="box cardsuits">
+  <h1>Play Tic Tac Toe</h1>
+<%= render 'tictactoes/new' %>
+Play and watch ongoing games
+<ul>
+<% @tictactoes.each do |tic| %>
+<li><%= link_to User.find_by(id: tic.x_id).profile.username + ' vs ' + User.find_by(id: tic.o_id).profile.username, tictacto_path(tic) %></li>
+<% end %>
+</ul>
+</div>

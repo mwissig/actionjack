@@ -1,8 +1,8 @@
-<h2>Blackjack</h2>
-<p>Create a new game</p>
-<% if logged_in? %>
-Hello <%= @current_user.email %><br>
 
+<% if logged_in? %>
+<div class="box">
+Hello <%= @current_user.profile.username %><br>
+</div>
 <% end %>
       <%= render "lobbychats/lobby" %>
 
