@@ -29,8 +29,6 @@ gem 'redis',                   '3.3.1'
 gem 'bcrypt', '~> 3.1.7'
 gem "figaro"
 gem 'jquery-rails'
-gem 'jquery-colorpicker-rails'
-gem 'jquery-minicolors-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem "sentry-raven"
