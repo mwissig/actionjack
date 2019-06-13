@@ -2,7 +2,7 @@
 
 desc "Deletes old chats"
 task :delete_old_data => :environment do
-  puts "Deleting old posts"
+  puts "Deleting old data"
   Lobbychat.where('created_at < ?', 14.days.ago).each do |post|
     post.destroy
   end

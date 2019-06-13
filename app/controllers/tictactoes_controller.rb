@@ -47,8 +47,19 @@ class TictactoesController < ApplicationController
   end
 
   def show
+@user_x = User.find_by(id: @tictactoe.x_id)
+@user_o = User.find_by(id: @tictactoe.o_id)
+@grid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
+if !logged_in?
+  @current_user_status = "spectator"
+end
     @lobbychats = Lobbychat.all.last(200)
     if logged_in?
+      if @current_user == @user_x || @current_user == @user_o
+        @current_user_status = "player"
+      else
+        @current_user_status = "spectator"
+      end
           @lobbychat = @current_user.lobbychats.new
         end
     @winner ||= ""
