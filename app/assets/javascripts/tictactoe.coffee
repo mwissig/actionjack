@@ -24,6 +24,6 @@ App.tictactoe = App.cable.subscriptions.create "TictactoeChannel",
     if data.c1 != undefined
       document.getElementById('c1').innerHTML = data.c1
     if data.c2 != undefined
-      document.getElementById('c3').innerHTML = data.c2
+      document.getElementById('c2').innerHTML = data.c2
     if data.c3 != undefined
       document.getElementById('c3').innerHTML = data.c3
