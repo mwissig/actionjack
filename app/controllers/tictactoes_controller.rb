@@ -2,6 +2,7 @@ class TictactoesController < ApplicationController
 
     before_action :find_tictactoe, only: %i[show edit update a1 a2 a3 b1 b2 b3 c1 c2 c3]
     before_action :define_players, only: %i[show edit update a1 a2 a3 b1 b2 b3 c1 c2 c3]
+    before_action :win_conditions, only: %i[show edit update a1 a2 a3 b1 b2 b3 c1 c2 c3]
 
     def new
       @tictactoe = Tictactoe.new
@@ -70,115 +71,6 @@ class TictactoesController < ApplicationController
       end
     end
 
-
-    if @tictactoe.a1 == @tictactoe.a2 && @tictactoe.a1 == @tictactoe.a3
-      @winner = @tictactoe.a1
-    elsif @tictactoe.a1 == @tictactoe.b1 && @tictactoe.a1 == @tictactoe.c1
-      @winner = @tictactoe.a1
-    elsif @tictactoe.a1 == @tictactoe.b2 && @tictactoe.a1 == @tictactoe.c3
-      @winner = @tictactoe.a1
-    elsif @tictactoe.a2 == @tictactoe.b2 && @tictactoe.a2 == @tictactoe.c2
-      @winner = @tictactoe.a2
-    elsif @tictactoe.a3 == @tictactoe.b3 && @tictactoe.a3 == @tictactoe.c3
-      @winner = @tictactoe.a3
-    elsif @tictactoe.a3 == @tictactoe.b2 && @tictactoe.a3 == @tictactoe.c1
-      @winner = @tictactoe.a3
-    elsif @tictactoe.b1 == @tictactoe.b2 && @tictactoe.b1 == @tictactoe.b3
-      @winner = @tictactoe.b1
-    elsif @tictactoe.c1 == @tictactoe.c2 && @tictactoe.c1 == @tictactoe.c3
-      @winner = @tictactoe.c1
-
-    elsif @tictactoe.a1 != nil && @tictactoe.a2 != nil && @tictactoe.a3 != nil && @tictactoe.b1 != nil && @tictactoe.b2 != nil && @tictactoe.b3 != nil && @tictactoe.c1 != nil && @tictactoe.c2 != nil && @tictactoe.c3 != nil && @winner == nil
-      @winner = "none"
-    end
-
-if @winner == "none"
-  flash[:tictactoe] = "Tie"
-  @tictactoe.a1 = nil
-  @tictactoe.a2 = nil
-  @tictactoe.a3 = nil
-  @tictactoe.b1 = nil
-  @tictactoe.b2 = nil
-  @tictactoe.b3 = nil
-  @tictactoe.c1 = nil
-  @tictactoe.c2 = nil
-  @tictactoe.c3 = nil
-  @tictactoe.turn = ['x', 'o'].sample
-  @tictactoe.save!
-            if @tictactoe.save
-                ActionCable.server.broadcast 'tictactoe_channel',
-                            a1: nil,
-                            a2: "It's a draw.",
-                            a3: nil,
-                            b1: nil,
-                            b2: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>",
-                            b3: nil,
-                            c1: nil,
-                            c2: nil,
-                            c3: nil
-            end
-              @winner = nil
-end
-
-if @winner == "x"
-flash[:tictactoe] = @user_x.profile.username + " wins"
-        @tictactoe.increment!(:x_wins, 1)
-        @user_x.increment!(:points, 10)
-        @tictactoe.turn = "x"
-          @tictactoe.a1 = nil
-          @tictactoe.a2 = nil
-          @tictactoe.a3 = nil
-          @tictactoe.b1 = nil
-          @tictactoe.b2 = nil
-          @tictactoe.b3 = nil
-          @tictactoe.c1 = nil
-          @tictactoe.c2 = nil
-          @tictactoe.c3 = nil
-          @tictactoe.save!
-          if @tictactoe.save
-              ActionCable.server.broadcast 'tictactoe_channel',
-              a1: nil,
-              a2: "<span class='winner'>" + @user_x.profile.username + " won.</span>",
-              a3: nil,
-              b1: nil,
-              b2: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>",
-              b3: nil,
-              c1: nil,
-              c2: nil,
-              c3: nil
-          end
-          @winner = nil
-      end
-
-      if @winner == "o"
-                flash[:tictactoe] = @user_o.profile.username + " wins"
-        @tictactoe.increment!(:o_wins, 1)
-        @user_o.increment!(:points, 10)
-        @tictactoe.turn = "o"
-          @tictactoe.a1 = nil
-          @tictactoe.a2 = nil
-          @tictactoe.a3 = nil
-          @tictactoe.b1 = nil
-          @tictactoe.b2 = nil
-          @tictactoe.b3 = nil
-          @tictactoe.c1 = nil
-          @tictactoe.c2 = nil
-          @tictactoe.c3 = nil
-          @tictactoe.save!
-          if @tictactoe.save
-              ActionCable.server.broadcast 'tictactoe_channel',
-              a1: nil,
-              a2: "<span class='winner'>" + @user_o.profile.username + " won.</span>",
-              a3: nil,
-              b1: nil,
-              b2: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>",
-              b3: nil,
-              c1: nil,
-              c2: nil,
-              c3: nil
-          end
-          @winner = nil
-      end
   end
 # A method that writes the 9 mehtods: doesn't work
 #
@@ -447,5 +339,119 @@ end
      end
    end
  end
+
+ def win_conditions
+     if @tictactoe.a1 == @tictactoe.a2 && @tictactoe.a1 == @tictactoe.a3
+       @winner = @tictactoe.a1
+     elsif @tictactoe.a1 == @tictactoe.b1 && @tictactoe.a1 == @tictactoe.c1
+       @winner = @tictactoe.a1
+     elsif @tictactoe.a1 == @tictactoe.b2 && @tictactoe.a1 == @tictactoe.c3
+       @winner = @tictactoe.a1
+     elsif @tictactoe.a2 == @tictactoe.b2 && @tictactoe.a2 == @tictactoe.c2
+       @winner = @tictactoe.a2
+     elsif @tictactoe.a3 == @tictactoe.b3 && @tictactoe.a3 == @tictactoe.c3
+       @winner = @tictactoe.a3
+     elsif @tictactoe.a3 == @tictactoe.b2 && @tictactoe.a3 == @tictactoe.c1
+       @winner = @tictactoe.a3
+     elsif @tictactoe.b1 == @tictactoe.b2 && @tictactoe.b1 == @tictactoe.b3
+       @winner = @tictactoe.b1
+     elsif @tictactoe.c1 == @tictactoe.c2 && @tictactoe.c1 == @tictactoe.c3
+       @winner = @tictactoe.c1
+     elsif @tictactoe.a1 != nil && @tictactoe.a2 != nil && @tictactoe.a3 != nil && @tictactoe.b1 != nil && @tictactoe.b2 != nil && @tictactoe.b3 != nil && @tictactoe.c1 != nil && @tictactoe.c2 != nil && @tictactoe.c3 != nil && @winner == nil
+       @winner = "none"
+     end
+
+     if @winner == "none"
+       flash[:tictactoe] = "Tie"
+       @tictactoe.a1 = nil
+       @tictactoe.a2 = nil
+       @tictactoe.a3 = nil
+       @tictactoe.b1 = nil
+       @tictactoe.b2 = nil
+       @tictactoe.b3 = nil
+       @tictactoe.c1 = nil
+       @tictactoe.c2 = nil
+       @tictactoe.c3 = nil
+       @tictactoe.turn = ['x', 'o'].sample
+       @tictactoe.save!
+                 if @tictactoe.save
+                     ActionCable.server.broadcast 'tictactoe_channel',
+                                 a1: nil,
+                                 a2: "It's a draw.",
+                                 a3: nil,
+                                 b1: nil,
+                                 b2: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>",
+                                 b3: nil,
+                                 c1: nil,
+                                 c2: nil,
+                                 c3: nil
+                 end
+                   @winner = nil
+     end
+
+     if @winner == "x"
+     flash[:tictactoe] = @user_x.profile.username + " wins"
+             @tictactoe.increment!(:x_wins, 1)
+             @user_x.increment!(:points, 10)
+             @tictactoe.turn = "x"
+               @tictactoe.a1 = nil
+               @tictactoe.a2 = nil
+               @tictactoe.a3 = nil
+               @tictactoe.b1 = nil
+               @tictactoe.b2 = nil
+               @tictactoe.b3 = nil
+               @tictactoe.c1 = nil
+               @tictactoe.c2 = nil
+               @tictactoe.c3 = nil
+               @tictactoe.save!
+               if @tictactoe.save
+                   ActionCable.server.broadcast 'tictactoe_channel',
+                   a1: nil,
+                   a2: "<span class='winner'>" + @user_x.profile.username + " won.</span>",
+                   a3: nil,
+                   b1: nil,
+                   b2: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>",
+                   b3: nil,
+                   c1: nil,
+                   c2: nil,
+                   c3: nil
+               end
+               @winner = nil
+           end
+
+           if @winner == "o"
+                     flash[:tictactoe] = @user_o.profile.username + " wins"
+             @tictactoe.increment!(:o_wins, 1)
+             @user_o.increment!(:points, 10)
+             @tictactoe.turn = "o"
+               @tictactoe.a1 = nil
+               @tictactoe.a2 = nil
+               @tictactoe.a3 = nil
+               @tictactoe.b1 = nil
+               @tictactoe.b2 = nil
+               @tictactoe.b3 = nil
+               @tictactoe.c1 = nil
+               @tictactoe.c2 = nil
+               @tictactoe.c3 = nil
+               @tictactoe.save!
+               if @tictactoe.save
+                   ActionCable.server.broadcast 'tictactoe_channel',
+                   a1: nil,
+                   a2: "<span class='winner'>" + @user_o.profile.username + " won.</span>",
+                   a3: nil,
+                   b1: nil,
+                   b2: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>",
+                   b3: nil,
+                   c1: nil,
+                   c2: nil,
+                   c3: nil
+               end
+               @winner = nil
+           end
+
+
+   end
+
+
 
 end
