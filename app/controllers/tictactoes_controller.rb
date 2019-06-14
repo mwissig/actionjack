@@ -71,25 +71,25 @@ class TictactoesController < ApplicationController
     end
 
 
-      if @tictactoe.a1 == @tictactoe.a2 && @tictactoe.a2 == @tictactoe.a3
-      	@winner = @tictactoe.a1
-      elsif @tictactoe.b1 == @tictactoe.b2 && @tictactoe.b2 == @tictactoe.b3
-      	@winner = @tictactoe.b1
-      elsif @tictactoe.c1 == @tictactoe.c2 && @tictactoe.c2 == @tictactoe.c3
-      	@winner = @tictactoe.c1
-      elsif @tictactoe.a1 == @tictactoe.b1 && @tictactoe.b1 == @tictactoe.c1
-      	@winner = @tictactoe.a1
-      elsif @tictactoe.a2 == @tictactoe.b2 && @tictactoe.b2 == @tictactoe.c2
-      	@winner = @tictactoe.a2
-      elsif @tictactoe.a3 == @tictactoe.b3 && @tictactoe.b3 == @tictactoe.c3
-      	@winner = @tictactoe.a3
-      elsif @tictactoe.a1 == @tictactoe.b2 && @tictactoe.b2 == @tictactoe.c3
-      	@winner = @tictactoe.a1
-      elsif @tictactoe.a3 == @tictactoe.b2 && @tictactoe.b2 == @tictactoe.c1
-      	@winner = @tictactoe.a3
-      elsif @tictactoe.a1 != nil && @tictactoe.a2 != nil && @tictactoe.a3 != nil && @tictactoe.b1 != nil && @tictactoe.b2 != nil && @tictactoe.b3 != nil && @tictactoe.c1 != nil && @tictactoe.c2 != nil && @tictactoe.c3 != nil && @winner == nil
-        @winner = "none"
-      end
+    if @tictactoe.a1 == @tictactoe.a2 && @tictactoe.a2 == @tictactoe.a3
+      @winner = @tictactoe.a1
+    elsif @tictactoe.b1 == @tictactoe.b2 && @tictactoe.b2 == @tictactoe.b3
+      @winner = @tictactoe.b1
+    elsif @tictactoe.c1 == @tictactoe.c2 && @tictactoe.c2 == @tictactoe.c3
+      @winner = @tictactoe.c1
+    elsif @tictactoe.a1 == @tictactoe.b1 && @tictactoe.b1 == @tictactoe.c1
+      @winner = @tictactoe.a1
+    elsif @tictactoe.a2 == @tictactoe.b2 && @tictactoe.b2 == @tictactoe.c2
+      @winner = @tictactoe.a2
+    elsif @tictactoe.a3 == @tictactoe.b3 && @tictactoe.b3 == @tictactoe.c3
+      @winner = @tictactoe.a3
+    elsif @tictactoe.a1 == @tictactoe.b2 && @tictactoe.b2 == @tictactoe.c3
+      @winner = @tictactoe.a1
+    elsif @tictactoe.a3 == @tictactoe.b2 && @tictactoe.b2 == @tictactoe.c1
+      @winner = @tictactoe.a3
+    elsif @tictactoe.a1 != nil && @tictactoe.a2 != nil && @tictactoe.a3 != nil && @tictactoe.b1 != nil && @tictactoe.b2 != nil && @tictactoe.b3 != nil && @tictactoe.c1 != nil && @tictactoe.c2 != nil && @tictactoe.c3 != nil && @winner == nil
+      @winner = "none"
+    end
 
 if @winner == "none"
   flash[:tictactoe] = "Tie"
@@ -103,7 +103,6 @@ if @winner == "none"
   @tictactoe.c2 = nil
   @tictactoe.c3 = nil
   @tictactoe.turn = ['x', 'o'].sample
-  @winner = nil
   @tictactoe.save!
             if @tictactoe.save
                 ActionCable.server.broadcast 'tictactoe_channel',
@@ -117,6 +116,7 @@ if @winner == "none"
                             c2: nil,
                             c3: nil
             end
+              @winner = nil
 end
 
 if @winner == "x"
