@@ -3,7 +3,36 @@
 <div class="box">
 Hello <%= @current_user.profile.username %><br>
 </div>
+
+<div class="box cardsuits">
+  <h3>Recently Updated Games</h3>
+
+  <% @recent_tictactoes.each do |tic| %>
+
+  <% @user_x = User.find_by(id: tic.x_id) %>
+  <% @user_o = User.find_by(id: tic.o_id) %>
+    <div class="miniticContainer">
+    <div class="miniticgrid">
+      <% @grid.each do |coords| %>
+        <div>
+          <% p tic.send("#{coords}") %>
+          <% if tic.send("#{coords}") != nil %>
+            <%= tic.send("#{coords}") %>
+          <% end %>
+        </div>
+        <% end %>
+
+  </div>
+  <%= link_to @user_x.profile.username + ' vs ' + @user_o.profile.username, tictacto_path(tic) %>
+    </div>
+
+
 <% end %>
-      <%= render "lobbychats/lobby" %>
+
+
+
+
+<% end %>
+      <%# render "lobbychats/lobby" %>
 
 <!-- original nightjar image by https://www.sharpphotography.co.uk -->
