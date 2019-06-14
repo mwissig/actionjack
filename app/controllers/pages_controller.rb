@@ -6,7 +6,9 @@ class PagesController < ApplicationController
     @grid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
     if logged_in?
           @lobbychat = @current_user.lobbychats.new
+          @random_opponent = User.where.not(id: @current_user.id).sample
     end
+    @tictactoe = Tictactoe.new
   end
 
 def slots

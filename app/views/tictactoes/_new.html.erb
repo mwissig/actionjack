@@ -3,6 +3,6 @@
   <%= form_for @tictactoe do |f| %>
   <%= f.hidden_field :x_id, value: @current_user.id %>
   <%= f.hidden_field :o_id, value: @random_opponent.id %>
-    <%= f.submit "New game with random opponent" %>
+    <%= f.submit "Create new Tic Tac Toe game with random opponent" %>
   <% end %>
     <% end %>
