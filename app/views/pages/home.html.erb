@@ -5,7 +5,9 @@ Hello <%= @current_user.profile.username %><br>
 </div>
 
 <div class="box cardsuits">
+
   <h3>Recently Updated Games</h3>
+    <div class="minitic>">
 
   <% @recent_tictactoes.each do |tic| %>
 
@@ -30,6 +32,7 @@ Hello <%= @current_user.profile.username %><br>
 <% end %>
 
 
+</div>
 
 
 <% end %>

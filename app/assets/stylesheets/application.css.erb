@@ -160,9 +160,17 @@ header {
 .green {
   color: green;
 }
+.minitic {
+  display: flex;
+    flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0 auto;
+}
 .miniticContainer {
-  display: inline-block;
+display: inline-block;
   text-align: center;
+  margin: 5px auto;
 }
 .miniticgrid {
   display: grid;
@@ -174,9 +182,13 @@ header {
   background-color: black;
   grid-gap: 1px;
   margin: 0 auto;
+  margin-bottom: 3px;
 }
 .miniticgrid div {
   background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #lobby, #gamechat {

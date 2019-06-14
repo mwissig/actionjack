@@ -2,7 +2,7 @@
 class PagesController < ApplicationController
   def home
     @lobbychats = Lobbychat.all.last(200)
-    @recent_tictactoes = Tictactoe.all.order(updated_at: :desc).last(5)
+    @recent_tictactoes = Tictactoe.all.order(updated_at: :asc).last(8)
     @grid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
     if logged_in?
           @lobbychat = @current_user.lobbychats.new
