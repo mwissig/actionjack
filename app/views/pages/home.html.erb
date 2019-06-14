@@ -4,7 +4,7 @@
 Hello <%= @current_user.profile.username %>
 <ul>
   <li><div class="inlineButton">
-<%= button_to "Play slot machine", games_slots_path %></div></li>
+<%= link_to "Play slot machine", games_slots_path %></div></li>
 <li><div class="inlineButton">
 <%= render 'tictactoes/new' %></div></li>
 </ul>
