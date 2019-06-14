@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_12_195319) do
+ActiveRecord::Schema.define(version: 2019_06_13_224726) do
 
   create_table "blackjacks", force: :cascade do |t|
     t.integer "player_id"
     t.string "room_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "gamechats", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.string "game_type"
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

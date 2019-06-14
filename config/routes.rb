@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'notifications/new'
+
+
+
   get 'inbox' => 'notifications#index'
-  get 'notifications/edit'
-  get 'notifications/show'
+
   get 'tictactoes/:id/a1' => 'tictactoes#a1'
   get 'tictactoes/:id/a2' => 'tictactoes#a2'
   get 'tictactoes/:id/a3' => 'tictactoes#a3'
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   get 'tictactoes/:id/c1' => 'tictactoes#c1'
   get 'tictactoes/:id/c2' => 'tictactoes#c2'
   get 'tictactoes/:id/c3' => 'tictactoes#c3'
-
+get 'users' => 'users#index'
   get 'tictactoes/new'
   get 'tictactoes/edit'
   get 'tictactoes/index'
@@ -43,6 +44,8 @@ Rails.application.routes.draw do
   root 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :lobbychats do
+  end
+  resources :gamechats do
   end
   resources :tictactoes do
   end

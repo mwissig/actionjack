@@ -5,7 +5,7 @@
 <div id="lobby">
   <div id='lobbychats'>
       <div id="lobbyheader">Lobby</div>
-      <div id="lobbylist">
+      <div id="lobbylist" class="chatlist lobbychatlist">
 <% @lobbychats.each do |chat| %>
 <div class="chat" style="color:#<%= chat.user.profile.color %>"><strong><%= chat.user.profile.username %>: </strong><%= chat.body %></div>
 <% end %>

@@ -1,0 +1,37 @@
+<% if logged_in? %>
+    <%  @gamechat = @current_user.gamechats.new %>
+    <% end %>
+
+<div id="gamechat">
+  <div id='gamechats'>
+      <div id="gamechatheader">
+<% if @gametype == "tictactoe" %>
+Tic Tac Toe <%= @user_x.profile.username %> vs <%= @user_o.profile.username %> Game Chat
+<% end %>
+      </div>
+      <div id="gamechatlist_<%= @gametype %>_<%= @gameid %>" class="chatlist gamechatlist">
+<% @gamechats.each do |chat| %>
+<div class="chat" style="color:#<%= chat.user.profile.color %>"><strong><%= chat.user.profile.username %>: </strong><%= chat.body %></div>
+<% end %>
+</div>
+</div>
+
+<div id="gamechatform">
+  <% if logged_in? %>
+<%= form_for(@gamechat, remote: true ) do |f| %>
+<%= f.hidden_field :game_type, value: @gametype %>
+<%= f.hidden_field :game_id, value: @gameid %>
+<%= f.text_field :body %>
+<%= f.button :submit do %>
+Send &#9166
+<% end %>
+<% end %>
+
+</div>
+<% else %>
+<span style="color:white">You must be logged in to chat.</span>
+<% end %>
+</div>
+<script>
+  dragElement(document.getElementById("gamechat"));
+  </script>

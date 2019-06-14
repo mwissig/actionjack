@@ -161,7 +161,7 @@ header {
   color: green;
 }
 
-#lobby {
+#lobby, #gamechat {
   position: absolute;
   right: 50px;
   bottom: 50px;
@@ -174,41 +174,55 @@ header {
   overflow: hidden;
 }
 
-#lobbyheader {
+#gamechat {
+  right: auto;
+  left: 20px;
+  bottom: 50px;
+  height: 200px;
+  width: 600px;
+}
+
+#lobbyheader, #gamechatheader {
   height: 20px;
   max-height: 20px;
   overflow: hidden;
 }
 
-#lobbylist {
+.chatlist {
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 442px;
 }
 
-#lobbylist::-webkit-scrollbar {
+.lobbychatlist {
+  height: 442px;
+}
+.gamechatlist {
+    height: 142px;
+}
+
+.chatlist::-webkit-scrollbar {
   width: 10px;
 }
 
-#lobbylist::-webkit-scrollbar-track {
+.chatlist::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
-#lobbylist::-webkit-scrollbar-thumb {
+.chatlist::-webkit-scrollbar-thumb {
   background: #040e23;
 }
 
-#lobbylist::-webkit-scrollbar-thumb:hover {
+.chatlist::-webkit-scrollbar-thumb:hover {
   background: rgba(57, 87, 150, 0.35);
 }
 
-#lobbyheader {
+#lobbyheader, #gamechatheader {
   background-color: #040e23;
   color: white;
   padding: 5px;
 }
 
-#lobbyform {
+#lobbyform, #gamechatform  {
   background-color: #040e23;
   position: absolute;
   bottom: 0px;
@@ -218,14 +232,17 @@ header {
   overflow: hidden;
 }
 
-#lobbyform input {
+#lobbyform input, #gamechatform input {
   width: 310px;
   border-radius: 3px;
   padding: 3px 5px;
   border: none;
 }
+#gamechatform input {
+    width: 510px;
+}
 
-#lobbyform button {
+#lobbyform button, #gamechatform button {
   background-color: #040e23;
   color: white;
   border: none;

@@ -6,10 +6,10 @@
       <% if @tictactoe.send("#{coords}") != nil %>
         <%= @tictactoe.send("#{coords}") %>
       <% else %>
-      <% if @current_user_status != "spectator" %>
+            <% if logged_in? && @current_user_status != "spectator" %>
         <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/' + coords, method: 'get') do %>
         <%= button_tag :submit do %>
-          Play
+          Play <%= @current_user_mark.upcase %>
           <% end %>
           <% end %>
         <% end %>
@@ -36,3 +36,4 @@
   <% end %>
 </div>
       <%= render "lobbychats/lobby" %>
+      <%= render "gamechats/gamechat" %>
