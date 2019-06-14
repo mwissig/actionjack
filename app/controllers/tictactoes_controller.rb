@@ -52,7 +52,6 @@ class TictactoesController < ApplicationController
     @gameid = params[:id]
     @gamechats = Gamechat.where("game_type = ? and game_id = ?", "tictactoe", params[:id]).last(200)
     @grid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
-    @winner ||= ""
     if !logged_in?
       @current_user_status = "spectator"
     end
@@ -88,8 +87,8 @@ class TictactoesController < ApplicationController
       	@winner = @tictactoe.a1
       elsif @tictactoe.a3 == @tictactoe.b2 && @tictactoe.b2 == @tictactoe.c1
       	@winner = @tictactoe.a3
-      elsif @tictactoe.a1 != nil && @tictactoe.a2 != nil && @tictactoe.a3 != nil && @tictactoe.b1 != nil && @tictactoe.b2 != nil && @tictactoe.b3 != nil && @tictactoe.c1 != nil && @tictactoe.c2 != nil && @tictactoe.c3 != nil && @winner == ""
-          @winner = "none"
+      elsif @tictactoe.a1 != nil && @tictactoe.a2 != nil && @tictactoe.a3 != nil && @tictactoe.b1 != nil && @tictactoe.b2 != nil && @tictactoe.b3 != nil && @tictactoe.c1 != nil && @tictactoe.c2 != nil && @tictactoe.c3 != nil && @winner == nil
+        @winner = "none"
       end
 
 if @winner == "none"
@@ -104,7 +103,7 @@ if @winner == "none"
   @tictactoe.c2 = nil
   @tictactoe.c3 = nil
   @tictactoe.turn = ['x', 'o'].sample
-  @winner = ""
+  @winner = nil
   @tictactoe.save!
             if @tictactoe.save
                 ActionCable.server.broadcast 'tictactoe_channel',
@@ -120,7 +119,7 @@ if @winner == "none"
             end
 end
 
-      if @winner == "x"
+if @winner == "x"
 flash[:tictactoe] = @user_x.profile.username + " wins"
         @tictactoe.increment!(:x_wins, 1)
         @user_x.increment!(:points, 10)
@@ -147,7 +146,7 @@ flash[:tictactoe] = @user_x.profile.username + " wins"
               c2: nil,
               c3: nil
           end
-          @winner = ""
+          @winner = nil
       end
 
       if @winner == "o"
@@ -177,7 +176,7 @@ flash[:tictactoe] = @user_x.profile.username + " wins"
               c2: nil,
               c3: nil
           end
-          @winner = ""
+          @winner = nil
       end
   end
 # A method that writes the 9 mehtods: doesn't work
