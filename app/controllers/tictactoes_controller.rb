@@ -107,7 +107,7 @@ if @winner == "none"
             if @tictactoe.save
                 ActionCable.server.broadcast 'tictactoe_channel',
                             a1: nil,
-                            a2: nil,
+                            a2: "It's a draw.",
                             a3: nil,
                             b1: nil,
                             b2: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>",
@@ -137,7 +137,7 @@ flash[:tictactoe] = @user_x.profile.username + " wins"
           if @tictactoe.save
               ActionCable.server.broadcast 'tictactoe_channel',
               a1: nil,
-              a2: nil,
+              a2: "<span class='winner'>" + @user_x.profile.username + " won.</span>",
               a3: nil,
               b1: nil,
               b2: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>",
@@ -167,7 +167,7 @@ flash[:tictactoe] = @user_x.profile.username + " wins"
           if @tictactoe.save
               ActionCable.server.broadcast 'tictactoe_channel',
               a1: nil,
-              a2: nil,
+              a2: "<span class='winner'>" + @user_o.profile.username + " won.</span>",
               a3: nil,
               b1: nil,
               b2: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>",
