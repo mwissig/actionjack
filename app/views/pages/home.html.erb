@@ -3,7 +3,7 @@
 <div class="box">
 Hello <%= @current_user.profile.username %><br>
 </div>
-
+<% end %>
 <div class="box cardsuits">
 
   <h3>Recently Updated Games</h3>
@@ -13,6 +13,12 @@ Hello <%= @current_user.profile.username %><br>
 
   <% @user_x = User.find_by(id: tic.x_id) %>
   <% @user_o = User.find_by(id: tic.o_id) %>
+  <% @linktext = "Watch" %>
+    <% if logged_in? %>
+      <% if @current_user == @user_x || @current_user == @user_o %>
+      <% @linktext = "Play" %>
+      <% end %>
+    <% end %>
     <div class="miniticContainer">
     <div class="miniticgrid">
       <% @grid.each do |coords| %>
@@ -25,7 +31,12 @@ Hello <%= @current_user.profile.username %><br>
         <% end %>
 
   </div>
-  <%= link_to @user_x.profile.username + ' vs ' + @user_o.profile.username, tictacto_path(tic) %>
+  <%= link_to tictacto_path(tic) do %>
+  <%= @user_x.profile.username %> vs <%= @user_o.profile.username %>
+  <br>
+<%= @linktext %>
+  <% end %>
+
     </div>
 
 
@@ -34,8 +45,8 @@ Hello <%= @current_user.profile.username %><br>
 
 </div>
 
+</div>
 
-<% end %>
-      <%# render "lobbychats/lobby" %>
+      <%= render "lobbychats/lobby" %>
 
 <!-- original nightjar image by https://www.sharpphotography.co.uk -->
