@@ -169,16 +169,20 @@ header {
 }
 .miniticContainer {
 display: inline-block;
+width: 120px;
+max-width: 120px;
+overflow: hidden;
   text-align: center;
   margin: 5px auto;
+
 }
 .miniticgrid {
   display: grid;
-  grid-template-columns: repeat(3, 30px);
-  grid-template-rows: repeat(3, 30px);
+  grid-template-columns: repeat(3, 25px);
+  grid-template-rows: repeat(3, 25px);
   color: black;
   border: 1px solid black;
-  max-width: 92px;
+  max-width: 77px;
   background-color: black;
   grid-gap: 1px;
   margin: 0 auto;
@@ -189,6 +193,7 @@ display: inline-block;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 #lobby, #gamechat {
