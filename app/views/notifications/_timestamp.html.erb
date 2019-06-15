@@ -1,0 +1,9 @@
+
+
+<% if @note.created_at > 1.day.ago %>
+<%= @note.created_at.strftime("%B %-d, %-l:%M%p") %>
+<% elsif @note.created_at > 1.year.ago %>
+<%= @note.created_at.strftime("%B %-d") %>
+<% else %>
+<%= @note.created_at.strftime("%B %-d, %Y") %>
+<% end %>
