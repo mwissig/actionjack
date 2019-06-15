@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       flash[:success] = "Please confirm your email address to continue"
       redirect_to login_path(fallback_location: root_path)
     else
-      render 'new'
+      redirect_back(fallback_location: root_path)
       msg = @user.errors.full_messages
 flash.now[:error] = msg
     end
