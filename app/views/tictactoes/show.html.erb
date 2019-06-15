@@ -2,7 +2,7 @@
   <%= flash[:tictactoe].html_safe unless flash[:tictactoe].blank? %>
   <div id="tictactoegrid">
     <% @grid.each do |coords| %>
-    <div class="tic" id="<%= coords %>">
+    <div class="tic" id="<%= coords %>_<%= @gameid %>">
       <% if @tictactoe.send("#{coords}") != nil %>
         <%= @tictactoe.send("#{coords}") %>
       <% else %>

@@ -306,7 +306,8 @@ def c3
       @tictactoe.save!
       if @tictactoe.save
       ActionCable.server.broadcast 'tictactoe_channel',
-                        c3: @tictactoe.c3
+                        c3: @tictactoe.c3,
+                        id: @tictactoe.id
     end
     @tictactoe.c3 != nil && @tictactoe.c3 != @current_user_mark
         flash[:tictactoe] = "Invalid move."
@@ -384,7 +385,8 @@ end
                                  b3: nil,
                                  c1: nil,
                                  c2: nil,
-                                 c3: nil
+                                 c3: nil,
+                                 id: @tictactoe.id
                  end
                    @winner = nil
      end
@@ -414,7 +416,8 @@ end
                    b3: nil,
                    c1: nil,
                    c2: nil,
-                   c3: nil
+                   c3: nil,
+                   id: @tictactoe.id
                end
                @winner = nil
            end
@@ -444,7 +447,8 @@ end
                    b3: nil,
                    c1: nil,
                    c2: nil,
-                   c3: nil
+                   c3: nil,
+                   id: @tictactoe.id
                end
                @winner = nil
            end
