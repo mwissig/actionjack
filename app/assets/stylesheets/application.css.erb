@@ -140,13 +140,20 @@ header {
   font-size: 30px;
 }
 
-#slotreel {
+#slotreel, #slotflash {
   width: 80%;
+  height: 100px;
   background-color: #d2d2d2;
   margin: 0 auto;
   padding: 1em 0;
+  display: grid;
+  grid-template-columns: repeat(3, 30%);
+  grid-gap: 5px;
+  padding: 5px;
 }
-
+#slotflash {
+  height: 2em;
+}
 #slotreel h3 {
   font-size: 50px;
   font-family: 'Roboto Condensed', sans-serif;
@@ -157,32 +164,50 @@ header {
   color: black;
   font-family: 'Roboto Condensed', sans-serif;
 }
-
+.reel {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.jackpot {
+  font-size: 20px;
+  font-weight: bold;
+}
 .bar {
   background-color: black;
   color: white;
   font-weight: bold;
+  font-size: 30px;
   padding: 0 5px;
 }
 
 .yellow {
   color: yellow;
+  text-shadow: 2px 2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000, -2px -2px 0 #000000, 2px 0px 0 #000000, 0px 2px 0 #000000, -2px 0px 0 #000000, 0px -2px 0 #000000, 2px 2px 2px rgba(0,0,0,0);
 }
 
 .gold {
   color: #caa741;
+    text-shadow: 2px 2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000, -2px -2px 0 #000000, 2px 0px 0 #000000, 0px 2px 0 #000000, -2px 0px 0 #000000, 0px -2px 0 #000000, 2px 2px 2px rgba(0,0,0,0);
 }
 
 .purple {
   color: purple;
+    text-shadow: 2px 2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000, -2px -2px 0 #000000, 2px 0px 0 #000000, 0px 2px 0 #000000, -2px 0px 0 #000000, 0px -2px 0 #000000, 2px 2px 2px rgba(0,0,0,0);
 }
 
 .red {
   color: red;
+    text-shadow: 2px 2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000, -2px -2px 0 #000000, 2px 0px 0 #000000, 0px 2px 0 #000000, -2px 0px 0 #000000, 0px -2px 0 #000000, 2px 2px 2px rgba(0,0,0,0);
 }
 
 .green {
   color: green;
+    text-shadow: 2px 2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000, -2px -2px 0 #000000, 2px 0px 0 #000000, 0px 2px 0 #000000, -2px 0px 0 #000000, 0px -2px 0 #000000, 2px 2px 2px rgba(0,0,0,0);
 }
 
 .minitic {
@@ -499,7 +524,7 @@ header ul {
     max-width: 90vw;
   }
 
-  #slotreel {
+  #slotreel, #slotflash {
     width: 90vw;
     max-width: 90vw;
   }

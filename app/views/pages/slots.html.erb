@@ -2,6 +2,11 @@
 <div class="box" id="slotmachine">
   <h2>Slot machine</h2>
   <div id="slotreel">
+    <div class="reel"><%= flash[:slotreel1].html_safe unless flash[:slotreel1].blank? %></div>
+      <div class="reel"><%= flash[:slotreel2].html_safe unless flash[:slotreel2].blank? %></div>
+        <div class="reel"><%= flash[:slotreel3].html_safe unless flash[:slotreel3].blank? %></div>
+</div>
+<div id="slotflash">
 <%= flash[:slots].html_safe unless flash[:slots].blank? %>
 </div>
 <%= form_tag('/games/slots2', method: 'get') do %>
