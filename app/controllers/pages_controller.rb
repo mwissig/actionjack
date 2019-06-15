@@ -22,7 +22,7 @@ end
     if logged_in?
       if @current_user.points >= 10
         @current_user.decrement!(:points, 10)
-        @reel = ["<h3><i class='fas fa-pepper-hot red'></i></h3>", "<span class='bar'>BAR</span>", "<h3><b>7</b></h3>", "<h5>JACKPOT</h5>", "<h3><i class='fas fa-anchor'></i></h3>", "<h3><i class='fas fa-lemon yellow'></i></h3>", "<h3><i class='fas fa-money-bill-wave green'></i></h3>", "<h3><i class='fas fa-coins gold''></i></h3>", "<h3><i class='fas fa-star purple'></i></h3>"]
+        @reel = ["<h3><i class='fas fa-pepper-hot red'></i></h3>", "<span class='bar'>BAR</span>", "<h3><b>7</b></h3>", "<span class='jackpot'>JACKPOT</span>", "<h3><i class='fas fa-anchor'></i></h3>", "<h3><i class='fas fa-lemon yellow'></i></h3>", "<h3><i class='fas fa-money-bill-wave green'></i></h3>", "<h3><i class='fas fa-coins gold''></i></h3>", "<h3><i class='fas fa-star purple'></i></h3>"]
         @reel1 = @reel.sample
         @reel2 = @reel.sample
         @reel3 = @reel.sample
