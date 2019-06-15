@@ -1,5 +1,5 @@
 <div id="tictactoe" class="box">
-  <%= flash[:tictactoe].html_safe unless flash[:tictactoe].blank? %>
+
   <div id="tictactoegrid">
     <% @grid.each do |coords| %>
     <div class="tic" id="<%= coords %>_<%= @gameid %>">
@@ -17,11 +17,14 @@
     </div>
     <% end %>
   </div>
+  <div class="tict tictactoeTurn" id="ticturn_<%= @gameid %>">It's <%= @tictactoe.turn.upcase %>'s turn.</div>
+  <div class="tict tictactoeMessage" id="ticmessage_<%= @gameid %>">  <%= flash[:tictactoe].html_safe unless flash[:tictactoe].blank? %></div>
+  <div class="tict tictactoeReload" id="ticreload_<%= @gameid %>"></div>
   <div class="winschart">
     <div>  <%= @user_x.profile.username %> (X)
 </div><div><%= @user_o.profile.username %> (O)</div>
-<div><%= @tictactoe.x_wins %> wins</div>
-    <div> <%= @tictactoe.o_wins %> wins</div>
+<div><span id="x_wincount_<%= @gameid %>"><%= @tictactoe.x_wins %></span> wins</div>
+    <div> <span id="o_wincount_<%= @gameid %>"><%= @tictactoe.o_wins %></span> wins</div>
     </div>
 
   <% if logged_in? %>
