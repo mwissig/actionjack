@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       @user.set_confirmation_token
       @user.save(validate: false)
       UserMailer.registration_confirmation(@user).deliver
-      flash[:success] = "Please confirm your email address to continue"
+      flash[:success] = "Please confirm your email address to continue. If you do not recieve a confirmation email, your account will be activated within 24 hours."
       redirect_to login_path(fallback_location: root_path)
     else
       render 'new'

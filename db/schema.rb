@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_15_192449) do
+ActiveRecord::Schema.define(version: 2019_06_15_200731) do
 
   create_table "blackjacks", force: :cascade do |t|
     t.integer "player_id"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2019_06_15_192449) do
     t.string "email"
     t.string "password_digest"
     t.string "time_zone"
-    t.boolean "email_confirmed", default: true
+    t.boolean "email_confirmed", default: false
     t.string "confirm_token"
     t.string "reset_digest"
     t.datetime "reset_sent_at"

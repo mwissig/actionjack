@@ -20,3 +20,13 @@ task :give_points => :environment do
   end
   puts "done."
 end
+
+desc "Activates user accounts"
+task :activate_accounts => :environment do
+  puts "Activating inactive accounts"
+  User.all.where(email_confirmed: false).each do |user|
+    user.email_confirmed = true
+    user.save(validate: false)
+  end
+  puts "done."
+end

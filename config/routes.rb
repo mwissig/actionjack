@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'tictactoes/:id/c2' => 'tictactoes#c2'
   get 'tictactoes/:id/c3' => 'tictactoes#c3'
 get '/users' => 'users#index'
-post '/users' => 'users#index'
+# post '/users' => 'users#index'
   get 'tictactoes/new'
   get 'tictactoes/edit'
   get 'tictactoes/index'
