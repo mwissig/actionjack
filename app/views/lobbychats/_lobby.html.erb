@@ -1,6 +1,6 @@
 <% if logged_in? %>
     <%  @lobbychat = @current_user.lobbychats.new %>
-    <% end %>
+  <% end %>
 
 <div id="lobby">
   <div id='lobbychats'>
@@ -14,19 +14,20 @@
 
 <div id="lobbyform">
   <% if logged_in? %>
-<%= form_for(@lobbychat, remote: true ) do |f| %>
-<%# f.hidden_field :user_id, value: @current_user.id %>
-<%= f.text_field :body %>
-<%= f.button :submit do %>
-Send &#9166
-<% end %>
-<% end %>
+    <%= form_for(@lobbychat, remote: true ) do |f| %>
+    <%# f.hidden_field :user_id, value: @current_user.id %>
+    <%= f.text_field :body %>
+    <%= f.button :submit do %>
+    Send &#9166
+    <% end %>
+  <% end %>
 
-</div>
 <% else %>
 <span style="color:white">You must be logged in to chat.</span>
 <% end %>
 </div>
+</div>
+
 <script>
   dragElement(document.getElementById("lobby"));
   </script>
