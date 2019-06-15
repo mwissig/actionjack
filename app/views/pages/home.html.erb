@@ -28,7 +28,7 @@ Hello <%= @current_user.profile.username %>
     <div class="miniticContainer">
     <div class="miniticgrid">
       <% @grid.each do |coords| %>
-        <div>
+        <div id="<%= coords %>_<%= tic.id %>">
           <% p tic.send("#{coords}") %>
           <% if tic.send("#{coords}") != nil %>
             <%= tic.send("#{coords}") %>
