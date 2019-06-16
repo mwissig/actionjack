@@ -1,6 +1,7 @@
 
-<% if logged_in? %>
 <div class="box hello">
+<% if logged_in? %>
+
 Hello <%= @current_user.profile.username %>
 <ul>
   <li><div class="inlineButton">
@@ -8,8 +9,12 @@ Hello <%= @current_user.profile.username %>
 <li><div class="inlineButton">
 <%= render 'tictactoes/new' %></div></li>
 </ul>
-</div>
+
 <% end %>
+<p>Welcome to Crepuscular Games.</p>
+<p>This is a Rails web app that uses ActionCable to display live game data for simple chat room games. I will be building on this site and adding more games and features in the future.</p>
+<p>Please contact me at mwissig@gmail.com (or through Facebook, etc.) if you have any problems with the site or would like to know if your registration went through. I will also respond to the in-site chat.</p>
+</div>
 <div class="box cardsuits">
 
   <h3>Recently Updated Games</h3>
