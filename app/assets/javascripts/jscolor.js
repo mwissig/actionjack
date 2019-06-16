@@ -990,10 +990,10 @@ var jsc = {
 		this.onFineChange = null; // called instantly every time the color changes (value can be either a function or a string with javascript code)
 		this.activeClass = 'jscolor-active'; // class to be set to the target element when a picker window is open on it
 		this.overwriteImportant = false; // whether to overwrite colors of styleElement using !important
-		this.minS = 50; // min allowed saturation (0 - 100)
+		this.minS = 25; // min allowed saturation (0 - 100)
 		this.maxS = 100; // max allowed saturation (0 - 100)
 		this.minV = 0; // min allowed value (brightness) (0 - 100)
-		this.maxV = 100; // max allowed value (brightness) (0 - 100)
+		this.maxV = 75; // max allowed value (brightness) (0 - 100)
 
 		// Accessing the picked color
 		//
