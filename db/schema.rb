@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_15_200731) do
+ActiveRecord::Schema.define(version: 2019_06_17_155124) do
 
   create_table "blackjacks", force: :cascade do |t|
     t.integer "player_id"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 2019_06_15_200731) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "read"
+  end
+
+  create_table "pictionaries", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "last_online"
+    t.integer "current_score"
+    t.integer "all_time_score"
+    t.boolean "turn"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", force: :cascade do |t|

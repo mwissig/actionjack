@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  last_online: 2019-06-17 11:51:24
+  current_score: 1
+  all_time_score: 1
+  turn: false
+
+two:
+  user_id: 1
+  last_online: 2019-06-17 11:51:24
+  current_score: 1
+  all_time_score: 1
+  turn: false

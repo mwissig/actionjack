@@ -66,6 +66,34 @@ end
 
 def pictionary
     @lobbychats = Lobbychat.all.last(200)
+    @pictionaries = Pictionary.all
+    @onlineusers = @pictionaries.where('last_online > ?', 10.minutes.ago)
+    @recentusers = @pictionaries.where('last_online > ?', 1.hour.ago)
+    if logged_in?
+      if @current_user.pictionary != nil
+        @pictionary = @current_user.pictionary
+        @pictionary.last_online = DateTime.now
+        @pictionary.save!
+        if @pictionary.save
+        ActionCable.server.broadcast 'pictionary_players_channel',
+                          name: @current_user.profile.username,
+                          last_online: @pictionary.last_online.strftime("%-l:%M%P %B %-d, %Y")
+      end
+      else
+        @pictionary = Pictionary.create(
+          user_id: @current_user.id,
+          last_online: DateTime.now,
+          current_score: 0,
+          all_time_score: 0,
+          turn: false
+        )
+        if @pictionary.save
+        ActionCable.server.broadcast 'pictionary_players_channel',
+                          name: @current_user.profile.username,
+                          last_online: @pictionary.last_online.strftime("%-l:%M%P %B %-d, %Y")
+      end
+end
+    end
 end
 
 def pic2
