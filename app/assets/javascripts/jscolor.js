@@ -1,4 +1,4 @@
-console.log('jscolor loaded')
+console.log('jscolor loaded');
 
 /**
  * jscolor - JavaScript Color Picker

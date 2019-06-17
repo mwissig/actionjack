@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
 
 
+
+  get 'pages/pic2'
   get 'inbox' => 'notifications#index'
 
   get 'tictactoes/:id/a1' => 'tictactoes#a1'
@@ -14,8 +16,8 @@ Rails.application.routes.draw do
   get 'tictactoes/:id/c1' => 'tictactoes#c1'
   get 'tictactoes/:id/c2' => 'tictactoes#c2'
   get 'tictactoes/:id/c3' => 'tictactoes#c3'
-get '/users' => 'users#index'
-# post '/users' => 'users#index'
+  get '/users' => 'users#index'
+
   get 'tictactoes/new'
   get 'tictactoes/edit'
   get 'tictactoes/index'
@@ -26,6 +28,10 @@ get '/users' => 'users#index'
   get 'games/slots' => 'pages#slots'
   get 'games/slots2' => 'pages#slots2'
   post 'games/slots2' => 'pages#slots'
+
+  get 'games/pictionary' => 'pages#pictionary'
+  post 'games/pictionary/update', to: 'pages#pic2'
+
   get 'password_resets/new'
   get 'password_resets/edit'
   get 'profiles/new'
@@ -36,6 +42,7 @@ get '/users' => 'users#index'
   get 'blackjack/edit'
   get 'blackjack/index'
   get 'blackjack/show'
+
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
     delete 'logout' => 'sessions#destroy'

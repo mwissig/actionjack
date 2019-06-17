@@ -1,5 +1,6 @@
 
 class PagesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def home
     @lobbychats = Lobbychat.all.last(200)
     @recent_tictactoes = Tictactoe.all.order(updated_at: :desc).first(8)
@@ -61,6 +62,20 @@ end
       flash[:slots] = "You do not have enough points."
     end
   end
+end
+
+def pictionary
+
+end
+
+def pic2
+  ActionCable.server.broadcast 'pictionary_channel',
+    fromx: params[:fromx],
+    fromy: params[:fromy],
+    tox: params[:tox],
+    toy: params[:toy],
+    color: params[:color]
+  head :ok
 end
 
   def shop
