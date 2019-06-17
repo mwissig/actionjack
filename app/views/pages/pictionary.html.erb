@@ -1,4 +1,4 @@
-<canvas id='pictionarycanvas' width='500' height='500' style='border:1px solid black;background-color:white;'></canvas>
+<div class="box"><canvas id='pictionarycanvas' width='500' height='500' style='border:1px solid black;background-color:white;'></canvas>
 <br>
 <input id='drawcolor' type='hidden' value='000000'></input>
 <input id='brushsize' type='hidden' value='5'></input><br>
@@ -23,6 +23,10 @@
 <button class='pictbrush' onclick="pickBrushSize(20)">20</button>
 <button class='pictbrush' onclick="pickBrushSize(50)">50</button>
 <button class='pictbrush' onclick="pickBrushSize(100)">100</button>
+<p>
+  This is a partially constructed pictionary game. Currently, the only available feature is a drawing board where you can see other people's drawings if they are online at the same time as you. Feel free to play with this while I work on the rest of the game.</p>
+  </p>
+  </div>
 <%= render "lobbychats/lobby" %>
 <script>
 
@@ -65,15 +69,15 @@
       //get coords if mouse down
       color = '#' + document.getElementById('drawcolor').value
       size = document.getElementById('brushsize').value;
-      var x = e.pageX;
-      var y = e.pageY;
+      var x = e.pageX - $('#pictionarycanvas').offset().left;
+      var y = e.pageY - $('#pictionarycanvas').offset().top;
       //get coords if touch
       if (e.originalEvent.changedTouches) {
         color = '#' + document.getElementById('drawcolor').value;
         size = document.getElementById('brushsize').value;
         e = e.originalEvent.changedTouches[0];
-        x = e.pageX;
-        y = e.pageY;
+        x = e.pageX - $('#pictionarycanvas').offset().left;
+        y = e.pageY - $('#pictionarycanvas').offset().top;
       }
       //set drawing to true and the coordinates for the prev object the prev object is used for the start of the drawing line
       color = '#' + document.getElementById('drawcolor').value;
@@ -95,15 +99,15 @@
         //get mouse coords
         color = '#' + document.getElementById('drawcolor').value;
         size = document.getElementById('brushsize').value;
-        var x = e.pageX;
-        var y = e.pageY;
+        var x = e.pageX - $('#pictionarycanvas').offset().left;
+        var y = e.pageY - $('#pictionarycanvas').offset().top;
         //if touching, get touch coords
         if (e.originalEvent.changedTouches) {
           color = '#' + document.getElementById('drawcolor').value;
           size = document.getElementById('brushsize').value;
           e = e.originalEvent.changedTouches[0];
-          x = e.pageX;
-          y = e.pageY;
+          x = e.pageX - $('#pictionarycanvas').offset().left;
+          y = e.pageY - $('#pictionarycanvas').offset().top;
         }
         //create ajax request to /updateline data is prev coordinates and current coordinates and color
         $.ajax({
@@ -139,4 +143,6 @@
     ctx.lineTo(tox, toy);
     ctx.stroke();
   }
+
+
 </script>
