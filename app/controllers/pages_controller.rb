@@ -65,7 +65,7 @@ end
 end
 
 def pictionary
-
+    @lobbychats = Lobbychat.all.last(200)
 end
 
 def pic2
