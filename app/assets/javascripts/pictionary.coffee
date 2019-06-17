@@ -7,4 +7,4 @@ App.pictionary = App.cable.subscriptions.create "PictionaryChannel",
 
   received: (data) ->
     unless data.fromx.blank?
-      drawLine(data.fromx, data.fromy, data.tox, data.toy, data.color)
+      drawLine(data.fromx, data.fromy, data.tox, data.toy, data.color, data.size)

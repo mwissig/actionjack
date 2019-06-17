@@ -1,10 +1,28 @@
-
-
 <canvas id='pictionarycanvas' width='500' height='500' style='border:1px solid black;background-color:white;'></canvas>
 <br>
-<input id='drawcolor' type='text' class='pictionarycolorpicker jscolor', value='000000'></input><br>
-Change brush color
-
+<input id='drawcolor' type='hidden' value='000000'></input>
+<input id='brushsize' type='hidden' value='5'></input><br>
+<button class='pictcolors' style='background-color:#000000;' onclick="pickColor('000000')"></button>
+<button class='pictcolors' style='background-color:#ff0000;' onclick="pickColor('ff0000')"></button>
+<button class='pictcolors' style='background-color:#ff9900;' onclick="pickColor('ff9900')"></button>
+<button class='pictcolors' style='background-color:#ffee00;' onclick="pickColor('ffee00')"></button>
+<button class='pictcolors' style='background-color:#00ff00;' onclick="pickColor('00ff00')"></button>
+<button class='pictcolors' style='background-color:#00ffff;' onclick="pickColor('00ffff')"></button>
+<button class='pictcolors' style='background-color:#0000ff;' onclick="pickColor('0000ff')"></button><br>
+<button class='pictcolors' style='background-color:#ffffff;' onclick="pickColor('ffffff')"></button>
+<button class='pictcolors' style='background-color:#ff00ff;' onclick="pickColor('0000ff')"></button>
+<button class='pictcolors' style='background-color:#570089;' onclick="pickColor('570089')"></button>
+<button class='pictcolors' style='background-color:#ff72ad;' onclick="pickColor('ff72ad')"></button>
+<button class='pictcolors' style='background-color:#ffdcbc;' onclick="pickColor('ffdcbc')"></button>
+<button class='pictcolors' style='background-color:#845d39;' onclick="pickColor('845d39')"></button>
+<button class='pictcolors' style='background-color:#593513;' onclick="pickColor('593513')"></button>
+<br>Brush Size<br>
+<button class='pictbrush' onclick="pickBrushSize(2)">2</button>
+<button class='pictbrush' onclick="pickBrushSize(5)">5</button>
+<button class='pictbrush' onclick="pickBrushSize(10)">10</button>
+<button class='pictbrush' onclick="pickBrushSize(20)">20</button>
+<button class='pictbrush' onclick="pickBrushSize(50)">50</button>
+<button class='pictbrush' onclick="pickBrushSize(100)">100</button>
 <script>
 
   console.log('canvas loaded');
@@ -13,65 +31,80 @@ Change brush color
 
   App.cable = ActionCable.createConsumer();
   App.messages = App.cable.subscriptions.create('pictionary_channel', {
-    received: function(data) {
-      drawLine(data.fromx, data.fromy, data.tox, data.toy, data.color)
+    received: function (data) {
+      drawLine(data.fromx, data.fromy, data.tox, data.toy, data.color, data.size)
     }
   });
+  var hexcolor = '#00000';
+  var brushsize = 5;
 
-  $(function() {
+  function pickBrushSize(brushsize) {
+    document.getElementById('brushsize').value = brushsize;
+  };
+
+  function pickColor(hexcolor) {
+    document.getElementById('drawcolor').value = hexcolor;
+  };
+
+  $(function () {
     //vars that should be globally accessed, the document, the canvas, and the canvas context.
     doc = $(document),
-      canvas = $('#pictionarycanvas'),
-      ctx = canvas[0].getContext('2d');
+    canvas = $('#pictionarycanvas'),
+    ctx = canvas[0].getContext('2d');
 
     //local vars, previous coords for the client, a random color, a boolean stating if the client is drawing or not, and the time since we last told the server we were drawing.
     var prev = {};
     var color = '#00000';
+    var size = 5;
     var drawing = false;
     var timeSinceLastSend = $.now();
     //event to fire if mouse down or touch on canvas element
-    canvas.on('mousedown touchstart', function(e) {
+    canvas.on('mousedown touchstart', function (e) {
       e.preventDefault();
       //get coords if mouse down
       color = '#' + document.getElementById('drawcolor').value
+      size = document.getElementById('brushsize').value;
       var x = e.pageX;
       var y = e.pageY;
       //get coords if touch
       if (e.originalEvent.changedTouches) {
-        color = '#' + document.getElementById('drawcolor').value
+        color = '#' + document.getElementById('drawcolor').value;
+        size = document.getElementById('brushsize').value;
         e = e.originalEvent.changedTouches[0];
         x = e.pageX;
         y = e.pageY;
       }
-      //set drawing to true and the coordinates for the prev object
-      //the prev object is used for the start of the drawing line
-      color = '#' + document.getElementById('drawcolor').value
+      //set drawing to true and the coordinates for the prev object the prev object is used for the start of the drawing line
+      color = '#' + document.getElementById('drawcolor').value;
+      size = document.getElementById('brushsize').value;
       drawing = true;
       prev.x = x;
       prev.y = y;
     });
     //event to fire if the mouse is released/left or touched up
-    doc.bind('mouseup mouseleave touchend', function() {
-      color = '#' + document.getElementById('drawcolor').value
+    doc.bind('mouseup mouseleave touchend', function () {
+      color = '#' + document.getElementById('drawcolor').value;
+      size = document.getElementById('brushsize').value;
       drawing = false;
     });
     //event to fire as the mouse moves or finger is dragged
-    doc.on('mousemove touchmove', function(e) {
+    doc.on('mousemove touchmove', function (e) {
       //if we are drawing, and its been over 10ms since last update
       if (drawing && $.now() - timeSinceLastSend > 10) {
         //get mouse coords
-        color = '#' + document.getElementById('drawcolor').value
+        color = '#' + document.getElementById('drawcolor').value;
+        size = document.getElementById('brushsize').value;
         var x = e.pageX;
         var y = e.pageY;
         //if touching, get touch coords
         if (e.originalEvent.changedTouches) {
-          color = '#' + document.getElementById('drawcolor').value
+          color = '#' + document.getElementById('drawcolor').value;
+          size = document.getElementById('brushsize').value;
           e = e.originalEvent.changedTouches[0];
           x = e.pageX;
           y = e.pageY;
         }
-        //create ajax request to /updateline
-        //data is prev coordinates and current coordinates and color
+        //create ajax request to /updateline data is prev coordinates and current coordinates and color
         $.ajax({
           method: 'POST',
           url: '/games/pictionary/update',
@@ -80,7 +113,8 @@ Change brush color
             'fromy': prev.y,
             'tox': x,
             'toy': y,
-            'color': color
+            'color': color,
+            'size': size
           }
         });
         //reset time since last send
@@ -95,8 +129,8 @@ Change brush color
     });
   });
   //function to draw a line
-  function drawLine(fromx, fromy, tox, toy, color) {
-    ctx.lineWidth = 5;
+  function drawLine(fromx, fromy, tox, toy, color, size) {
+    ctx.lineWidth = size;
     ctx.lineCap = 'round';
     ctx.beginPath();
     ctx.strokeStyle = color

@@ -74,7 +74,8 @@ def pic2
     fromy: params[:fromy],
     tox: params[:tox],
     toy: params[:toy],
-    color: params[:color]
+    color: params[:color],
+    size: params[:size]
   head :ok
 end
 
