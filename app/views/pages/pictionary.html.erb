@@ -1,4 +1,4 @@
-<div class="box">
+<div class="box" id="picbox">
   <div class="whoisonline">
     Users online in the past 10 minutes
     <hr>
@@ -18,7 +18,7 @@
     <hr>
     <div id="onlineusers"></div>
   </div>
-  <canvas id='pictionarycanvas' width='500' height='500' style='border:1px solid black;background-color:white;'></canvas>
+  <canvas id='pictionarycanvas' class='piccanvas' width='500' height='500' style='border:1px solid black;background-color:white;'></canvas>
 <br>
 <input id='drawcolor' type='hidden' value='000000'></input>
 <input id='brushsize' type='hidden' value='5'></input><br>
@@ -37,12 +37,12 @@
 <button class='pictcolors' style='background-color:#845d39;' onclick="pickColor('845d39')"></button>
 <button class='pictcolors' style='background-color:#593513;' onclick="pickColor('593513')"></button>
 <br>Brush Size<br>
-<button class='pictbrush' onclick="pickBrushSize(2)">2</button>
-<button class='pictbrush' onclick="pickBrushSize(5)">5</button>
-<button class='pictbrush' onclick="pickBrushSize(10)">10</button>
-<button class='pictbrush' onclick="pickBrushSize(20)">20</button>
-<button class='pictbrush' onclick="pickBrushSize(50)">50</button>
-<button class='pictbrush' onclick="pickBrushSize(100)">100</button>
+<button class='pictbrush' onclick="pickBrushSize(2, 'px2')">2</button>
+<button class='pictbrush' onclick="pickBrushSize(5, 'px5')">5</button>
+<button class='pictbrush' onclick="pickBrushSize(10, 'px10')">10</button>
+<button class='pictbrush' onclick="pickBrushSize(20, 'px20')">20</button>
+<button class='pictbrush' onclick="pickBrushSize(50, 'px50')">50</button>
+<button class='pictbrush' onclick="pickBrushSize(100, 'px100')">100</button>
 <p>
   This is a partially constructed pictionary game. Currently, the only available feature is a drawing board where you can see other people's drawings if they are online at the same time as you. Feel free to play with this while I work on the rest of the game.</p>
 
@@ -51,6 +51,8 @@
 <script>
 
   console.log('canvas loaded');
+
+
 
   this.App = {};
 
@@ -63,8 +65,15 @@
   var hexcolor = '#00000';
   var brushsize = 5;
 
-  function pickBrushSize(brushsize) {
+  function pickBrushSize(brushsize, cursor) {
     document.getElementById('brushsize').value = brushsize;
+    document.getElementById('pictionarycanvas').classList.remove('px2');
+    document.getElementById('pictionarycanvas').classList.remove('px5');
+    document.getElementById('pictionarycanvas').classList.remove('px10');
+    document.getElementById('pictionarycanvas').classList.remove('px20');
+    document.getElementById('pictionarycanvas').classList.remove('px50');
+    document.getElementById('pictionarycanvas').classList.remove('px100');
+    document.getElementById('pictionarycanvas').classList.add(cursor);
   };
 
   function pickColor(hexcolor) {
