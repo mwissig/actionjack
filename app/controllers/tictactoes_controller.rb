@@ -24,13 +24,14 @@ class TictactoesController < ApplicationController
           points: 0
         )
       end
+      if User.find_by(id: @notification.user_id) != nil
       @to_user = User.find_by(id: @notification.user_id)
-      if @to_user != nil
       @notecount = @to_user.notifications.where(read: false).count
           ActionCable.server.broadcast 'notifications_channel',
                           notecount: @notecount
+                        end
             redirect_to tictacto_path(@tictactoe)
-          end
+
       else
         render 'new'
         msg = @tictactoe.errors.full_messages
