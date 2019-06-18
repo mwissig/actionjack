@@ -13,6 +13,7 @@ class TictactoesController < ApplicationController
 
     def create
       if logged_in?
+        if @random_opponent != nil
       @tictactoe = Tictactoe.new(tictactoe_params)
       if @tictactoe.save
         @notification = Notification.create(
@@ -33,7 +34,7 @@ class TictactoesController < ApplicationController
                         end
                       end
             redirect_to tictacto_path(@tictactoe)
-
+end
       else
         render 'new'
         msg = @tictactoe.errors.full_messages
