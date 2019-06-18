@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     @grid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
     if logged_in?
           @lobbychat = @current_user.lobbychats.new
-          @random_opponent = @thisweekusers.where.not(id: @current_user.id).sample
+          @random_opponent = @thisweekusers.where.not(user_id: @current_user.id).sample.user
     end
     @tictactoe = Tictactoe.new
   end

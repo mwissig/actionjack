@@ -5,4 +5,6 @@ class Tictactoe < ApplicationRecord
     self.x_wins ||= 0
     self.o_wins ||= 0
   end
+  validates :x_id, presence: true
+  validates :o_id, presence: true
 end

@@ -6,40 +6,35 @@ class TictactoesController < ApplicationController
 
     def new
       @tictactoe = Tictactoe.new
-      if logged_in?
-        @random_opponent = @thisweekusers.where.not(id: @current_user.id).sample
-      end
     end
 
     def create
       if logged_in?
-        if @random_opponent != nil
-      @tictactoe = Tictactoe.new(tictactoe_params)
-      if @tictactoe.save
-        @notification = Notification.create(
-          user_id: @tictactoe.o_id,
-          sender_id: @tictactoe.x_id,
-          body: 'A new tic-tac-toe game has been created.',
-          game: 'tictactoe',
-          game_id: @tictactoe.id,
-          points: 0
-        )
-      end
-      if User.find_by(id: @notification.user_id) != nil
-      @to_user = User.find_by(id: @notification.user_id)
-      if @to_user.notifications.first != nil
-      @notecount = @to_user.notifications.where(read: false).count
-          ActionCable.server.broadcast 'notifications_channel',
-                          notecount: @notecount
-                        end
-                      end
-            redirect_to tictacto_path(@tictactoe)
-end
-      else
-        render 'new'
-        msg = @tictactoe.errors.full_messages
-        flash.now[:error] = msg
-      end
+          @tictactoe = Tictactoe.new(tictactoe_params)
+          @tictactoe.save!
+            if @tictactoe.save
+            @notification = Notification.create(
+              user_id: @tictactoe.o_id,
+              sender_id: @tictactoe.x_id,
+              body: 'A new tic-tac-toe game has been created.',
+              game: 'tictactoe',
+              game_id: @tictactoe.id,
+              points: 0
+            )
+            @to_user = User.find_by(id: @notification.user_id)
+            @notecount = @to_user.notifications.where(read: false).count
+            ActionCable.server.broadcast 'notifications_channel',
+                            notecount: @notecount
+              redirect_to tictacto_path(@tictactoe)
+            else
+              msg = @tictactoe.errors.full_messages
+              flash.now[:ticerr] = "msg"
+              redirect_back(fallback_location: root_path)
+            end
+        else
+          flash.now[:ticerr] = "No opponent available."
+          redirect_back(fallback_location: root_path)
+        end
     end
 
   def edit
@@ -48,9 +43,6 @@ end
   def index
     @tictactoes = Tictactoe.all
     @tictactoe = Tictactoe.new
-    if logged_in?
-      @random_opponent = @thisweekusers.where.not(id: @current_user.id).sample
-    end
   end
 
   def show
