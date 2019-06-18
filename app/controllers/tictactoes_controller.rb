@@ -25,10 +25,12 @@ class TictactoesController < ApplicationController
         )
       end
       @to_user = User.find_by(id: @notification.user_id)
+      if @to_user != nil
       @notecount = @to_user.notifications.where(read: false).count
           ActionCable.server.broadcast 'notifications_channel',
                           notecount: @notecount
             redirect_to tictacto_path(@tictactoe)
+          end
       else
         render 'new'
         msg = @tictactoe.errors.full_messages
@@ -43,7 +45,7 @@ class TictactoesController < ApplicationController
     @tictactoes = Tictactoe.all
     @tictactoe = Tictactoe.new
     if logged_in?
-      @random_opponent = User.where.not(id: @current_user.id).sample
+      @random_opponent = @thisweekusers.where.not(id: @current_user.id).sample
     end
   end
 
