@@ -7,7 +7,7 @@ class TictactoesController < ApplicationController
     def new
       @tictactoe = Tictactoe.new
       if logged_in?
-        @random_opponent = User.where.not(id: @current_user.id).sample
+        @random_opponent = @thisweekusers.where.not(id: @current_user.id).sample
       end
     end
 

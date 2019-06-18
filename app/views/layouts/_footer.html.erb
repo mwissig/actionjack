@@ -1,0 +1,15 @@
+<footer class="box">
+  <%= @allrecentusers.count %> players online in the past hour:
+  <% if @allrecentusers.first != nil %>
+    <% @allrecentusers.each do |user| %>
+      <%= link_to user.username, user_path(user.user) %>
+    <% end %>
+  <% end %>
+  <hr>
+  <%= @thisweekusers.count %> players online in the past week:
+  <% if @thisweekusers.first != nil %>
+    <% @thisweekusers.each do |user| %>
+      <%= link_to user.username, user_path(user.user) %>
+    <% end %>
+  <% end %>
+</footer>

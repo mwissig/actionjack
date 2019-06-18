@@ -49,7 +49,7 @@ end
 
   def profile_params
 
-    params.require(:profile).permit(:color, :username)
+    params.require(:profile).permit(:color, :username, :online_at)
 
   end
 
