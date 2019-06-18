@@ -5,6 +5,12 @@ class PagesController < ApplicationController
     @lobbychats = Lobbychat.all.last(200)
     @recent_tictactoes = Tictactoe.all.order(updated_at: :desc).first(8)
     @grid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
+    @users = User.all.order(:id)
+    @usernames = []
+    @users.each do |user|
+      @usernames.push user.profile.username
+    end
+    @userlist = @usernames.zip(@users.ids)
     if logged_in?
           @lobbychat = @current_user.lobbychats.new
           @random_opponent = @thisweekusers.where.not(user_id: @current_user.id).sample.user

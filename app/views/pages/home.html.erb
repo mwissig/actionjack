@@ -7,8 +7,9 @@ Hello <%= @current_user.profile.username %>
   <li><div class="inlineButton">
 <%= link_to "Play slot machine", games_slots_path %></div></li>
 <li><div class="inlineButton">
-<%= render 'tictactoes/new' %></div><br>
-<%= flash[:ticerr].html_safe unless flash[:ticerr].blank? %></li>
+<%= render 'tictactoes/new' %></div></li>
+<li><div class="inlineButton">
+<%= render 'tictactoes/new_choose' %></div></li>
 </ul>
 
 <% end %>

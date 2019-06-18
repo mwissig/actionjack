@@ -1,8 +1,8 @@
 
-  <% if logged_in? %>
+  <% if logged_in? %>Create new Tic Tac Toe game against
   <%= form_for @tictactoe do |f| %>
   <%= f.hidden_field :x_id, value: @current_user.id, required: true  %>
-  <%= f.hidden_field :o_id, value: @random_opponent.id, required: true %>
+  <%= f.select :o_id, @userlist, include_blank: true, required: true %>
     <%= f.submit "Play" %>
   <% end %>
     <% end %>
