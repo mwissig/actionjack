@@ -1,0 +1,9 @@
+
+  <% if logged_in? %>
+      <%= form_for([@current_user, @friend]) do |f| %>
+        <%= f.hidden_field :user_id, value: @current_user.id, required: true %>
+        <%= f.hidden_field :recipient_id, value: @user.id, required: true %>
+        <%= f.hidden_field :accepted, value: true, required: true %>
+        <%= f.submit "Accept" %>
+  <% end %>
+  <% end %>

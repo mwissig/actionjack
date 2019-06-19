@@ -40,7 +40,10 @@ end
 
   def show
     @user = User.find(params[:id])
-
+    if logged_in?
+    @friend = Friend.new
+    @friends = @user.friends.where(accepted: true)
+  end
   end
 
   def index

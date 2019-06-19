@@ -4,6 +4,7 @@ class NotificationsController < ApplicationController
 
   def index
     if logged_in?
+      @friend = Friend.new
     @notifications = @current_user.notifications.all.order(created_at: :desc)
     @unread_notifications = @notifications.where(read: false)
     @unread_notifications.each do |note|

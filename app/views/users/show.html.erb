@@ -8,11 +8,39 @@
   <li>
 <%= @user.points %> <i class="fas fa-coins"></i>
 </li>
-<p><%= @user.profile.desc %> </p>
+
 </ul>
+<p><%= @user.profile.desc %> </p>
+<% if @user != @current_user %>
+  <% if Friend.where('user_id = ? AND recipient_id = ?', @current_user.id, @user.id).first == nil && Friend.where('user_id = ? AND recipient_id = ?', @user.id, @current_user.id).first == nil  %>
+    <%= render "friends/add" %>
+  <% else %>
+    <% if Friend.where('user_id = ? AND recipient_id = ?', @current_user.id, @user.id).first != nil %>
+    <% @request = Friend.where('user_id = ? AND recipient_id = ?', @current_user.id, @user.id).first %>
+      <% if @request.accepted == false %>
+        You sent this user a friend request.
+      <% else %>
+        You are friends with this user.
+      <% end %>
+    <% elsif Friend.where('user_id = ? AND recipient_id = ?', @user.id, @current_user.id).first != nil %>
+    <% @request = Friend.where('user_id = ? AND recipient_id = ?', @user.id, @current_user.id).first %>
+    <% if @request.accepted == false %>
+      This user sent you a friend request.
+        <%= render "friends/accept" %>
+    <% else %>
+      You are friends with this user.
+    <% end %>
+    <% end %>
+  <% end %>
+  <% end %><p>Friends:
+<% @friends.each do |friend| %>
+  <% @friend = User.find_by(id: friend.recipient_id) %>
+      <%= link_to @friend.profile.username, user_path(@friend) %>
+      <% end %></p>
 </div>
+
 <% if logged_in? %>
 <% if @user == @current_user %>
   <%= render "users/edit_profile" %>
-  <% end %>
+    <% end %>
     <% end %>

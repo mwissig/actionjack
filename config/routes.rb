@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
 
 
+  get 'friends/new'
+  get 'friends/edit'
+  get 'friends/index'
+  get 'friends/show'
   get 'pages/pic2'
   get 'inbox' => 'notifications#index'
 
@@ -61,7 +65,9 @@ Rails.application.routes.draw do
       resources :profiles do
 
       end
+      resources :friends do
 
+      end
  delete 'delete' => 'users#destroy'
  member do
   get :confirm_email
