@@ -21,7 +21,7 @@ Hello <%= @current_user.profile.username %>
 <div class="box cardsuits">
 
   <h3>Your Games</h3>
-  <div class="minitic">
+  <div class="microtic">
 
 <% @my_tictactoes.each do |tic| %>
 <% @user_x = User.find_by(id: tic.x_id) %>
@@ -32,11 +32,11 @@ Hello <%= @current_user.profile.username %>
  <% @turn = @user_o %>
  <% end %>
  <% if @turn == @current_user %>
-  <div class="miniticContainer yourturn">
+  <div class="microticContainer yourturn">
     <% else %>
-      <div class="miniticContainer">
+      <div class="microticContainer">
         <% end %>
-  <div class="miniticgrid">
+  <div class="microticgrid">
     <% @grid.each do |coords| %>
 
 <% if @turn == @current_user %>

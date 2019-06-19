@@ -234,15 +234,19 @@ header {
   text-shadow: 2px 2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000, -2px -2px 0 #000000, 2px 0px 0 #000000, 0px 2px 0 #000000, -2px 0px 0 #000000, 0px -2px 0 #000000, 2px 2px 2px rgba(0, 0, 0, 0);
 }
 
-.minitic {
+.minitic, .microtic {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
   margin: 0 auto;
 }
+.microtic {
+  font-size: 12px;
 
-.miniticContainer {
+}
+
+.miniticContainer, .microticContainer {
   display: inline-block;
   width: 120px;
   max-width: 120px;
@@ -251,7 +255,11 @@ header {
   margin: 5px auto;
 }
 
-.miniticgrid {
+.microticContainer {
+  width: 75px;
+  max-width: 75px;
+}
+.miniticgrid, .microticgrid  {
   display: grid;
   grid-template-columns: repeat(3, 25px);
   grid-template-rows: repeat(3, 25px);
@@ -263,8 +271,14 @@ header {
   margin: 0 auto;
   margin-bottom: 3px;
 }
+.microticgrid  {
+  grid-template-columns: repeat(3, 15px);
+  grid-template-rows: repeat(3, 15px);
+    max-width: 47px;
 
-.miniticgrid div {
+}
+
+.miniticgrid div, .microticgrid div  {
   background-color: white;
   display: flex;
   align-items: center;
