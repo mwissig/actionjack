@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
   def home
     @lobbychats = Lobbychat.all.last(200)
-    @recent_tictactoes = Tictactoe.all.order(updated_at: :desc).first(8)
+    @recent_tictactoes = Tictactoe.all.order(updated_at: :desc).first(12)
     @grid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
 
 
