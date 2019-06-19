@@ -17,6 +17,47 @@ Hello <%= @current_user.profile.username %>
 <p>This is a Rails web app that uses ActionCable to display live game data for simple chat room games. I will be building on this site and adding more games and features in the future.</p>
 <p>Please contact me at mwissig@gmail.com (or through Facebook, etc.) if you have any problems with the site or would like to know if your registration went through. I will also respond to the in-site chat.</p>
 </div>
+<% if logged_in? %>
+<div class="box cardsuits">
+
+  <h3>Your Games</h3>
+  <div class="minitic">
+
+<% @my_tictactoes.each do |tic| %>
+<% @user_x = User.find_by(id: tic.x_id) %>
+<% @user_o = User.find_by(id: tic.o_id) %>
+<% if tic.turn == 'x' %>
+  <% @turn = @user_x %>
+<% elsif tic.turn == 'o' %>
+ <% @turn = @user_0 %>
+ <% end %>
+  <div class="miniticContainer">
+  <div class="miniticgrid">
+    <% @grid.each do |coords| %>
+      <div id="<%= coords %>_<%= tic.id %>">
+        <% if tic.send("#{coords}") != nil %>
+          <%= tic.send("#{coords}") %>
+        <% end %>
+      </div>
+      <% end %>
+
+</div>
+<%= link_to tictacto_path(tic) do %>
+<%= @user_x.profile.username %> vs <%= @user_o.profile.username %>
+<br>
+<% if @turn == @current_user %>
+Your turn
+<% else %>
+<%= @turn.profile.username %> 's turn
+<% end %>
+<% end %>
+
+      </div>
+<% end %>
+      </div>
+      </div>
+<% end %>
+
 <div class="box cardsuits">
 
   <h3>Recently Updated Games</h3>
