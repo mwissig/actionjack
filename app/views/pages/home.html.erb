@@ -48,7 +48,9 @@ Hello <%= @current_user.profile.username %>
 <% if @turn == @current_user %>
 Your turn
 <% else %>
+<% if @turn != nil %>
 <%= @turn.profile.username %> 's turn
+<% end %>
 <% end %>
 <% end %>
 
