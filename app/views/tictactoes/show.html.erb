@@ -18,6 +18,8 @@
     </div>
     <% end %>
   </div>
+  </div>
+  <div id="ticinfo">
   <div class="tict tictactoeTurn" id="ticturn_<%= @gameid %>">It's <%= @tictactoe.turn.upcase %>'s turn.</div>
   <div class="tict tictactoeMessage" id="ticmessage_<%= @gameid %>">  <%= flash[:tictactoe].html_safe unless flash[:tictactoe].blank? %></div>
   <div class="tict tictactoeReload" id="ticreload_<%= @gameid %>"></div>

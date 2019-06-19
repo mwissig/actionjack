@@ -5,6 +5,7 @@ Change display name <br>
   <%= f.text_field :username %><br>
 Change chat text color
 <%= f.text_field :color, required: true, class: 'jscolor {mode:"HVS",position:"right"}' %><br>
+<%= f.text_area :desc, placeholder: 'Profile description' %><br>
 <%= f.hidden_field :online_at, value: DateTime.now %>
   <%= f.submit 'Edit' %>
 <% end %>

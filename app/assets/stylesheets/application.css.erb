@@ -88,13 +88,32 @@ a {
   font-weight: bold;
   color: white;
 }
-
-input {
+form {
+  display: inline;
+}
+input, textarea {
   border-radius: 3px;
   padding: 3px 5px;
   border: 1px solid gray;
   margin: 3px;
   font-family: 'Roboto Condensed', sans-serif;
+  width: 90%;
+}
+input[type='submit'] {
+  width:auto;
+}
+select {
+  background-color: white;
+  display: inline;
+  border-radius: 3px;
+  padding: 3px 5px;
+  border: 1px solid gray;
+  margin: 3px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+textarea {
+  width: 90%;
+  height: 3em;
 }
 
 header {
@@ -237,7 +256,7 @@ header {
   grid-template-columns: repeat(3, 25px);
   grid-template-rows: repeat(3, 25px);
   color: black;
-  border: 1px solid black;
+  border: none;
   max-width: 77px;
   background-color: black;
   grid-gap: 1px;
@@ -255,6 +274,7 @@ header {
 
 #lobby, #gamechat {
   position: absolute;
+  z-index: 254;
   right: 5px;
   bottom: 5px;
   top: 45px;
@@ -367,7 +387,7 @@ header {
 
 .box {
   border: 1px solid gray;
-  padding: 5px;
+  padding: 5px 8px;
   width: 40vw;
   background-color: white;
   position: relative;
@@ -452,12 +472,19 @@ header ul {
 #tictactoe {
   text-align: center;
   width: 310px;
-  background-color: transparent;
+  background-color: black;
   border: none;
+  padding: 0;
+
+}
+#ticinfo {
+  text-align: center;
+  width: 310px;
+  margin: 0 auto;
 }
 .bg {
-  padding: 0;
-  background-color: rgb(158, 184, 196);
+  padding: 5px;
+  background-color: white;
 }
 
 #tictactoegrid {
@@ -655,7 +682,7 @@ canvas {
 }
 
 @media only screen and (max-height: 800px) {
-  #tictactoe {
+  #tictactoe, #ticinfo {
     width: 250px;
   }
 
