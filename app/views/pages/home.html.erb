@@ -40,9 +40,9 @@ Hello <%= @current_user.profile.username %>
     <% @grid.each do |coords| %>
 
 <% if @turn == @current_user %>
-<div id="<%= coords %>_<%= tic.id %>" class="yourturn">
+<div class="yourturn">
       <% else %>
-      <div id="<%= coords %>_<%= tic.id %>">
+      <div>
         <% end %>
         <% if tic.send("#{coords}") != nil %>
           <%= tic.send("#{coords}") %>
