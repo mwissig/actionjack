@@ -31,10 +31,19 @@ Hello <%= @current_user.profile.username %>
 <% elsif tic.turn == 'o' %>
  <% @turn = @user_o %>
  <% end %>
-  <div class="miniticContainer">
+ <% if @turn == @current_user %>
+  <div class="miniticContainer yourturn">
+    <% else %>
+      <div class="miniticContainer">
+        <% end %>
   <div class="miniticgrid">
     <% @grid.each do |coords| %>
+
+<% if @turn == @current_user %>
+<div id="<%= coords %>_<%= tic.id %>" class="yourturn">
+      <% else %>
       <div id="<%= coords %>_<%= tic.id %>">
+        <% end %>
         <% if tic.send("#{coords}") != nil %>
           <%= tic.send("#{coords}") %>
         <% end %>
@@ -46,11 +55,9 @@ Hello <%= @current_user.profile.username %>
 <%= @user_x.profile.username %> vs <%= @user_o.profile.username %>
 <br>
 <% if @turn == @current_user %>
-Your turn
+<span class="yourturn">Your turn</span>
 <% else %>
-<% if @turn != nil %>
 <%= @turn.profile.username %> 's turn
-<% end %>
 <% end %>
 <% end %>
 
