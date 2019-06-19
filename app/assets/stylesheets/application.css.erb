@@ -452,6 +452,12 @@ header ul {
 #tictactoe {
   text-align: center;
   width: 310px;
+  background-color: transparent;
+  border: none;
+}
+.bg {
+  padding: 0;
+  background-color: rgb(158, 184, 196);
 }
 
 #tictactoegrid {
@@ -461,11 +467,12 @@ header ul {
   grid-gap: 5px;
   width: 500px;
   margin: 0 auto;
+
 }
 
 .tic {
   background-color: white;
-  border: 1px solid gray;
+  border: none;
   width: 100px;
   height: 100px;
   max-width: 100px;
@@ -485,13 +492,13 @@ header ul {
 }
 
 .tic button:hover {
-  background-color: green;
+  background-color: rgb(178, 233, 129);
 }
 
 .winschart {
   display: grid;
   grid-template-columns: repeat(2, 50%);
-  background-color: #e6d6d1;
+  background-color: #f0ecd4;
   padding: 3px;
   width: 300px;
 }
