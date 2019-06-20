@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     @lobbychats = Lobbychat.all.last(200)
     @recent_tictactoes = Tictactoe.all.order(updated_at: :desc).first(12)
     if logged_in?
-    @my_tictactoes = Tictactoe.where('x_id = ? OR x_id = ?', @current_user.id, @current_user.id).order(updated_at: :desc)
+    @my_tictactoes = Tictactoe.where('x_id = ? OR o_id = ?', @current_user.id, @current_user.id).order(updated_at: :desc)
     end
     @grid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
 
