@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :lobbychats do
   end
+  resources :notifications do
+  end
   resources :gamechats do
   end
   resources :tictactoes do

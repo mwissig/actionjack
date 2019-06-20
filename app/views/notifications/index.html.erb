@@ -1,5 +1,7 @@
 <% if logged_in? %>
   <div class="box cardsuits">
+
+      <%= render 'notifications/send' %>
   <h2>Notifications</h2>
 <ul>
 <% @notifications.each do |note| %>
@@ -28,6 +30,20 @@
         <% @note = note %>
         <%= render 'notifications/timestamp' %>
         </li>
+
+        <% elsif note.game == 'message' %>
+          <li>
+          <%= link_to User.find_by(id: note.sender_id).profile.username, user_path(User.find_by(id: note.sender_id)) %> sent you a message
+<% if note.points > 0 %>
+and <%= note.points %>  <i class='fas fa-coins gold'></i>
+<% end %>
+          <% @note = note %>
+          <%= render 'notifications/timestamp' %>
+          <p class='notebody'>
+<%= note.body %>
+          </p>
+
+          </li>
 
   <% end %>
 
