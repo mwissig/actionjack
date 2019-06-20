@@ -166,20 +166,24 @@ header {
 .new_notification input[type='number']{
   width: 100px;
 }
+.slotcontainer {
+  background-color: rgb(177, 185, 185);
+}
 #slotreel, #slotflash {
   width: 80%;
   height: 100px;
-  background-color: #d2d2d2;
+  background-color: transparent;
   margin: 0 auto;
   padding: 1em 0;
   display: grid;
-  grid-template-columns: repeat(3, 30%);
+  grid-template-columns: repeat(3, 33%);
   grid-gap: 5px;
   padding: 5px;
 }
 
 #slotflash {
   height: 2em;
+  display: block;
 }
 
 #slotreel h3 {
@@ -668,6 +672,7 @@ canvas {
   #slotreel, #slotflash {
     width: 90vw;
     max-width: 90vw;
+    text-align: center;
   }
 
   #lobby, #gamechat {

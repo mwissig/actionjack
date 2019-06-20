@@ -1,20 +1,27 @@
 <% if logged_in? %>
 <div class="box" id="slotmachine">
+
   <h2>Slot machine</h2>
+    <div class="slotcontainer">
+      <div id="slotflash">
+      <%= flash[:slots].html_safe unless flash[:slots].blank? %>
+      </div>
   <div id="slotreel">
     <div class="reel"><%= flash[:slotreel1].html_safe unless flash[:slotreel1].blank? %></div>
-      <div class="reel"><%= flash[:slotreel2].html_safe unless flash[:slotreel2].blank? %></div>
-        <div class="reel"><%= flash[:slotreel3].html_safe unless flash[:slotreel3].blank? %></div>
-</div>
-<div id="slotflash">
-<%= flash[:slots].html_safe unless flash[:slots].blank? %>
-</div>
+    <div class="reel"><%= flash[:slotreel2].html_safe unless flash[:slotreel2].blank? %></div>
+    <div class="reel"><%= flash[:slotreel3].html_safe unless flash[:slotreel3].blank? %></div>
+  </div>
+
+
+
+
 <%= form_tag('/games/slots2', method: 'get') do %>
 <%= button_tag :submit do %>
     Bet 10 <span class="points"><i class="fas fa-coins big"></i></span>
 <% end %>
-<% end %>
+<% end %><br>
 You have <span class="points"><%= @current_user.points %> <i class="fas fa-coins"></i></span>
+</div>
 </div>
       <%= render "lobbychats/lobby" %>
 <% end %>

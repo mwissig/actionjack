@@ -34,13 +34,13 @@ end
     if logged_in?
       if @current_user.points >= 10
         @current_user.decrement!(:points, 10)
-        @reel = ["<h3><i class='fas fa-pepper-hot red'></i></h3>", "<span class='bar'>BAR</span>", "<h3><b>7</b></h3>", "<span class='jackpot'>JACKPOT</span>", "<h3><i class='fas fa-anchor'></i></h3>", "<h3><i class='fas fa-lemon yellow'></i></h3>", "<h3><i class='fas fa-money-bill-wave green'></i></h3>", "<h3><i class='fas fa-coins gold''></i></h3>", "<h3><i class='fas fa-star purple'></i></h3>"]
+        @reel = ["<h3 class='animated slideInUp fast'><i class='fas fa-pepper-hot red'></i></h3>", "<span class='bar animated slideInUp'>BAR</span>", "<h3 class='animated slideInUp faster'><b>7</b></h3>", "<span class='animated slideInUp slow jackpot'>JACKPOT</span>", "<h3 class='animated slideInDown slow'><i class='fas fa-anchor'></i></h3>", "<h3 class='animated slideInDown'><i class='fas fa-lemon yellow'></i></h3>", "<h3 class='animated slideInDown fast'><i class='fas fa-money-bill-wave green'></i></h3>", "<h3 class='animated slideInUp faster'><i class='fas fa-coins gold'></i></h3>", "<h3 class='animated slideInDown'><i class='fas fa-star purple'></i></h3>"]
         @reel1 = @reel.sample
         @reel2 = @reel.sample
         @reel3 = @reel.sample
         @message = ""
         @amount = 0
-        if @reel1 == "JACKPOT" && @reel1 == @reel2 && @reel2 == @reel3
+        if @reel1 == "<span class='animated slideInUp slow jackpot'>JACKPOT</span>" && @reel1 == @reel2 && @reel2 == @reel3
           @message = "JACKPOT! You won"
           @amount = 1000
           @current_user.increment!(:points, 1000)
@@ -57,12 +57,12 @@ end
           @amount = 0
         end
         if @amount > 0
-        flash[:slots] = "<p>" + @message + " " + @amount.to_s + "</p>"
+        flash[:slots] = "<h3 class='animated fadeIn'>" + @message + " " + @amount.to_s + " <i class='fas fa-coins gold'></i></h3>"
         flash[:slotreel1] = @reel1
         flash[:slotreel2] = @reel2
         flash[:slotreel3] = @reel3
       else
-        flash[:slots] = "<p> " + @message + "</p>"
+        flash[:slots] = "<p class='animated fadeIn'> " + @message + "</p>"
         flash[:slotreel1] = @reel1
         flash[:slotreel1] = @reel1
         flash[:slotreel2] = @reel2
@@ -70,7 +70,7 @@ end
       end
         redirect_to games_slots_path
       else
-      flash[:slots] = "You do not have enough points."
+      flash[:slots] = "You do not have enough <i class='fas fa-coins gold'></i>."
     end
   end
 end
