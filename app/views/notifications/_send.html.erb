@@ -2,14 +2,13 @@
   <% if logged_in? && @friends_for_select != nil %>
       <h2>Send a notification</h2>
       <%= flash[:inbox].html_safe unless flash[:inbox].blank? %>
-      <%= form_for @notification, class: 'sendnote' do |f| %>
+      <%= form_for @notification do |f| %>
         <%= f.hidden_field :sender_id, value: @current_user.id, required: true %>
         <%= f.hidden_field :recipient_id, value: @user.id, required: true %>
         <%= f.hidden_field :game, value: 'message', required: true %>
         <%= f.hidden_field :read, value: false, required: true %>
         <%= f.text_area :body, placeholder: 'Write a message' %>
         <%= f.select :user_id, @friends_for_select, prompt: "Select friend", required: true %>
-
         <%= f.number_field :points, value: 0, required: true %> Send <i class='fas fa-coins gold'></i>?
         <%= f.submit "Send" %>
         <% end %>
