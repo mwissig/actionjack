@@ -3,6 +3,11 @@
 
       <%= render 'notifications/send' %>
   <h2>Notifications</h2>
+  <div class="pagination-wrapper">
+  <div class="digg_pagination">
+      <%= will_paginate @notifications, :container => false %>
+    </div>
+    </div>
 <ul>
 <% @notifications.each do |note| %>
 
@@ -50,5 +55,9 @@ and <%= note.points %>  <i class='fas fa-coins gold'></i>
 <% end %>
 
 </ul>
-</div>
+<div class="pagination-wrapper">
+<div class="digg_pagination">
+    <%= will_paginate @notifications, :container => false %>
+  </div>
+  </div>
 <% end %>

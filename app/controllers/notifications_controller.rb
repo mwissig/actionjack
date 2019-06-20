@@ -45,7 +45,7 @@ class NotificationsController < ApplicationController
             @friend_usernames.push(@user.profile.username)
           end
       @friends_for_select = @friend_usernames.zip(@friend_user_ids)
-      @notifications = @current_user.notifications.all.order(created_at: :desc)
+      @notifications = @current_user.notifications.all.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
       @unread_notifications = @notifications.where(read: false)
       @unread_notifications.each do |note|
       note.read = true
