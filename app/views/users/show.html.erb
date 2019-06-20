@@ -10,7 +10,8 @@
 </li>
 
 </ul>
-<p><%= @user.profile.desc %> </p>
+<p><%= simple_format(@user.profile.desc) %> </p>
+<% if logged_in? %>
 <% if @user != @current_user %>
   <% if Friend.where('user_id = ? AND recipient_id = ?', @current_user.id, @user.id).first == nil && Friend.where('user_id = ? AND recipient_id = ?', @user.id, @current_user.id).first == nil  %>
     <%= render "friends/add" %>
@@ -32,11 +33,15 @@
     <% end %>
     <% end %>
   <% end %>
+    <% end %>
   <% end %><p>Friends:
+    <% if @friends != nil %>
 <% @friends.each do |friend| %>
   <% @friend = User.find_by(id: friend.recipient_id) %>
       <%= link_to @friend.profile.username, user_path(@friend) %>
-      <% end %></p>
+      <% end %>
+      <% end %>
+    </p>
 </div>
 
 <% if logged_in? %>

@@ -42,8 +42,8 @@ end
     @user = User.find(params[:id])
     if logged_in?
     @friend = Friend.new
-    @friends = @user.friends.where(accepted: true)
   end
+      @friends = @user.friends.where(accepted: true)
   end
 
   def index
