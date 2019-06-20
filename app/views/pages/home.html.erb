@@ -24,6 +24,7 @@ Hello <%= @current_user.profile.username %>
   <div class="microtic">
 
 <% @my_tictactoes.each do |tic| %>
+<%= link_to tictacto_path(tic) do %>
 <% @user_x = User.find_by(id: tic.x_id) %>
 <% @user_o = User.find_by(id: tic.o_id) %>
 <% if tic.turn == 'x' %>
@@ -51,8 +52,14 @@ Hello <%= @current_user.profile.username %>
       <% end %>
 
 </div>
-<%= link_to tictacto_path(tic) do %>
-<%= @user_x.profile.username %> vs <%= @user_o.profile.username %>
+
+<span class="opponentname">
+  <% if @user_x != @current_user %>
+    <%= @user_x.profile.username %>
+  <% elsif @user_o != @current_user %>
+    <%= @user_o.profile.username %>
+    <% end %>
+    </span>
 <br>
 <% if @turn == @current_user %>
 <span class="yourturn">Your turn</span>
