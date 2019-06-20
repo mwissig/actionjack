@@ -32,6 +32,9 @@ Send &#9166
 <span style="color:white">You must be logged in to chat.</span>
 <% end %>
 </div>
-<!-- <script>
-  dragElement(document.getElementById("gamechat"));
-  </script> -->
+<script>
+  window.addEventListener('load', function() {
+    var box = document.getElementById('gamechatlist_<%= @gametype %>_<%= @gameid %>')
+    box.scrollTop = box.scrollHeight;
+  });
+  </script>
