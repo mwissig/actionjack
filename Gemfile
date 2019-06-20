@@ -29,7 +29,10 @@ gem 'redis',                   '3.3.1'
 gem 'bcrypt', '~> 3.1.7'
 gem "figaro"
 gem 'jquery-rails'
+gem 'ckeditor'
+gem 'paperclip'
 # Use ActiveStorage variant
+# gem 'carrierwave'
 # gem 'mini_magick', '~> 4.8'
 gem "sentry-raven"
 # Use Capistrano for deployment

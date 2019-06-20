@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-
-
-
-
+  mount Ckeditor::Engine => '/ckeditor'
   get 'friends/new'
   get 'friends/edit'
   get 'friends/index'
@@ -78,4 +75,5 @@ end
 end
   resources :password_resets,     only: [:new, :create, :edit, :update]
 mount ActionCable.server, at: '/cable'
+
 end

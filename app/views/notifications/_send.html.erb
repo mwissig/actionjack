@@ -7,7 +7,7 @@
         <%= f.hidden_field :recipient_id, value: @user.id, required: true %>
         <%= f.hidden_field :game, value: 'message', required: true %>
         <%= f.hidden_field :read, value: false, required: true %>
-        <%= f.text_area :body, placeholder: 'Write a message' %>
+        <%= f.cktext_area :body, placeholder: 'Write a message', ckeditor: { uiColor: '#6197c2', toolbar: 'mini' } %>
         <%= f.select :user_id, @friends_for_select, prompt: "Select friend", required: true %>
         <%= f.number_field :points, value: 0, required: true %> Send <i class='fas fa-coins gold'></i>?
         <%= f.submit "Send" %>
