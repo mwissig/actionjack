@@ -44,6 +44,7 @@ body {
 .content {
   margin: 5px;
   margin-top: 3em;
+  max-height: 100vh;
 }
 
 h1 {
@@ -354,19 +355,19 @@ hyphens: auto;
   height: 142px;
 }
 
-.chatlist::-webkit-scrollbar {
+.chatlist::-webkit-scrollbar, .scrollbox::-webkit-scrollbar {
   width: 10px;
 }
 
-.chatlist::-webkit-scrollbar-track {
+.chatlist::-webkit-scrollbar-track, .scrollbox::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
-.chatlist::-webkit-scrollbar-thumb {
+.chatlist::-webkit-scrollbar-thumb, .scrollbox::-webkit-scrollbar-thumb {
   background: #040e23;
 }
 
-.chatlist::-webkit-scrollbar-thumb:hover {
+.chatlist::-webkit-scrollbar-thumb:hover, .scrollbox::-webkit-scrollbar-thumb:hover  {
   background: rgba(57, 87, 150, 0.35);
 }
 
@@ -430,7 +431,13 @@ hyphens: auto;
   margin-bottom: 5px;
   overflow: hidden;
 }
-
+.scrollbox {
+    width: calc(40vw + 30px);
+      margin: 0 auto;
+    height: calc(100vh - 50px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 .jscolor {
   width: 20px;
   height: 20px;
@@ -671,7 +678,13 @@ canvas {
     border-right: none;
     width: 100vw;
   }
-
+  .scrollbox {
+    width: 100vw;
+        margin: 0 auto;
+      height: calc(80vh - 50px);
+      overflow-y: scroll;
+      overflow-x: hidden;
+  }
   #slotmachine button {
     width: 90vw;
     max-width: 90vw;

@@ -1,4 +1,4 @@
-
+<div class="scrollbox">
 <div class="box hello">
 <% if logged_in? %>
 
@@ -114,6 +114,7 @@ Hello <%= @current_user.profile.username %>
 
 </div>
 <div class='floatright'><%= link_to "More...", tictactoes_path %></div>
+</div>
 </div>
 
       <%= render "lobbychats/lobby" %>

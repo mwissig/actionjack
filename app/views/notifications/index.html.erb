@@ -1,4 +1,6 @@
+
 <% if logged_in? %>
+<div class="scrollbox">
   <div class="box cardsuits">
 
       <%= render 'notifications/send' %>
@@ -61,5 +63,6 @@ and <%= note.points %>  <i class='fas fa-coins gold'></i>
   </div>
   </div>
   </div>
+    </div>
 <% end %>
       <%= render "lobbychats/lobby" %>
