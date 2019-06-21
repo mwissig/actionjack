@@ -1,12 +1,32 @@
-<div class="box cardsuits">
-  <h2>Play Tic Tac Toe</h2>
-<%= render 'tictactoes/new' %>
-<% if @tictactoes.first != nil %>
-Play and watch ongoing games
+  <% if logged_in? %>
+  <div class="box">
+    <h2>Play Tic Tac Toe</h2>
+    <ul>
+    <li><div class="inlineButton">
+    <%= render 'tictactoes/new' %></div></li>
+    <li><div class="inlineButton">
+    <%= render 'tictactoes/new_choose' %></div></li>
+    </ul><% if @tictactoes.first != nil %><br>
+    </div>
+    <% end %>
+
+    <div class="box cardsuits">
+
+<h3>Play and watch ongoing games</h3>
+<div class="pagination-wrapper">
+<div class="digg_pagination">
+    <%= will_paginate @tictactoes, :container => false %>
+  </div>
+  </div>
 <ul>
 <% @tictactoes.each do |tic| %>
 <li><%= link_to User.find_by(id: tic.x_id).profile.username + ' vs ' + User.find_by(id: tic.o_id).profile.username, tictacto_path(tic) %></li>
 <% end %>
 <% end %>
 </ul>
+<div class="pagination-wrapper">
+<div class="digg_pagination">
+    <%= will_paginate @tictactoes, :container => false %>
+  </div>
+  </div>
 </div>

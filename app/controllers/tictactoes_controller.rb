@@ -41,8 +41,20 @@ class TictactoesController < ApplicationController
   end
 
   def index
-    @tictactoes = Tictactoe.all
+    @tictactoes = Tictactoe.all.order(updated_at: :desc).paginate(page: params[:page], per_page: 12)
     @tictactoe = Tictactoe.new
+    @grid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
+    @lobbychats = Lobbychat.all.last(200)
+    if logged_in?
+          @lobbychat = @current_user.lobbychats.new
+          @random_opponent = @thisweekusers.where.not(user_id: @current_user.id).sample.user
+          @users = User.all.where.not(id: @current_user.id).order(:id)
+          @usernames = []
+          @users.each do |user|
+            @usernames.push user.profile.username
+          end
+          @userlist = @usernames.zip(@users.ids)
+    end
   end
 
   def show
