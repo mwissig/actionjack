@@ -23,6 +23,13 @@ class PagesController < ApplicationController
     @tictactoe = Tictactoe.new
   end
 
+  def games
+    @lobbychats = Lobbychat.all.last(200)
+    if logged_in?
+          @lobbychat = @current_user.lobbychats.new
+        end
+  end
+
 def slots
   @lobbychats = Lobbychat.all.last(200)
   if logged_in?

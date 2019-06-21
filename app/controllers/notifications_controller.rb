@@ -33,7 +33,9 @@ class NotificationsController < ApplicationController
     end
 
   def index
+    @lobbychats = Lobbychat.all.last(200)
     if logged_in?
+      @lobbychat = @current_user.lobbychats.new
       @notification = Notification.create
       @friend = Friend.new
       @friend_user_ids = []

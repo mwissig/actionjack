@@ -40,7 +40,9 @@ end
 
   def show
     @user = User.find(params[:id])
+        @lobbychats = Lobbychat.all.last(200)
     if logged_in?
+                @lobbychat = @current_user.lobbychats.new
     @friend = Friend.new
   end
       @friends = @user.friends.where(accepted: true)
