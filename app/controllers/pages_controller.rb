@@ -59,6 +59,14 @@ end
           @message = "You won"
           @amount = 50
           @current_user.increment!(:points, 50)
+        elsif @reel1 == @reel2 && @reel1 != @reel3
+          @message = "You won"
+          @amount = 5
+          @current_user.increment!(:points, 5)
+        elsif @reel2 == @reel3 && @reel1 != @slotreel2
+          @message = "You won"
+          @amount = 5
+          @current_user.increment!(:points, 5)
         else
           @message = "You lost"
           @amount = 0
