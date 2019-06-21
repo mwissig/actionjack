@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
   def home
     @lobbychats = Lobbychat.all.last(200)
-    @recent_tictactoes = Tictactoe.all.order(updated_at: :desc).first(12)
+    @recent_tictactoes = Tictactoe.all.order(updated_at: :desc).first(6)
     if logged_in?
     @my_tictactoes = Tictactoe.where('x_id = ? OR o_id = ?', @current_user.id, @current_user.id).order(updated_at: :desc)
     end

@@ -18,15 +18,54 @@
     <%= will_paginate @tictactoes, :container => false %>
   </div>
   </div>
-<ul>
-<% @tictactoes.each do |tic| %>
-<li><%= link_to User.find_by(id: tic.x_id).profile.username + ' vs ' + User.find_by(id: tic.o_id).profile.username, tictacto_path(tic) %></li>
+
+
+    <div class="minitic">
+
+  <% @tictactoes.each do |tic| %>
+
+  <% @user_x = User.find_by(id: tic.x_id) %>
+  <% @user_o = User.find_by(id: tic.o_id) %>
+  <% @linktext = "Watch" %>
+    <% if logged_in? %>
+      <% if @current_user == @user_x || @current_user == @user_o %>
+      <% @linktext = "Play" %>
+      <% end %>
+    <% end %>
+    <div class="miniticContainer">
+    <div class="miniticgrid">
+      <% @grid.each do |coords| %>
+        <div id="<%= coords %>_<%= tic.id %>">
+          <% if tic.send("#{coords}") != nil %>
+            <%= tic.send("#{coords}") %>
+          <% end %>
+        </div>
+        <% end %>
+
+  </div>
+  <%= link_to tictacto_path(tic) do %>
+  <%= @user_x.profile.username %> vs <%= @user_o.profile.username %>
+  <br>
+<%= @linktext %>
+  <% end %>
+
+    </div>
+
+
 <% end %>
-<% end %>
-</ul>
+
+
+</div>
+
+
+
+
+
 <div class="pagination-wrapper">
 <div class="digg_pagination">
     <%= will_paginate @tictactoes, :container => false %>
   </div>
   </div>
 </div>
+<% end %>
+<%= render "lobbychats/lobby" %>
