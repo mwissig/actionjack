@@ -45,7 +45,7 @@ and <%= note.points %>  <i class='fas fa-coins gold'></i>
           <% @note = note %>
           <%= render 'notifications/timestamp' %>
           <div class='notebody'>
-<%= simple_format(note.body) %>
+<%= simple_format(note.body, {}, sanitize: false)%>
           </div>
 
           </li>

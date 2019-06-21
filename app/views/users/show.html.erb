@@ -10,7 +10,7 @@
 </li>
 
 </ul>
-<p><%= simple_format(@user.profile.desc) %> </p>
+<p><%= simple_format(@user.profile.desc, {}, sanitize: false) %> </p>
 <% if logged_in? %>
 <% if @user != @current_user %>
   <% if Friend.where('user_id = ? AND recipient_id = ?', @current_user.id, @user.id).first == nil && Friend.where('user_id = ? AND recipient_id = ?', @user.id, @current_user.id).first == nil  %>
