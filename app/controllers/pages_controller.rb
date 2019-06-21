@@ -48,7 +48,7 @@ end
         @message = ""
         @amount = 0
         if @reel1 == "<span class='animated slideInUp slow jackpot'>JACKPOT</span>" && @reel1 == @reel2 && @reel2 == @reel3
-          @message = "JACKPOT! You won"
+          @message = "JACKPOT! You won<div class='pyro'><div class='before'></div><div class='after'></div></div>"
           @amount = 1000
           @current_user.increment!(:points, 1000)
          elsif @reel1 == @reel2 && @reel2 == @reel3
