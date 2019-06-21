@@ -3,8 +3,9 @@
 <p>Not registered? <%= link_to 'Create an account', register_path %>.</p>
 <%= form_for(:session, url: login_path) do |f| %>
   <%= f.email_field :email, placeholder: 'email', require: true %>
-  <%= f.password_field :password, placeholder: 'Password', require: true %>
-        <%= link_to "(forgot password?)", new_password_reset_path %>
-  <%= f.submit 'Log in' %>
+  <%= f.password_field :password, placeholder: 'Password', require: true %><br>
+
+  <%= f.submit 'Log in' %><br>
+  <%= link_to "Forgot password?", new_password_reset_path %>
 <% end %>
 </div>
