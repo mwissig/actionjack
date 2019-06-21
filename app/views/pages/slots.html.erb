@@ -17,10 +17,10 @@
 
 <%= form_tag('/games/slots2', method: 'get') do %>
 <%= button_tag :submit do %>
-    Bet 10 <span class="points"><i class="fas fa-coins big"></i></span>
+    Bet 10 <span class="points"><i class="fas fa-coins gold big"></i></span>
 <% end %>
 <% end %><br>
-You have <span class="points"><%= @current_user.points %> <i class="fas fa-coins"></i></span>
+You have <span class="points gold"><%= @current_user.points %> <i class="fas fa-coins"></i></span>
 </div>
 </div>
       <%= render "lobbychats/lobby" %>
