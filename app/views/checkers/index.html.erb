@@ -1,0 +1,16 @@
+<div class="box">
+  <div class="checkerboard">
+ <% @coords.each do |coords| %>
+  <% if @odds.include?(coords[0]) %>
+      <div id="<%= coords %>" class="odd_row"></div>
+  <% else %>
+        <div id="<%= coords %>" class="even_row"></div>
+  <% end %>
+<% end %>
+</div>
+under construction
+<div class="ckpiece ckblack"></div>
+<div class="ckpiece ckred"></div>
+<div class="ckpiece ckblack"><i class="fas fa-crown"></i></div>
+<div class="ckpiece ckred"><i class="fas fa-crown"></i></div>
+</div>

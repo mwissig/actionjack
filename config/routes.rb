@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'checkers/new'
+  get 'checkers' => 'checkers#index'
+  get 'checkers/edit'
+  get 'checkers/show'
   mount Ckeditor::Engine => '/ckeditor'
   get 'friends/new'
   get 'friends/edit'
