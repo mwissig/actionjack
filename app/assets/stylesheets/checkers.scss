@@ -1,9 +1,22 @@
 // Place all the styles related to the checkers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+.checkerframe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 450px;
+  height: 450px;
+  background-color: rgb(78, 48, 31);
+  transition: transform;
+  transition-duration: 1s;
+}
+.checkerframe:hover {
+  transform: rotate(180deg);
+}
 .checkerboard {
   display: grid;
+  border: 2px solid rgb(59, 25, 7);
   grid-template-columns: repeat(8, 50px);
   grid-template-rows: repeat(8, 50px);
   background-color: rgb(242, 232, 211);
