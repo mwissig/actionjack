@@ -24,8 +24,8 @@
   <div class="tict tictactoeMessage" id="ticmessage_<%= @gameid %>">  <%= flash[:tictactoe].html_safe unless flash[:tictactoe].blank? %></div>
   <div class="tict tictactoeReload" id="ticreload_<%= @gameid %>"></div>
   <div class="winschart">
-    <div>  <%= @user_x.profile.username %> (X)
-</div><div><%= @user_o.profile.username %> (O)</div>
+    <div>  <%= link_to @user_x.profile.username, user_path(@user_x) %> (X)
+</div><div><%= link_to @user_o.profile.username, user_path(@user_o)%> (O)</div>
 <div><span id="x_wincount_<%= @gameid %>"><%= @tictactoe.x_wins %></span> wins</div>
     <div> <span id="o_wincount_<%= @gameid %>"><%= @tictactoe.o_wins %></span> wins</div>
     </div>
