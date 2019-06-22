@@ -126,13 +126,13 @@ class TictactoesController < ApplicationController
           ActionCable.server.broadcast 'tictactoe_channel',
                             a1: @tictactoe.a1,
                             ticmessage: nil,
-                            ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                             id: @tictactoe.id
         end
         if @tictactoe.a1 != nil && @tictactoe.a1 != @current_user_mark
         ActionCable.server.broadcast 'tictactoe_channel',
                           ticmessage: "Invalid move.",
-                          ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                           id: @tictactoe.id
       end
         end
@@ -154,13 +154,13 @@ class TictactoesController < ApplicationController
           ActionCable.server.broadcast 'tictactoe_channel',
                             a2: @tictactoe.a2,
                             ticmessage: nil,
-                            ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                             id: @tictactoe.id
         end
         if @tictactoe.a2 != nil && @tictactoe.a2 != @current_user_mark
         ActionCable.server.broadcast 'tictactoe_channel',
                           ticmessage: "Invalid move.",
-                          ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                           id: @tictactoe.id
       end
         end
@@ -182,13 +182,13 @@ class TictactoesController < ApplicationController
           ActionCable.server.broadcast 'tictactoe_channel',
                             a3: @tictactoe.a3,
                             ticmessage: nil,
-                            ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                             id: @tictactoe.id
         end
         if @tictactoe.a3 != nil && @tictactoe.a3 != @current_user_mark
         ActionCable.server.broadcast 'tictactoe_channel',
                           ticmessage: "Invalid move.",
-                          ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                           id: @tictactoe.id
       end
         end
@@ -210,13 +210,13 @@ class TictactoesController < ApplicationController
           ActionCable.server.broadcast 'tictactoe_channel',
                             b1: @tictactoe.b1,
                             ticmessage: nil,
-                            ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                             id: @tictactoe.id
         end
         if @tictactoe.b1 != nil && @tictactoe.b1 != @current_user_mark
         ActionCable.server.broadcast 'tictactoe_channel',
                           ticmessage: "Invalid move.",
-                          ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                           id: @tictactoe.id
       end
         end
@@ -238,13 +238,13 @@ class TictactoesController < ApplicationController
           ActionCable.server.broadcast 'tictactoe_channel',
                             b2: @tictactoe.b2,
                             ticmessage: nil,
-                            ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                             id: @tictactoe.id
         end
         if @tictactoe.b2 != nil && @tictactoe.b2 != @current_user_mark
         ActionCable.server.broadcast 'tictactoe_channel',
                           ticmessage: "Invalid move.",
-                          ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                           id: @tictactoe.id
       end
         end
@@ -266,13 +266,13 @@ class TictactoesController < ApplicationController
           ActionCable.server.broadcast 'tictactoe_channel',
                             b3: @tictactoe.b3,
                             ticmessage: nil,
-                            ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                             id: @tictactoe.id
         end
         if @tictactoe.b3 != nil && @tictactoe.b3 != @current_user_mark
         ActionCable.server.broadcast 'tictactoe_channel',
                           ticmessage: "Invalid move.",
-                          ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                           id: @tictactoe.id
       end
         end
@@ -294,13 +294,13 @@ class TictactoesController < ApplicationController
           ActionCable.server.broadcast 'tictactoe_channel',
                             c1: @tictactoe.c1,
                             ticmessage: nil,
-                            ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                             id: @tictactoe.id
         end
         if @tictactoe.c1 != nil && @tictactoe.c1 != @current_user_mark
         ActionCable.server.broadcast 'tictactoe_channel',
                           ticmessage: "Invalid move.",
-                          ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                           id: @tictactoe.id
       end
         end
@@ -322,13 +322,13 @@ class TictactoesController < ApplicationController
           ActionCable.server.broadcast 'tictactoe_channel',
                             c2: @tictactoe.c2,
                             ticmessage: nil,
-                            ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                             id: @tictactoe.id
         end
         if @tictactoe.c2 != nil && @tictactoe.c2 != @current_user_mark
         ActionCable.server.broadcast 'tictactoe_channel',
                           ticmessage: "Invalid move.",
-                          ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                           id: @tictactoe.id
       end
         end
@@ -350,13 +350,13 @@ def c3
       ActionCable.server.broadcast 'tictactoe_channel',
                         c3: @tictactoe.c3,
                         ticmessage: nil,
-                        ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                        ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                         id: @tictactoe.id
     end
     if @tictactoe.c3 != nil && @tictactoe.c3 != @current_user_mark
     ActionCable.server.broadcast 'tictactoe_channel',
                       ticmessage: "Invalid move.",
-                      ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                      ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                       id: @tictactoe.id
   end
     end
@@ -377,6 +377,11 @@ end
  def define_players
    @user_x = User.find_by(id: @tictactoe.x_id)
    @user_o = User.find_by(id: @tictactoe.o_id)
+   if @tictactoe.turn == "x"
+     @turn_user = @user_x
+   elsif @tictactoe.turn == "o"
+    @turn_user = @user_o
+   end
    if logged_in?
      if @current_user == @user_x
        @current_user_mark = "x"
@@ -432,7 +437,7 @@ end
                                  c2: nil,
                                  c3: nil,
                                  id: @tictactoe.id,
-                                 ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                                 ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                                  ticmessage: "<span class='winner'>It's a draw.</span>",
                                  ticreload: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>"
                              end
@@ -467,7 +472,7 @@ end
                    c2: nil,
                    c3: nil,
                    id: @tictactoe.id,
-                   ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                   ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                    ticmessage: "<span class='winner'>" + @user_x.profile.username + " won.</span>",
                    ticreload: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>"
                end
@@ -502,7 +507,7 @@ end
                    c2: nil,
                    c3: nil,
                    id: @tictactoe.id,
-                   ticturn: "It's " + @tictactoe.turn.upcase + "'s turn.",
+                   ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                    ticmessage: "<span class='winner'>" + @user_o.profile.username + " won.</span>",
                    ticreload: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>"
                end
