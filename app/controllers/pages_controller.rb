@@ -185,6 +185,7 @@ end
     )
     if @item.save
       @current_user.decrement!(:points, @shopitem.shop_price)
+      redirect_to shop_path
     end
   end
 
