@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_20_185232) do
+ActiveRecord::Schema.define(version: 2019_06_24_163501) do
 
   create_table "blackjacks", force: :cascade do |t|
     t.integer "player_id"
@@ -85,6 +85,18 @@ ActiveRecord::Schema.define(version: 2019_06_20_185232) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "online_at"
+  end
+
+  create_table "slots", force: :cascade do |t|
+    t.integer "jackpot"
+    t.integer "last_winner_id"
+    t.integer "last_win_prize"
+    t.datetime "last_win_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "biggest_prize"
+    t.integer "biggest_winner_id"
+    t.datetime "biggest_win_date"
   end
 
   create_table "tictactoes", force: :cascade do |t|

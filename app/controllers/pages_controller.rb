@@ -31,6 +31,9 @@ class PagesController < ApplicationController
   end
 
 def slots
+        @slot = Slot.first
+        @last_winner = User.find_by(id: @slot.last_winner_id)
+        @biggest_winner = User.find_by(id: @slot.biggest_winner_id)
   @lobbychats = Lobbychat.all.last(200)
   if logged_in?
         @lobbychat = @current_user.lobbychats.new
@@ -39,8 +42,12 @@ end
 
   def slots2
     if logged_in?
+      @slot = Slot.first
+      @last_winner = User.find_by(id: @slot.last_winner_id)
+      @biggest_winner = User.find_by(id: @slot.biggest_winner_id)
       if @current_user.points >= 10
         @current_user.decrement!(:points, 10)
+        @slot.increment!(:jackpot, 10)
         @reel = ["<h3 class='animated slideInUp fast'><i class='fas fa-pepper-hot red'></i></h3>", "<span class='bar animated slideInUp'>BAR</span>", "<h3 class='animated slideInUp faster'><b>7</b></h3>", "<span class='animated slideInUp slow jackpot'>JACKPOT</span>", "<h3 class='animated slideInDown slow'><i class='fas fa-anchor'></i></h3>", "<h3 class='animated slideInDown'><i class='fas fa-lemon yellow'></i></h3>", "<h3 class='animated slideInDown fast'><i class='fas fa-money-bill-wave green'></i></h3>", "<h3 class='animated slideInUp faster'><i class='fas fa-coins gold'></i></h3>", "<h3 class='animated slideInDown'><i class='fas fa-star purple'></i></h3>"]
         @reel1 = @reel.sample
         @reel2 = @reel.sample
@@ -49,24 +56,40 @@ end
         @amount = 0
         if @reel1 == "<span class='animated slideInUp slow jackpot'>JACKPOT</span>" && @reel1 == @reel2 && @reel2 == @reel3
           @message = "JACKPOT! You won<div class='pyro'><div class='before'></div><div class='after'></div></div>"
-          @amount = 1000
-          @current_user.increment!(:points, 1000)
+          @amount = @slot.jackpot
+          @time = DateTime.now
+          @current_user.increment!(:points, @amount)
+          @slot.decrement!(:jackpot, @amount)
+          @slot.jackpot = 1000
+          @slot.last_win_prize = @amount
+          @slot.last_win_date = @time
+          @slot.last_winner_id = @current_user.id
+          if @amount > @slot.biggest_prize
+          @slot.biggest_prize = @amount
+          @slot.biggest_winner_id = @current_user.id
+          @slot.biggest_win_date = @time
+          end
+          @slot.save!
          elsif @reel1 == @reel2 && @reel2 == @reel3
           @message = "You won"
           @amount = 100
           @current_user.increment!(:points, 100)
+          @slot.decrement!(:jackpot, 10)
         elsif @reel1 == @reel3 && @reel1 != @reel2
           @message = "You won"
           @amount = 50
           @current_user.increment!(:points, 50)
+          @slot.decrement!(:jackpot, 50)
         elsif @reel1 == @reel2 && @reel1 != @reel3
           @message = "You won"
           @amount = 5
           @current_user.increment!(:points, 5)
+          @slot.decrement!(:jackpot, 5)
         elsif @reel2 == @reel3 && @reel1 != @slotreel2
           @message = "You won"
           @amount = 5
           @current_user.increment!(:points, 5)
+          @slot.decrement!(:jackpot, 5)
         else
           @message = "You lost"
           @amount = 0

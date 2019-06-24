@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get 'tictactoes/:id/play' => 'tictactoes#play'
 
   get 'shop' => 'pages#shop'
-  
+
   get 'games' => 'pages#games'
   get 'games/blackjack' => 'pages#blackjack'
   get 'games/slots' => 'pages#slots'
@@ -51,6 +51,8 @@ Rails.application.routes.draw do
 
   root 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :slots do
+  end
   resources :lobbychats do
   end
   resources :notifications do

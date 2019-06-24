@@ -1,4 +1,6 @@
 <% if logged_in? %>
+
+
 <div class="box" id="slotmachine">
 
   <h2>Slot machine</h2>
@@ -20,7 +22,17 @@
     Bet 10 <span class="points"><i class="fas fa-coins gold big"></i></span>
 <% end %>
 <% end %><br>
-You have <span class="points gold"><%= @current_user.points %> <i class="fas fa-coins"></i></span>
+<h3>You have <span class="points gold"><%= @current_user.points %> <i class="fas fa-coins"></i></span></h3>
+Current jackpot: <span class="points gold"><%= @slot.jackpot %> <i class="fas fa-coins"></i></span><br>
+<% if @slot.last_winner_id != nil %><p>
+Most recent winner:
+<%= link_to @last_winner.profile.username, user_path(@last_winner) %> won <%= @slot.last_win_prize %> <i class="fas fa-coins gold"></i> on <%= @slot.last_win_date.in_time_zone(@current_user.time_zone).strftime("%B %-d %Y, %-l:%M%P") %></p>
+<% end %>
+<% if @slot.biggest_winner_id != nil %><p>
+Biggest jackpot ever:
+<%= link_to @biggest_winner.profile.username, user_path(@biggest_winner) %> won <%= @slot.biggest_prize %> <i class="fas fa-coins gold"></i> on <%= @slot.biggest_win_date.in_time_zone(@current_user.time_zone).strftime("%B %-d, %Y") %>
+</p>
+<% end %>
 </div>
 </div>
       <%= render "lobbychats/lobby" %>

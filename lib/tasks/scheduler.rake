@@ -30,3 +30,13 @@ task :activate_accounts => :environment do
   end
   puts "done."
 end
+
+desc "Creates the slot machine db"
+task :build_slot => :environment do
+  puts "Making slot machine"
+  Slot.create(
+    jackpot: 1000,
+    biggest_prize: 0
+  )
+  puts "done."
+end
