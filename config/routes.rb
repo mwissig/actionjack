@@ -12,22 +12,17 @@ Rails.application.routes.draw do
   get 'pages/pic2'
   get 'inbox' => 'notifications#index'
 
-  get 'tictactoes/:id/a1' => 'tictactoes#a1'
-  get 'tictactoes/:id/a2' => 'tictactoes#a2'
-  get 'tictactoes/:id/a3' => 'tictactoes#a3'
-  get 'tictactoes/:id/b1' => 'tictactoes#b1'
-  get 'tictactoes/:id/b2' => 'tictactoes#b2'
-  get 'tictactoes/:id/b3' => 'tictactoes#b3'
-  get 'tictactoes/:id/c1' => 'tictactoes#c1'
-  get 'tictactoes/:id/c2' => 'tictactoes#c2'
-  get 'tictactoes/:id/c3' => 'tictactoes#c3'
+
   get '/users' => 'users#index'
 
   get 'tictactoes/new'
   get 'tictactoes/edit'
   get 'tictactoes/index'
   get 'tictactoes/show'
+  get 'tictactoes/:id/play' => 'tictactoes#play'
+
   get 'shop' => 'pages#shop'
+  
   get 'games' => 'pages#games'
   get 'games/blackjack' => 'pages#blackjack'
   get 'games/slots' => 'pages#slots'

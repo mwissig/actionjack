@@ -7,4 +7,6 @@ class Tictactoe < ApplicationRecord
   end
   validates :x_id, presence: true
   validates :o_id, presence: true
+  attr_accessor :co
+  attr_accessor :button
 end

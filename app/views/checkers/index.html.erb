@@ -5,7 +5,7 @@
   <% if @odds.include?(coords[0]) %>
       <div id="<%= coords %>" class="odd_row">
         <% if @black_piece_starter_coordinates.include?(coords) %>
-         <div class="ckpiece ckblack"></div>
+         <div class="ckpiece ckblack" onlcick='checkersHighlight("<%= coords %>");'></div>
          <% elsif @red_piece_starter_coordinates.include?(coords) %>
          <div class="ckpiece ckred"></div>
         <% end %>

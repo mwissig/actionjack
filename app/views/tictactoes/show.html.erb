@@ -8,7 +8,8 @@
         <%= @tictactoe.send("#{coords}") %>
       <% else %>
             <% if logged_in? && @current_user_status != "spectator" %>
-        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/' + coords, method: 'get') do %>
+        <%= form_tag('/tictactoes/' + @tictactoe.id.to_s + '/play/', method: 'get', remote: true ) do %>
+        <%= hidden_field_tag :co, coords %>
         <%= button_tag :submit do %>
           Play <%= @current_user_mark.upcase %>
           <% end %>

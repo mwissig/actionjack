@@ -1,8 +1,8 @@
 class TictactoesController < ApplicationController
 
-    before_action :find_tictactoe, only: %i[show edit update a1 a2 a3 b1 b2 b3 c1 c2 c3]
-    before_action :define_players, only: %i[show edit update a1 a2 a3 b1 b2 b3 c1 c2 c3]
-    before_action :win_conditions, only: %i[show edit update a1 a2 a3 b1 b2 b3 c1 c2 c3]
+    before_action :find_tictactoe, only: %i[show edit update play]
+    before_action :define_players, only: %i[show edit update play]
+    before_action :win_conditions, only: %i[show edit update play]
 
     def new
       @tictactoe = Tictactoe.new
@@ -66,7 +66,6 @@ class TictactoesController < ApplicationController
     if !logged_in?
       @current_user_status = "spectator"
     end
-
     if logged_in?
       @lobbychat = @current_user.lobbychats.new
       if @current_user == @user_x || @current_user == @user_o
@@ -80,266 +79,13 @@ class TictactoesController < ApplicationController
         @current_user_status = "spectator"
       end
     end
-
   end
-# A method that writes the 9 mehtods: doesn't work
-#
-    # @defgrid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
-    # @defgrid.each do |coords|
-    #   define_method(coords) do
-    #     if logged_in?
-    #       if @tictactoe.turn == @current_user_mark
-    #         if @tictactoe.coords == nil
-    #           @tictactoe.coords = @current_user_mark
-    #             if @tictactoe.turn == "x"
-    #               @tictactoe.turn = "o"
-    #             elsif @tictactoe.turn == "o"
-    #               @tictactoe.turn = "o"
-    #           end
-    #           @tictactoe.save!
-    #           if @tictactoe.save
-    #               ActionCable.server.broadcast 'tictactoe_channel',
-    #                               coords: @tictactoe.coords
-    #           end
-    #         else
-    #           flash[:tictactoe] = "Invalid move."
-    #         end
-    #       else
-    #         flash[:tictactoe] = "It's the other player's turn."
-    #       end
-    #     end
-    #   end
-    #   end
-    # end
 
-    def a1
-      if logged_in?
-        if @tictactoe.turn == @current_user_mark && @tictactoe.a1 == nil
-          @tictactoe.a1 = @current_user_mark
-          if @tictactoe.turn == "x"
-            @tictactoe.turn = "o"
-          elsif @tictactoe.turn == "o"
-            @tictactoe.turn = "x"
-          end
-          @tictactoe.save!
-          if @tictactoe.save
-          ActionCable.server.broadcast 'tictactoe_channel',
-                            a1: @tictactoe.a1,
-                            ticmessage: nil,
-                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                            id: @tictactoe.id
-        end
-        if @tictactoe.a1 != nil && @tictactoe.a1 != @current_user_mark
-        ActionCable.server.broadcast 'tictactoe_channel',
-                          ticmessage: "Invalid move.",
-                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                          id: @tictactoe.id
-      end
-        end
-      end
-        redirect_to tictacto_path(@tictactoe)
-    end
-
-    def a2
-      if logged_in?
-        if @tictactoe.turn == @current_user_mark && @tictactoe.a2 == nil
-          @tictactoe.a2 = @current_user_mark
-          if @tictactoe.turn == "x"
-            @tictactoe.turn = "o"
-          elsif @tictactoe.turn == "o"
-            @tictactoe.turn = "x"
-          end
-          @tictactoe.save!
-          if @tictactoe.save
-          ActionCable.server.broadcast 'tictactoe_channel',
-                            a2: @tictactoe.a2,
-                            ticmessage: nil,
-                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                            id: @tictactoe.id
-        end
-        if @tictactoe.a2 != nil && @tictactoe.a2 != @current_user_mark
-        ActionCable.server.broadcast 'tictactoe_channel',
-                          ticmessage: "Invalid move.",
-                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                          id: @tictactoe.id
-      end
-        end
-      end
-        redirect_to tictacto_path(@tictactoe)
-    end
-
-    def a3
-      if logged_in?
-        if @tictactoe.turn == @current_user_mark && @tictactoe.a3 == nil
-          @tictactoe.a3 = @current_user_mark
-          if @tictactoe.turn == "x"
-            @tictactoe.turn = "o"
-          elsif @tictactoe.turn == "o"
-            @tictactoe.turn = "x"
-          end
-          @tictactoe.save!
-          if @tictactoe.save
-          ActionCable.server.broadcast 'tictactoe_channel',
-                            a3: @tictactoe.a3,
-                            ticmessage: nil,
-                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                            id: @tictactoe.id
-        end
-        if @tictactoe.a3 != nil && @tictactoe.a3 != @current_user_mark
-        ActionCable.server.broadcast 'tictactoe_channel',
-                          ticmessage: "Invalid move.",
-                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                          id: @tictactoe.id
-      end
-        end
-      end
-        redirect_to tictacto_path(@tictactoe)
-    end
-
-    def b1
-      if logged_in?
-        if @tictactoe.turn == @current_user_mark && @tictactoe.b1 == nil
-          @tictactoe.b1 = @current_user_mark
-          if @tictactoe.turn == "x"
-            @tictactoe.turn = "o"
-          elsif @tictactoe.turn == "o"
-            @tictactoe.turn = "x"
-          end
-          @tictactoe.save!
-          if @tictactoe.save
-          ActionCable.server.broadcast 'tictactoe_channel',
-                            b1: @tictactoe.b1,
-                            ticmessage: nil,
-                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                            id: @tictactoe.id
-        end
-        if @tictactoe.b1 != nil && @tictactoe.b1 != @current_user_mark
-        ActionCable.server.broadcast 'tictactoe_channel',
-                          ticmessage: "Invalid move.",
-                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                          id: @tictactoe.id
-      end
-        end
-      end
-        redirect_to tictacto_path(@tictactoe)
-    end
-
-    def b2
-      if logged_in?
-        if @tictactoe.turn == @current_user_mark && @tictactoe.b2 == nil
-          @tictactoe.b2 = @current_user_mark
-          if @tictactoe.turn == "x"
-            @tictactoe.turn = "o"
-          elsif @tictactoe.turn == "o"
-            @tictactoe.turn = "x"
-          end
-          @tictactoe.save!
-          if @tictactoe.save
-          ActionCable.server.broadcast 'tictactoe_channel',
-                            b2: @tictactoe.b2,
-                            ticmessage: nil,
-                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                            id: @tictactoe.id
-        end
-        if @tictactoe.b2 != nil && @tictactoe.b2 != @current_user_mark
-        ActionCable.server.broadcast 'tictactoe_channel',
-                          ticmessage: "Invalid move.",
-                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                          id: @tictactoe.id
-      end
-        end
-      end
-        redirect_to tictacto_path(@tictactoe)
-    end
-
-    def b3
-      if logged_in?
-        if @tictactoe.turn == @current_user_mark && @tictactoe.b3 == nil
-          @tictactoe.b3 = @current_user_mark
-          if @tictactoe.turn == "x"
-            @tictactoe.turn = "o"
-          elsif @tictactoe.turn == "o"
-            @tictactoe.turn = "x"
-          end
-          @tictactoe.save!
-          if @tictactoe.save
-          ActionCable.server.broadcast 'tictactoe_channel',
-                            b3: @tictactoe.b3,
-                            ticmessage: nil,
-                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                            id: @tictactoe.id
-        end
-        if @tictactoe.b3 != nil && @tictactoe.b3 != @current_user_mark
-        ActionCable.server.broadcast 'tictactoe_channel',
-                          ticmessage: "Invalid move.",
-                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                          id: @tictactoe.id
-      end
-        end
-      end
-        redirect_to tictacto_path(@tictactoe)
-    end
-
-    def c1
-      if logged_in?
-        if @tictactoe.turn == @current_user_mark && @tictactoe.c1 == nil
-          @tictactoe.c1 = @current_user_mark
-          if @tictactoe.turn == "x"
-            @tictactoe.turn = "o"
-          elsif @tictactoe.turn == "o"
-            @tictactoe.turn = "x"
-          end
-          @tictactoe.save!
-          if @tictactoe.save
-          ActionCable.server.broadcast 'tictactoe_channel',
-                            c1: @tictactoe.c1,
-                            ticmessage: nil,
-                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                            id: @tictactoe.id
-        end
-        if @tictactoe.c1 != nil && @tictactoe.c1 != @current_user_mark
-        ActionCable.server.broadcast 'tictactoe_channel',
-                          ticmessage: "Invalid move.",
-                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                          id: @tictactoe.id
-      end
-        end
-      end
-        redirect_to tictacto_path(@tictactoe)
-    end
-
-    def c2
-      if logged_in?
-        if @tictactoe.turn == @current_user_mark && @tictactoe.c2 == nil
-          @tictactoe.c2 = @current_user_mark
-          if @tictactoe.turn == "x"
-            @tictactoe.turn = "o"
-          elsif @tictactoe.turn == "o"
-            @tictactoe.turn = "x"
-          end
-          @tictactoe.save!
-          if @tictactoe.save
-          ActionCable.server.broadcast 'tictactoe_channel',
-                            c2: @tictactoe.c2,
-                            ticmessage: nil,
-                            ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                            id: @tictactoe.id
-        end
-        if @tictactoe.c2 != nil && @tictactoe.c2 != @current_user_mark
-        ActionCable.server.broadcast 'tictactoe_channel',
-                          ticmessage: "Invalid move.",
-                          ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                          id: @tictactoe.id
-      end
-        end
-      end
-        redirect_to tictacto_path(@tictactoe)
-    end
-
-def c3
+def play
   if logged_in?
-    if @tictactoe.turn == @current_user_mark && @tictactoe.c3 == nil
-      @tictactoe.c3 = @current_user_mark
+  @co = params[:co]
+    if @tictactoe.turn == @current_user_mark && @tictactoe.send(@co) == nil
+        @tictactoe.send("#{@co}=", @current_user_mark)
       if @tictactoe.turn == "x"
         @tictactoe.turn = "o"
       elsif @tictactoe.turn == "o"
@@ -348,12 +94,12 @@ def c3
       @tictactoe.save!
       if @tictactoe.save
       ActionCable.server.broadcast 'tictactoe_channel',
-                        c3: @tictactoe.c3,
+                        "#{@co}": @tictactoe.send(@co),
                         ticmessage: nil,
                         ticturn: "It's " + @turn_user.profile.username + "'s turn.",
                         id: @tictactoe.id
     end
-    if @tictactoe.c3 != nil && @tictactoe.c3 != @current_user_mark
+    if @tictactoe.send(@co) != nil && @tictactoe.send(@co) != @current_user_mark
     ActionCable.server.broadcast 'tictactoe_channel',
                       ticmessage: "Invalid move.",
                       ticturn: "It's " + @turn_user.profile.username + "'s turn.",
@@ -367,7 +113,7 @@ end
   private
 
   def tictactoe_params
-    params.require(:tictactoe).permit(:x_id, :o_id)
+    params.require(:tictactoe).permit(:x_id, :o_id, :id, :co, :button)
   end
 
   def find_tictactoe
