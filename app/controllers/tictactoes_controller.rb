@@ -190,10 +190,15 @@ end
                    @winner = nil
      end
 
-     if @winner == "x"
-     flash[:tictactoe] = @user_x.profile.username + " wins"
-             @tictactoe.increment!(:x_wins, 1)
-             @user_x.increment!(:points, 10)
+     if @winner == "x" || @winner == "o"
+       if @winner == "x"
+       @user_winner = @user_x
+     elsif @winner == "o"
+       @user_winner = @user_o
+      end
+     flash[:tictactoe] = @user_winner.profile.username + " wins"
+             @tictactoe.increment!(:"#{@winner}_wins", 1)
+             @user_winner.increment!(:points, 10)
              @tictactoe.turn = "x"
                @tictactoe.a1 = nil
                @tictactoe.a2 = nil
@@ -207,7 +212,7 @@ end
                @tictactoe.save!
                if @tictactoe.save
                    ActionCable.server.broadcast 'tictactoe_channel',
-                   x_wincount: @tictactoe.x_wins,
+                   "#{@winner}_wincount": @tictactoe.send("#{@winner}_wins"),
                    a1: nil,
                    a2: nil,
                    a3: nil,
@@ -219,47 +224,11 @@ end
                    c3: nil,
                    id: @tictactoe.id,
                    ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                   ticmessage: "<span class='winner'>" + @user_x.profile.username + " won.</span>",
+                   ticmessage: "<span class='winner'>" + @user_winner.profile.username + " won.</span>",
                    ticreload: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>"
                end
                @winner = nil
            end
-
-           if @winner == "o"
-                     flash[:tictactoe] = @user_o.profile.username + " wins"
-             @tictactoe.increment!(:o_wins, 1)
-             @user_o.increment!(:points, 10)
-             @tictactoe.turn = "o"
-               @tictactoe.a1 = nil
-               @tictactoe.a2 = nil
-               @tictactoe.a3 = nil
-               @tictactoe.b1 = nil
-               @tictactoe.b2 = nil
-               @tictactoe.b3 = nil
-               @tictactoe.c1 = nil
-               @tictactoe.c2 = nil
-               @tictactoe.c3 = nil
-               @tictactoe.save!
-               if @tictactoe.save
-                   ActionCable.server.broadcast 'tictactoe_channel',
-                   o_wincount: @tictactoe.o_wins,
-                   a1: nil,
-                   a2: nil,
-                   a3: nil,
-                   b1: nil,
-                   b2: nil,
-                   b3: nil,
-                   c1: nil,
-                   c2: nil,
-                   c3: nil,
-                   id: @tictactoe.id,
-                   ticturn: "It's " + @turn_user.profile.username + "'s turn.",
-                   ticmessage: "<span class='winner'>" + @user_o.profile.username + " won.</span>",
-                   ticreload: "<button class='refresh' value='Play Again' onClick='window.location.reload();'>Play Again</button>"
-               end
-               @winner = nil
-           end
-
 
    end
 
