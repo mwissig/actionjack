@@ -163,7 +163,7 @@ end
   def buy
     @item_name = params[:name]
     @shopitem = Shopitem.find_by(name: @item_name)
-    if @current_user.points >= @shopitem.shop_price
+    if @current_user.points >= @shopitem.shop_price.to_i
     @item = Item.create(
       user_id: @current_user.id,
       name: @shopitem.name,
@@ -186,7 +186,7 @@ end
     )
     if @item.save
       @current_user.decrement!(:points, @shopitem.shop_price)
-      flash[:shop] = @shopitem.name + " bought"
+      flash[:shop] = @shopitem.name + " bought."
       redirect_to shop_path
     end
   else
