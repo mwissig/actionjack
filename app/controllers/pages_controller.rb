@@ -163,6 +163,7 @@ end
   def buy
     @item_name = params[:name]
     @shopitem = Shopitem.find_by(name: @item_name)
+    if @current_user.points >= @shopitem.shop_price
     @item = Item.create(
       user_id: @current_user.id,
       name: @shopitem.name,
@@ -187,6 +188,7 @@ end
       @current_user.decrement!(:points, @shopitem.shop_price)
       redirect_to shop_path
     end
+  end
   end
 
 end
