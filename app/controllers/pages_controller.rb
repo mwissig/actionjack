@@ -169,8 +169,8 @@ end
       name: @shopitem.name,
       image: @shopitem.image,
       category: @shopitem.category,
-      shop_price: @shopitem.shop_price,
-      sellback_price: @shopitem.sellback_price,
+      shop_price: @shopitem.shop_price.to_i,
+      sellback_price: @shopitem.sellback_price.to_i,
       user_set_price: 0,
       color: @shopitem.color,
       material: @shopitem.material,
@@ -185,7 +185,7 @@ end
       datetime2: @shopitem.datetime2
     )
     if @item.save
-      @current_user.decrement!(:points, @shopitem.shop_price)
+      @current_user.decrement!(:points, @shopitem.shop_price.to_i)
       flash[:shop] = @shopitem.name + " bought."
       redirect_to shop_path
     end
