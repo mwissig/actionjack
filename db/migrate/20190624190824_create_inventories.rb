@@ -1,7 +1,7 @@
 class CreateInventories < ActiveRecord::Migration[5.2]
   def change
     create_table :inventories do |t|
-      t.string :user_id
+      t.integer :user_id
       t.string :name
       t.string :category
       t.integer :shop_price
