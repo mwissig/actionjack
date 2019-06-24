@@ -3,8 +3,8 @@ class CreateShopitems < ActiveRecord::Migration[5.2]
     create_table :shopitems do |t|
       t.string :name
       t.string :category
-      t.string :shop_price
-      t.string :sellback_price
+      t.integer :shop_price
+      t.integer :sellback_price
       t.string :color
       t.string :material
       t.string :quality
