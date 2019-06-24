@@ -186,9 +186,14 @@ end
     )
     if @item.save
       @current_user.decrement!(:points, @shopitem.shop_price)
+      flash[:shop] = @shopitem.name + " bought"
       redirect_to shop_path
     end
+  else
+    redirect_to shop_path
+    flash[:shop] = "Not enough money"
   end
   end
+
 
 end
