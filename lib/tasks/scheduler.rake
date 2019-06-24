@@ -40,3 +40,18 @@ task :build_slot => :environment do
   )
   puts "done."
 end
+
+desc "adds items to shop"
+task :add_shop_items => :environment do
+  puts "Populating shop"
+  Shopitem.create(
+    name: "Egg",
+    category: "pets",
+    image: "egg.png",
+    shop_price: 2000,
+    sellback_price: 1000,
+    description: "A mysterious egg.",
+    long_description: "This egg hatches into a pet."
+  )
+  puts "done."
+end

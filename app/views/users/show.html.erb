@@ -42,6 +42,18 @@
       <% end %>
       <% end %>
     </p>
+
+    <h2>Inventory</h2>
+
+  <div class="inventory-container">
+  <% @user.items.each do |item| %>
+  <div class="inventory_item">
+    <h3><%= item.name %></h3>
+    <%= image_tag("items/#{item.image}") %><br>
+  </div>
+  <% end %>
+  </div>
+
 </div>
 
 <% if logged_in? %>

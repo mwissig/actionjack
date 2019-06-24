@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  name: MyString
+  category: MyString
+  shop_price: 1
+  sellback_price: 1
+  user_set_price: 1
+  color: MyString
+  material: MyString
+  quality: MyString
+  description: MyText
+  long_description: MyText
+  string1: MyString
+  string2: MyString
+  integer1: 1
+  integer2: 1
+  datetime1: 2019-06-24 15:08:24
+  datetime2: 2019-06-24 15:08:24
+
+two:
+  user_id: MyString
+  name: MyString
+  category: MyString
+  shop_price: 1
+  sellback_price: 1
+  user_set_price: 1
+  color: MyString
+  material: MyString
+  quality: MyString
+  description: MyText
+  long_description: MyText
+  string1: MyString
+  string2: MyString
+  integer1: 1
+  integer2: 1
+  datetime1: 2019-06-24 15:08:24
+  datetime2: 2019-06-24 15:08:24

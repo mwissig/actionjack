@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_24_163501) do
+ActiveRecord::Schema.define(version: 2019_06_24_210343) do
 
   create_table "blackjacks", force: :cascade do |t|
     t.integer "player_id"
@@ -45,6 +45,29 @@ ActiveRecord::Schema.define(version: 2019_06_24_163501) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "category"
+    t.integer "shop_price"
+    t.integer "sellback_price"
+    t.integer "user_set_price"
+    t.string "color"
+    t.string "material"
+    t.string "quality"
+    t.text "description"
+    t.text "long_description"
+    t.string "string1"
+    t.string "string2"
+    t.integer "integer1"
+    t.integer "integer2"
+    t.datetime "datetime1"
+    t.datetime "datetime2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
   end
 
   create_table "lobbychats", force: :cascade do |t|
@@ -85,6 +108,27 @@ ActiveRecord::Schema.define(version: 2019_06_24_163501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "online_at"
+  end
+
+  create_table "shopitems", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.integer "shop_price"
+    t.integer "sellback_price"
+    t.string "color"
+    t.string "material"
+    t.string "quality"
+    t.text "description"
+    t.text "long_description"
+    t.string "string1"
+    t.string "string2"
+    t.integer "integer1"
+    t.integer "integer2"
+    t.datetime "datetime1"
+    t.datetime "datetime2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
   end
 
   create_table "slots", force: :cascade do |t|

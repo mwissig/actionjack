@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   get 'checkers/new'
   get 'checkers' => 'checkers#index'
   get 'checkers/edit'
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   get 'tictactoes/:id/play' => 'tictactoes#play'
 
   get 'shop' => 'pages#shop'
+  get 'shop/buy' => 'pages#buy'
 
   get 'games' => 'pages#games'
   get 'games/blackjack' => 'pages#blackjack'
@@ -53,6 +55,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :slots do
   end
+  resources :shopitems do
+  end
   resources :lobbychats do
   end
   resources :notifications do
@@ -63,6 +67,9 @@ Rails.application.routes.draw do
   end
   resources :users do
       resources :profiles do
+
+      end
+      resources :items do
 
       end
       resources :friends do

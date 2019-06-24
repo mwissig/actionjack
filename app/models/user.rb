@@ -7,6 +7,7 @@ class User < ApplicationRecord
     has_one :profile
     has_one :pictionary
     has_many :friends
+    has_many :items
   before_save :default_values
   before_save { self.email = email.downcase }
   def default_values

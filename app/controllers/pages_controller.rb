@@ -157,5 +157,35 @@ def pic2
 end
 
   def shop
+    @items = Shopitem.all
   end
+
+  def buy
+    @item_name = params[:name]
+    @shopitem = Shopitem.find_by(name: @item_name)
+    @item = Item.create(
+      user_id: @current_user.id,
+      name: @shopitem.name,
+      image: @shopitem.image,
+      category: @shopitem.category,
+      shop_price: @shopitem.shop_price,
+      sellback_price: @shopitem.sellback_price,
+      user_set_price: 0,
+      color: @shopitem.color,
+      material: @shopitem.material,
+      quality: @shopitem.quality,
+      description: @shopitem.description,
+      long_description: @shopitem.long_description,
+      string1: @shopitem.string1,
+      string2: @shopitem.string2,
+      integer1: @shopitem.integer1,
+      integer2: @shopitem.integer2,
+      datetime1: @shopitem.datetime1,
+      datetime2: @shopitem.datetime2
+    )
+    if @item.save
+      @current_user.decrement!(:points, @shopitem.shop_price)
+    end
+  end
+
 end

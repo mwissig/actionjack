@@ -1,2 +1,20 @@
-<h2>Shop</h2>
-<p>Under construction</p>
+<div class="box">
+  <h2>Shop</h2>
+<div class="shop-container">
+<% @items.each do |item| %>
+<div class="shop_item">
+  <h3><%= item.name %></h3>
+  <%= item.shop_price %>  <i class='fas fa-coins gold'></i><br>
+  <%= image_tag("items/#{item.image}") %><br>
+  <% if logged_in? %>
+    <%= form_tag('/shop/buy/', method: 'get' ) do %>
+    <%= hidden_field_tag :name, item.name %>
+    <%= button_tag :submit do %>
+      Buy <%= item.name %>
+    <% end %>
+    <% end %>
+  <% end %>
+</div>
+<% end %>
+</div>
+</div>
