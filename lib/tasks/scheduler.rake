@@ -45,13 +45,16 @@ desc "adds items to shop"
 task :add_shop_items => :environment do
   puts "Populating shop"
   Shopitem.create(
-    name: "Egg",
-    category: "pets",
-    image: "egg.png",
-    shop_price: 2000,
-    sellback_price: 1000,
-    description: "A mysterious egg.",
-    long_description: "This egg hatches into a pet."
+    name: "Wooden Sword",
+    category: "weapons",
+    material: "wood",
+    quality: "starter",
+    image: "sword_wood.png",
+    shop_price: 500,
+    sellback_price: 250,
+    description: "A wooden sword.",
+    long_description: "A basic wooden sword. Integer1 value of weapons is attack power.",
+    integer1: 10
   )
   puts "done."
 end

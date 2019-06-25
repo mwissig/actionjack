@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'admin' => 'pages#admin'
+  
   get 'checkers/new'
   get 'checkers' => 'checkers#index'
   get 'checkers/edit'

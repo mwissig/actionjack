@@ -1,0 +1,14 @@
+<% if logged_in? %>
+<div class="box">
+<% if @current_user.admin == true %>
+
+
+<h2>Admin Panel</h2>
+
+
+
+<% else %>
+You are not authorized to access this page.
+<% end %>
+</div>
+<% end %>

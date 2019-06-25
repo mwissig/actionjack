@@ -5,6 +5,9 @@
 <% @items.each do |item| %>
 <div class="shop_item">
   <h3><%= item.name %></h3>
+  <% if item.category == "weapons" %>
+    ATK: <%= item.integer1 %><br>
+  <% end %>
   <%= item.shop_price %>  <i class='fas fa-coins gold'></i><br>
   <%= image_tag("items/#{item.image}") %><br>
   <% if logged_in? %>
