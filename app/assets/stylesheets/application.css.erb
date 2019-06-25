@@ -181,10 +181,20 @@ justify-content: flex-end;
   height: 72px;
   margin: 0 auto;
 }
+
+.shop_item img:hover, .inventory_item img:hover {
+  animation: wiggle 1s;
+    animation-iteration-count: infinite;
+}
 .shop_item button:hover, .inventory_item button:hover {
   background-color: rgb(158, 210, 148);
-
-
+}
+@keyframes wiggle {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  25% { transform: translate(1px, 3px) rotate(1deg); }
+  50% { transform: translate(0px, 0px) rotate(0deg); }
+  75% { transform: translate(-1px, 3px) rotate(-1deg); }
+  100% { transform: translate(1px, 1px) rotate(0deg); }
 }
 #slotmachine {
   text-align: center;
