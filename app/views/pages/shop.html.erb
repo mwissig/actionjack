@@ -8,13 +8,13 @@
   <% if item.category == "weapons" %>
     ATK: <%= item.integer1 %><br>
   <% end %>
-  <%= item.shop_price %>  <i class='fas fa-coins gold'></i><br>
+
   <%= image_tag("items/#{item.image}") %><br>
   <% if logged_in? %>
     <%= form_tag('/shop/buy/', method: 'get' ) do %>
     <%= hidden_field_tag :name, item.name %>
     <%= button_tag :submit do %>
-      Buy <%= item.name %>
+      Buy for <%= item.shop_price %>  <i class='fas fa-coins gold'></i>
     <% end %>
     <% end %>
   <% end %>
