@@ -41,6 +41,21 @@ task :build_slot => :environment do
   puts "done."
 end
 
+desc "Hatches the egg"
+task :hatch_eggs => :environment do
+  puts "Hatching egg"
+@eggs = Item.where(name: "egg")
+@ready_eggs = @eggs.where('created_at < ?', 14.days.ago)
+@egg_outcomes = []
+@ready_eggs.each do |egg|
+  Item.create(
+    name: "pet"
+  )
+  egg.destroy!
+end
+  puts "done."
+end
+
 desc "adds items to shop"
 task :add_shop_items => :environment do
   puts "Populating shop"

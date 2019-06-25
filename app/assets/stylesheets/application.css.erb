@@ -165,6 +165,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 display: flex;
 flex-direction: column;
 justify-content: flex-end;
+border-style: solid;
+border-width: 2px;
+border-image:
+  linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.6),
+    transparent
+  ) 1 100%;
+  border-top: transparent;
+  border-bottom: transparent;
 }
 .inventory_item {
     height: 150px;
