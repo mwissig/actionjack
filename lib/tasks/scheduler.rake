@@ -76,16 +76,14 @@ desc "adds items to shop"
 task :add_shop_items => :environment do
   puts "Populating shop"
   Shopitem.create(
-    name: "Wooden Sword",
-    category: "weapons",
-    material: "wood",
-    quality: "starter",
-    image: "sword_wood.png",
-    shop_price: 500,
-    sellback_price: 250,
-    description: "A wooden sword.",
-    long_description: "A basic wooden sword. Integer1 value of weapons is attack power.",
-    integer1: 10
+    name: "Plum",
+    category: "food",
+    image: "plum.png",
+    shop_price: 10,
+    sellback_price: 5,
+    description: "A plum.",
+    long_description: "A plum. Integer1 value of food is the amount it reduces hunger.",
+    integer1: 5
   )
   puts "done."
 end
@@ -112,8 +110,8 @@ task :create_item => :environment do
     shop_price: 10,
     sellback_price: 5,
     description: "A plum.",
-    long_description: "A plum. Integer1 value of food is calories.",
-    integer1: 30
+    long_description: "A plum. Integer1 value of food is the amount it reduces hunger.",
+    integer1: 5
   )
   puts "done."
 end
