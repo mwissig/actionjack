@@ -44,6 +44,7 @@
     </p>
 <% if @user.items.first != nil %>
     <h2>Inventory</h2>
+      <%= flash[:inventory].html_safe unless flash[:inventory].blank? %>
 <% @location = "inventory" %>
 
 <%= render 'layouts/items' %>

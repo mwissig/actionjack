@@ -191,18 +191,36 @@ end
 
   def feed
     if logged_in?
+      @food_id = params[:food]
+      @pet_id = params[:pet]
+      @food = Item.find_by(id: @food_id)
+      @pet = Item.find_by(id: @pet_id)
+      @food_value = @food.integer1
+      @pet_current_hunger = @pet.integer1
+      @pet_max_hunger = @pet.integer2
+      @points_to_max = @pet_max_hunger - @pet_current_hunger
+      if @food_value > @points_to_max
+        @food_value = @points_to_max + 1
+      end
+       @pet.increment!(:integer1, @food_value)
+       @pet.datetime1 = DateTime.now
+       @pet.save!
+      @food.destroy!
+      redirect_to user_path(@current_user)
+    flash[:inventory] = "You have fed your" + @pet.name
+  end
+  end
 
-    @food_ids = []
-    @food_names = []
-    @food = @current_user.items.where(category: "food")
-        @food.each do |food|
-          @user = User.find_by(id: food.recipient_id)
-          @food_ids.push(food.id)
-          @food_anmes.push(food.name)
-        end
-    @food_for_select = @food_names.zip(@food_ids)
-  end
-  end
+
+    def dispose
+      if logged_in?
+        @item_id = params[:item]
+        @item = Item.find_by(id: @item_id)
+        flash[:inventory] = @item.name + " disposed of."
+        @item.destroy!
+        redirect_to user_path(@current_user)
+    end
+    end
 
 private
 

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user, only: %i[show edit update]
-
+before_action :food_for_select, only: %i[show]
   def new
     @user = User.new
       end
@@ -83,4 +83,11 @@ end
   def find_user
     @user = User.find(params[:id])
  end
+
+ def food_for_select
+   if logged_in?
+   @food = @current_user.items.where(category: "food")
+ end
+ end
+
 end

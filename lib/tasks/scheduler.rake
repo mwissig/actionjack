@@ -12,11 +12,49 @@ task :delete_old_data => :environment do
   puts "done."
 end
 
-desc "Gives all users 100 points"
+desc "Gives all users 100 points and make pets hungry"
 task :give_points => :environment do
   puts "Giving everyone 100 points"
   User.all.each do |user|
     user.increment!(:points, 100)
+  end
+
+  @pets = Item.where(category: "pets")
+  @hatched_eggs = @pets.where.not(name: "Egg")
+  @hatched_eggs.where('datetime1 < ?', 6.hours.ago).or(@hatched_eggs.where(datetime1: nil)).each do |pet|
+    if pet.integer1 > 0
+      pet.decrement!(:integer1, 1)
+    end
+  end
+
+  puts "spawning poop"
+    @poops = ["small", "small", "small", "medium"]
+@fed_animals = @hatched_eggs.where('datetime1 > ?', 24.hours.ago)
+@fed_animals.each do |animal|
+      @pooptype = @poops.sample
+      if @pooptype == "small"
+      Item.create(
+        user_id: animal.user_id,
+        name: "Small Poop",
+        category: "waste",
+        image: "small_poop.png",
+        shop_price: 0,
+        sellback_price: 0,
+        description: "Poop.",
+        long_description: "Poop.",
+      )
+    elsif @pooptype == "medium"
+      Item.create(
+        user_id: animal.user_id,
+        name: "Medium Poop",
+        category: "waste",
+        image: "medium_poop.png",
+        shop_price: 0,
+        sellback_price: 0,
+        description: "Poop.",
+        long_description: "Poop.",
+      )
+    end
   end
   puts "done."
 end
@@ -87,22 +125,6 @@ task :hatch_eggs => :environment do
   @notecount = @to_user.notifications.where(read: false).count
   ActionCable.server.broadcast 'notifications_channel',
                   notecount: @notecount
-end
-  puts "done."
-end
-
-desc "spawn poop"
-task :poop => :environment do
-  puts "pooping"
-@pets = Item.where(category: "pets")
-@hatched_eggs = @pets.where.not(name: "Egg")
-@fed_animals = @animals.where('integer1 >= ?', 0)
-@egg_outcomes = []
-@ready_eggs.each do |egg|
-  Item.create(
-    name: "Small Poop"
-  )
-  egg.destroy!
 end
   puts "done."
 end

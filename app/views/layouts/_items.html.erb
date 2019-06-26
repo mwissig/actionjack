@@ -9,20 +9,43 @@
     <% elsif item.category == "pets" && item.name != "Egg" %>
       <% if item.integer1 <= item.integer2/2 %>
         Hungry
+  <% @hunger = "hungry" %>
       <% else %>
       Not Hungry
+      <% @hunger = "not hungry" %>
       <% end %>
         (<%= item.integer1 %>/<%= item.integer2 %>)<br>
   <% end %>
   <%= image_tag("items/#{item.image}", title: item.description ) %><br>
-  <% if logged_in? && @location == "shop" %>
-  <%= form_tag('/shop/buy/', method: 'get' ) do %>
-  <%= hidden_field_tag :name, item.name %>
-  <%= button_tag :submit do %>
-    Buy for <%= item.shop_price %>  <i class='fas fa-coins gold'></i>
-  <% end %>
-  <% end %>
-<% end %>
+
+    <% if logged_in? && @location == "shop" %>
+      <%= form_tag('/shop/buy/', method: 'get' ) do %>
+      <%= hidden_field_tag :name, item.name %>
+            <%= button_tag :submit do %>
+              Buy for <%= item.shop_price %>  <i class='fas fa-coins gold'></i>
+            <% end %>
+      <% end %>
+    <% end %>
+
+    <% if logged_in? && @user == @current_user && @location == "inventory" && item.category == "pets" && item.name != "Egg" && @hunger == "hungry" && @food.first != nil %>
+      <%= form_tag('/feed/', method: 'get' ) do %>
+      <%= hidden_field_tag :pet, item.id %>
+      <%= select_tag "food", options_from_collection_for_select(@food, "id", "name") %>
+      <%= button_tag :submit do %>
+        Feed
+      <% end %>
+    <% end %>
+    <% end %>
+
+    <% if logged_in? && @user == @current_user && @location == "inventory" && item.category == "waste" %>
+      <%= form_tag('/dispose/', method: 'get' ) do %>
+      <%= hidden_field_tag :item, item.id %>
+      <%= button_tag :submit do %>
+        Clean
+      <% end %>
+    <% end %>
+    <% end %>
+
 </div>
 <% end %>
 </div>
