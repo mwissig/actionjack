@@ -7,9 +7,11 @@
   <h3><%= item.name %></h3>
   <% if item.category == "weapons" %>
     ATK: <%= item.integer1 %><br>
+  <% elsif item.category == "food" %>
+    <%= item.integer1 %> food<br>
   <% end %>
 
-  <%= image_tag("items/#{item.image}") %><br>
+  <%= image_tag("items/#{item.image}", title: item.description ) %><br>
   <% if logged_in? %>
     <%= form_tag('/shop/buy/', method: 'get' ) do %>
     <%= hidden_field_tag :name, item.name %>

@@ -54,7 +54,7 @@
       <% elsif item.category == "food" %>
       <%= item.integer1 %> food<br>
     <% end %>
-    <%= image_tag("items/#{item.image}") %><br>
+    <%= image_tag("items/#{item.image}", title: item.description ) %><br>
   </div>
   <% end %>
   </div>
