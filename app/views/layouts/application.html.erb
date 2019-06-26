@@ -31,7 +31,15 @@
   <%= content_tag :div, value, class: "flash #{key}" %>
   <% end %>
   <% end %>
+  <div class="scrollbox">
     <%= yield %>
+    </div>
+    <% if @lobbychats != nil %>
+          <%= render "lobbychats/lobby" %>
+    <% end %>
+    <% if @gamechats != nil %>
+      <%= render "gamechats/gamechat" %>
+    <% end %>
     <%= render 'layouts/footer' %>
     </div>
   </body>
