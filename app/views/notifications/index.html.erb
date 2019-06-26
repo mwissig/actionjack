@@ -20,6 +20,9 @@
     <%= render 'notifications/timestamp' %>
     </li>
 
+    <% elsif note.game == 'egg' %>
+      <li><%= note.body %></li>
+
     <% elsif note.game == 'friend_sent' %>
       <li>
       <%= link_to User.find_by(id: note.sender_id).profile.username, user_path(User.find_by(id: note.sender_id)) %> sent you a friend request.

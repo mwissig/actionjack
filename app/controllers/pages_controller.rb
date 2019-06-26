@@ -189,6 +189,21 @@ end
   end
   end
 
+  def feed
+    if logged_in?
+
+    @food_ids = []
+    @food_names = []
+    @food = @current_user.items.where(category: "food")
+        @food.each do |food|
+          @user = User.find_by(id: food.recipient_id)
+          @food_ids.push(food.id)
+          @food_anmes.push(food.name)
+        end
+    @food_for_select = @food_names.zip(@food_ids)
+  end
+  end
+
 private
 
 def get_lobbychats

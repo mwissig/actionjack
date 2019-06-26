@@ -59,7 +59,7 @@ task :hatch_eggs => :environment do
       shop_price: 0,
       sellback_price: 3000,
       description: "A treehopper.",
-      long_description: "A treehopper. Integer1 value of pet is current hunger and integer2 is max hunger.",
+      long_description: "A treehopper. Integer1 value of pet is current hunger and integer2 is max hunger. Datetime1 is time last fed.",
       integer1: 1,
       integer2: 1
     )
@@ -72,12 +72,21 @@ task :hatch_eggs => :environment do
       shop_price: 0,
       sellback_price: 3500,
       description: "A jerboa.",
-      long_description: "A jerboa. Integer1 value of pet is current hunger and integer2 is max hunger.",
+      long_description: "A jerboa. Integer1 value of pet is current hunger and integer2 is max hunger. Datetime1 is time last fed.",
       integer1: 2,
       integer2: 2
     )
   end
   egg.destroy!
+  @notification = Notification.create(
+    user_id: egg.user_id,
+    body: 'An egg has hatched in your inventory.',
+    game: 'egg',
+  )
+  @to_user = User.find_by(id: @notification.user_id)
+  @notecount = @to_user.notifications.where(read: false).count
+  ActionCable.server.broadcast 'notifications_channel',
+                  notecount: @notecount
 end
   puts "done."
 end
