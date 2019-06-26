@@ -1,26 +1,9 @@
 <div class="box">
   <h2>Shop</h2>
   <%= flash[:shop].html_safe unless flash[:shop].blank? %>
-<div class="shop-container">
-<% @items.each do |item| %>
-<div class="shop_item">
-  <h3><%= item.name %></h3>
-  <% if item.category == "weapons" %>
-    ATK: <%= item.integer1 %><br>
-  <% elsif item.category == "food" %>
-    <%= item.integer1 %> food<br>
-  <% end %>
 
-  <%= image_tag("items/#{item.image}", title: item.description ) %><br>
-  <% if logged_in? %>
-    <%= form_tag('/shop/buy/', method: 'get' ) do %>
-    <%= hidden_field_tag :name, item.name %>
-    <%= button_tag :submit do %>
-      Buy for <%= item.shop_price %>  <i class='fas fa-coins gold'></i>
-    <% end %>
-    <% end %>
-  <% end %>
-</div>
-<% end %>
-</div>
+  <% @location = "shop" %>
+
+  <%= render 'layouts/items' %>
+
 </div>

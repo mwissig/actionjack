@@ -42,22 +42,13 @@
       <% end %>
       <% end %>
     </p>
-
+<% if @user.items.first != nil %>
     <h2>Inventory</h2>
+<% @location = "inventory" %>
 
-  <div class="inventory-container">
-  <% @user.items.each do |item| %>
-  <div class="inventory_item">
-    <h3><%= item.name %></h3>
-    <% if item.category == "weapons" %>
-      ATK: <%= item.integer1 %><br>
-      <% elsif item.category == "food" %>
-      <%= item.integer1 %> food<br>
-    <% end %>
-    <%= image_tag("items/#{item.image}", title: item.description ) %><br>
-  </div>
+<%= render 'layouts/items' %>
+
   <% end %>
-  </div>
 
 </div>
 

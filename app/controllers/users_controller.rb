@@ -41,6 +41,7 @@ end
   def show
     @user = User.find(params[:id])
         @lobbychats = Lobbychat.all.last(100)
+        @items = @user.items
     if logged_in?
                 @lobbychat = @current_user.lobbychats.new
     @friend = Friend.new

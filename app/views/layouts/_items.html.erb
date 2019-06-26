@@ -1,0 +1,28 @@
+<div class="<%= @location %>-container">
+<% @items.each do |item| %>
+<div class="<%= @location %>_item">
+  <h3><%= item.name %></h3>
+  <% if item.category == "weapons" %>
+      ATK: <%= item.integer1 %><br>
+    <% elsif item.category == "food" %>
+      <%= item.integer1 %> food<br>
+    <% elsif item.category == "pets" && item.name != "Egg" %>
+      <% if item.integer1 <= item.integer2/2 %>
+        Hungry
+      <% else %>
+      Not Hungry
+      <% end %>
+        (<%= item.integer1 %>/<%= item.integer2 %>)<br>
+  <% end %>
+  <%= image_tag("items/#{item.image}", title: item.description ) %><br>
+  <% if logged_in? && @location == "shop" %>
+  <%= form_tag('/shop/buy/', method: 'get' ) do %>
+  <%= hidden_field_tag :name, item.name %>
+  <%= button_tag :submit do %>
+    Buy for <%= item.shop_price %>  <i class='fas fa-coins gold'></i>
+  <% end %>
+  <% end %>
+<% end %>
+</div>
+<% end %>
+</div>

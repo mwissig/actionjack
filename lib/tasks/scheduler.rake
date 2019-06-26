@@ -44,13 +44,39 @@ end
 desc "Hatches the egg"
 task :hatch_eggs => :environment do
   puts "Hatching egg"
-@eggs = Item.where(name: "egg")
-@ready_eggs = @eggs.where('created_at < ?', 14.days.ago)
+  @pets = ["treehopper", "jerboa"]
+@eggs = Item.where(name: "Egg")
+@ready_eggs = @eggs.where('created_at < ?', 3.days.ago)
 @egg_outcomes = []
 @ready_eggs.each do |egg|
-  Item.create(
-    name: "pet"
-  )
+  @pet = @pets.sample
+  if @pet == "treehopper"
+    Item.create(
+      user_id: egg.user_id,
+      name: "Treehopper",
+      category: "pets",
+      image: "treehopper.png",
+      shop_price: 0,
+      sellback_price: 3000,
+      description: "A treehopper.",
+      long_description: "A treehopper. Integer1 value of pet is current hunger and integer2 is max hunger.",
+      integer1: 1,
+      integer2: 1
+    )
+  elsif @pet == "jerboa"
+    Item.create(
+      user_id: egg.user_id,
+      name: "Jerboa",
+      category: "pets",
+      image: "jerboa.png",
+      shop_price: 0,
+      sellback_price: 3500,
+      description: "A jerboa.",
+      long_description: "A jerboa. Integer1 value of pet is current hunger and integer2 is max hunger.",
+      integer1: 2,
+      integer2: 2
+    )
+  end
   egg.destroy!
 end
   puts "done."
