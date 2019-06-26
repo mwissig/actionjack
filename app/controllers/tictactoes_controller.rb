@@ -44,7 +44,7 @@ class TictactoesController < ApplicationController
     @tictactoes = Tictactoe.all.order(updated_at: :desc).paginate(page: params[:page], per_page: 12)
     @tictactoe = Tictactoe.new
     @grid = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
-    @lobbychats = Lobbychat.all.last(200)
+    @lobbychats = Lobbychat.all.last(100)
     if logged_in?
           @lobbychat = @current_user.lobbychats.new
           @random_opponent = @thisweekusers.where.not(user_id: @current_user.id).sample.user
@@ -58,7 +58,7 @@ class TictactoesController < ApplicationController
   end
 
   def show
-    @lobbychats = Lobbychat.all.last(200)
+    @lobbychats = Lobbychat.all.last(100)
     @gametype = "tictactoe"
     @gameid = params[:id]
     @gamechats = Gamechat.where("game_type = ? and game_id = ?", "tictactoe", params[:id]).last(200)

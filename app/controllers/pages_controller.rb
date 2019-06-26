@@ -1,8 +1,8 @@
 
 class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :get_lobbychats
   def home
-    @lobbychats = Lobbychat.all.last(200)
     @recent_tictactoes = Tictactoe.all.order(updated_at: :desc).first(6)
     if logged_in?
     @my_tictactoes = Tictactoe.where('x_id = ? OR o_id = ?', @current_user.id, @current_user.id).order(updated_at: :desc)
@@ -11,7 +11,6 @@ class PagesController < ApplicationController
 
 
     if logged_in?
-          @lobbychat = @current_user.lobbychats.new
           @random_opponent = @thisweekusers.where.not(user_id: @current_user.id).sample.user
           @users = User.all.where.not(id: @current_user.id).order(:id)
           @usernames = []
@@ -24,17 +23,13 @@ class PagesController < ApplicationController
   end
 
   def games
-    @lobbychats = Lobbychat.all.last(200)
-    if logged_in?
-          @lobbychat = @current_user.lobbychats.new
-        end
   end
 
 def slots
         @slot = Slot.first
         @last_winner = User.find_by(id: @slot.last_winner_id)
         @biggest_winner = User.find_by(id: @slot.biggest_winner_id)
-  @lobbychats = Lobbychat.all.last(200)
+  @lobbychats = Lobbychat.all.last(100)
   if logged_in?
         @lobbychat = @current_user.lobbychats.new
       end
@@ -114,7 +109,6 @@ end
 end
 
 def pictionary
-    @lobbychats = Lobbychat.all.last(200)
     @pictionaries = Pictionary.all
     @onlineusers = @pictionaries.where('last_online > ?', 10.minutes.ago)
     @recentusers = @pictionaries.where('last_online > ?', 1.hour.ago)
@@ -195,5 +189,13 @@ end
   end
   end
 
+private
+
+def get_lobbychats
+  @lobbychats = Lobbychat.all.last(100)
+  if logged_in?
+        @lobbychat = @current_user.lobbychats.new
+      end
+end
 
 end
