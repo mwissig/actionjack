@@ -51,6 +51,8 @@
     <h3><%= item.name %></h3>
     <% if item.category == "weapons" %>
       ATK: <%= item.integer1 %><br>
+      <% elsif item.category == "food" %>
+      <%= item.integer1 %> food<br>
     <% end %>
     <%= image_tag("items/#{item.image}") %><br>
   </div>
