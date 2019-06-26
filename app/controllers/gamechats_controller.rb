@@ -16,7 +16,8 @@ class GamechatsController < ApplicationController
                                    username: @gamechat.user.profile.username,
                                    color: @gamechat.user.profile.color,
                                    game: @gamechat.game_type,
-                                   id: @gamechat.game_id
+                                   id: @gamechat.game_id,
+                                   userpath: url_for(user_path(@gamechat.user))
      end
     end
   end

@@ -14,7 +14,8 @@ class LobbychatsController < ApplicationController
       ActionCable.server.broadcast 'makelobbychat_channel',
                                    body:  @lobbychat.body,
                                    username: @lobbychat.user.profile.username,
-                                   color: @lobbychat.user.profile.color
+                                   color: @lobbychat.user.profile.color,
+                                   userpath: url_for(user_path(@lobbychat.user))
      end
     end
   end

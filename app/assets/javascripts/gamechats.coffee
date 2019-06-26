@@ -11,7 +11,7 @@ App.makegamechat = App.cable.subscriptions.create "MakegamechatChannel",
 
   received: (data) ->
     unless data.body.blank?
-      $('#gamechatlist_' + data.game + '_' + data.id ).append '<div class="chat" style="color:#' + data.color + '"><strong>' + data.username + ':</strong> ' + data.body + '</div>'
+      $('#gamechatlist_' + data.game + '_' + data.id ).append  '<div class="chat" style="color:#' + data.color + '"><strong><a style="color:#' + data.color + '" href="' + data.userpath + '">' + data.username + '</a>:</strong> ' + data.body + '</div>'
       $('#gamechatlist_' + data.game + '_' + data.id ).scrollTop($('#gamechatlist_' + data.game + '_' + data.id)[0].scrollHeight)
       cleargc()
 

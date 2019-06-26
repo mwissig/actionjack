@@ -11,7 +11,7 @@ Tic Tac Toe <%= @user_x.profile.username %> vs <%= @user_o.profile.username %> G
       </div>
       <div id="gamechatlist_<%= @gametype %>_<%= @gameid %>" class="chatlist gamechatlist">
 <% @gamechats.each do |chat| %>
-<div class="chat" style="color:#<%= chat.user.profile.color %>"><strong><%= chat.user.profile.username %>: </strong><%= chat.body %></div>
+<div class="chat" style="color:#<%= chat.user.profile.color %>"><strong><%= link_to chat.user.profile.username, user_path(chat.user), style: "color:#" + chat.user.profile.color + ";" %>: </strong><%= chat.body %></div>
 <% end %>
 </div>
 </div>
