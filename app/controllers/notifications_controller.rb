@@ -10,7 +10,7 @@ class NotificationsController < ApplicationController
         if @notification.save
           @to_user = User.find_by(id: @notification.user_id)
           @from_user = User.find_by(id: @notification.sender_id)
-          if @notification.points > 0
+          if @notification.points > 0 && @notification.points <= @from_user.points
             @to_user.increment!(:points, @notification.points)
             @from_user.decrement!(:points, @notification.points)
           end
