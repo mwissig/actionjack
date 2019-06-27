@@ -10,10 +10,14 @@
       <% if item.integer1 <= item.integer2/2 %>
         Hungry
   <% @hunger = "hungry" %>
-      <% else %>
-      Not Hungry
-      <% @hunger = "not hungry" %>
-      <% end %>
+    <% elsif item.integer1 == item.integer2 %>
+      Full
+    <% elsif item.integer1 > item.integer2 %>
+      Stuffed
+    <% else %>
+    <% @hunger = "hungry" %>
+      Peckish
+    <% end %>
         (<%= item.integer1 %>/<%= item.integer2 %>)<br>
   <% end %>
   <%= image_tag("items/#{item.image}", title: item.description ) %><br>
