@@ -15,8 +15,7 @@
 <div id="lobbyform">
   <% if logged_in? %>
     <%= form_for(@lobbychat, remote: true ) do |f| %>
-    <%# f.hidden_field :user_id, value: @current_user.id %>
-    <%= f.text_field :body %>
+    <%= f.text_field :body, autocomplete: 'off' %>
     <%= f.button :submit do %>
     Send &#9166
     <% end %>

@@ -21,7 +21,7 @@ Tic Tac Toe <%= @user_x.profile.username %> vs <%= @user_o.profile.username %> G
 <%= form_for(@gamechat, remote: true ) do |f| %>
 <%= f.hidden_field :game_type, value: @gametype %>
 <%= f.hidden_field :game_id, value: @gameid %>
-<%= f.text_field :body %>
+<%= f.text_field :body, autocomplete: 'off' %>
 <%= f.button :submit do %>
 Send &#9166
 <% end %>
