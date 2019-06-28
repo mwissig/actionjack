@@ -98,7 +98,7 @@ task :hatch_eggs => :environment do
       sellback_price: 3000,
       description: "A treehopper.",
       long_description: "A treehopper. Integer1 value of pet is current hunger and integer2 is max hunger. Datetime1 is time last fed.",
-      integer1: 1,
+      integer1: 0,
       integer2: 1
     )
   elsif @pet == "jerboa"
@@ -111,7 +111,7 @@ task :hatch_eggs => :environment do
       sellback_price: 3500,
       description: "A jerboa.",
       long_description: "A jerboa. Integer1 value of pet is current hunger and integer2 is max hunger. Datetime1 is time last fed.",
-      integer1: 2,
+      integer1: 0,
       integer2: 2
     )
   end
