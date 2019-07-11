@@ -30,10 +30,16 @@ task :give_points => :environment do
   puts "activating auto feeders"
 @autofeeders = Item.where(name: "Automatic Pet Feeder")
 @autofeeders.each do |feeder|
-  @pets = feeder.user.items.where(category: "pets")
-  @hungry_pets = @pets.where("integer1 < ?", :integer2)
-  if feeder.integer1 >= @hungry_pets.count
-    @hungry_pets.each do |pet|
+@pets = feeder.user.items.where(category: "pets").where.not(name: "Egg")
+@hungrypets = []
+  @pets.each do |pet|
+    if pet.integer1 < pet.integer2
+      @hungrypets << pet
+    end
+  end
+
+  if feeder.integer1 >= @hungrypets.count
+    @hungrypets.each do |pet|
       pet.increment!(:integer1, 1)
       feeder.decrement!(:integer1, 1)
     end
