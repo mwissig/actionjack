@@ -26,7 +26,7 @@
     <% if @location == "inventory" && item.name == "Automatic Pet Feeder" %>
       <% @allpets = @items.where(category: "pets").where.not(name: "Egg") %>
       <% @hungrypets = @allpets.where("integer1 < ?", :integer2) %>
-      <% if @hungrypets.count <= item.integer1 %>
+      <% if @hungrypets.count.to_i <= item.integer1 %>
   <%= image_tag("items/#{item.string2}", title: item.description ) %><br>
     <% else %>
       <%= image_tag("items/#{item.string1}", title: item.description ) %><br>
