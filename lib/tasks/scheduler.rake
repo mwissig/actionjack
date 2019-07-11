@@ -27,6 +27,20 @@ task :give_points => :environment do
     end
   end
 
+  puts "activating auto feeders"
+@autofeeders = Item.where(name: "Automatic Pet Feeder")
+@autofeeders.each do |feeder|
+  @pets = feeder.user.items.where(category: "pets")
+  @hungry_pets = @pets.where("integer1 < ?", :integer2)
+  if feeder.integer1 >= @hungry_pets.count
+    @hungry_pets.each do |pet|
+      pet.increment!(:integer1, 1)
+      feeder.decrement!(:integer1, 1)
+    end
+  end
+end
+    puts "done."
+
   puts "spawning poop"
     @poops = ["small", "small", "small", "medium"]
 @fed_animals = @hatched_eggs.where('datetime1 > ?', 24.hours.ago)
@@ -57,6 +71,9 @@ task :give_points => :environment do
     end
   end
   puts "done."
+
+
+
 end
 
 desc "Activates user accounts"
@@ -133,14 +150,16 @@ desc "adds items to shop"
 task :add_shop_items => :environment do
   puts "Populating shop"
   Shopitem.create(
-    name: "Plum",
-    category: "food",
-    image: "plum.png",
-    shop_price: 10,
-    sellback_price: 5,
-    description: "A plum.",
-    long_description: "A plum. Integer1 value of food is the amount it reduces hunger.",
-    integer1: 5
+    name: "Automatic Pet Feeder",
+    category: "automator",
+    image: "pet_feeder.png",
+    shop_price: 10000,
+    sellback_price: 5000,
+    description: "Load food into this automatic pet feeder and it will feed all of your pets daily.",
+    long_description: "Load food into this automatic pet feeder and it will feed all of your pets daily. Integer1 is the amount of food in the feeder.",
+    integer1: 0,
+    string1: "pet_feeder_not_ready.png",
+    string2: "pet_feeder_loaded.png",
   )
   puts "done."
 end
@@ -169,6 +188,18 @@ task :create_item => :environment do
     description: "A plum.",
     long_description: "A plum. Integer1 value of food is the amount it reduces hunger.",
     integer1: 5
+  )
+  Shopitem.create(
+    name: "Automatic Pet Feeder",
+    category: "automator",
+    image: "pet_feeder.png",
+    shop_price: 10000,
+    sellback_price: 5000,
+    description: "Load food into this automatic pet feeder and it will feed all of your pets daily.",
+    long_description: "Load food into this automatic pet feeder and it will feed all of your pets daily. Integer1 is the amount of food in the feeder.",
+    integer1: 0,
+    string1: "pet_feeder_not_ready.png",
+    string2: "pet_feeder_loaded.png",
   )
   puts "done."
 end

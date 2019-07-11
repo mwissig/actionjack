@@ -211,6 +211,21 @@ end
   end
   end
 
+  def fillfeeder
+    if logged_in?
+      @food_id = params[:food]
+      @feeder_id = params[:feeder]
+      @food = Item.find_by(id: @food_id)
+      @feeder = Item.find_by(id: @feeder_id)
+      @food_value = @food.integer1
+       @feeder.increment!(:integer1, @food_value)
+       @feeder.save!
+      @food.destroy!
+      redirect_to user_path(@current_user)
+    flash[:inventory] = "You have added " + @food.integer1.to_s + " food to your Automatic Pet Feeder."
+  end
+  end
+
 
     def dispose
       if logged_in?

@@ -2,10 +2,13 @@
 <% @items.each do |item| %>
 <div class="<%= @location %>_item">
   <h3><%= item.name %></h3>
+
   <% if item.category == "weapons" %>
       ATK: <%= item.integer1 %><br>
     <% elsif item.category == "food" %>
       <%= item.integer1 %> food<br>
+    <% elsif @location == "inventory" && item.name == "Automatic Pet Feeder" %>
+     <%= item.integer1 %> food<br>
     <% elsif item.category == "pets" && item.name != "Egg" %>
       <% if item.integer1 <= item.integer2/2 %>
         Hungry
@@ -20,7 +23,18 @@
     <% end %>
         (<%= item.integer1 %>/<%= item.integer2 %>)<br>
   <% end %>
+    <% if @location == "inventory" && item.name == "Automatic Pet Feeder" %>
+      <% @allpets = @items.where(category: "pets").where.not(name: "Egg") %>
+      <% @hungrypets = @allpets.where("integer1 < ?", :integer2) %>
+      <% if @hungrypets.count <= item.integer1 %>
+  <%= image_tag("items/#{item.string2}", title: item.description ) %><br>
+    <% else %>
+      <%= image_tag("items/#{item.string1}", title: item.description ) %><br>
+    <% end %>
+
+    <% else %>
   <%= image_tag("items/#{item.image}", title: item.description ) %><br>
+  <% end %>
 
     <% if logged_in? && @location == "shop" %>
       <%= form_tag('/shop/buy/', method: 'get' ) do %>
@@ -48,6 +62,19 @@
         Clean
       <% end %>
     <% end %>
+    <% end %>
+
+
+    <% if logged_in? && @user == @current_user && @location == "inventory" && item.name == "Automatic Pet Feeder" %>
+      <% if @food.first != nil %>
+        <%= form_tag('/fill_feeder/', method: 'get' ) do %>
+        <%= hidden_field_tag :feeder, item.id %>
+        <%= select_tag "food", options_from_collection_for_select(@food, "id", "name") %>
+          <%= button_tag :submit do %>
+            Fill
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
 
 </div>

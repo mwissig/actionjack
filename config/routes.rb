@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get 'shop' => 'pages#shop'
   get 'shop/buy' => 'pages#buy'
     get 'feed' => 'pages#feed'
+        get 'fill_feeder' => 'pages#fillfeeder'
         get 'dispose' => 'pages#dispose'
 
   get 'games' => 'pages#games'
