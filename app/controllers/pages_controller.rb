@@ -189,6 +189,20 @@ end
   end
   end
 
+  def sell
+    @item_name = params[:name]
+    @item = @current_user.items.where(name: @item_name).first
+      @current_user.increment!(:points, @item.sellback_price.to_i)
+      @item.destroy!
+    if @item.destroy
+      flash[:shop] = @item.name + " sold"
+      redirect_to shop_path
+    else
+    redirect_to shop_path
+    flash[:shop] = "Item does not exist"
+    end
+  end
+
   def feed
     if logged_in?
       @food_id = params[:food]
