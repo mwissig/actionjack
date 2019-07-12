@@ -45,11 +45,19 @@
   <% end %>
 
     <% if logged_in? && @location == "shop" %>
+
+    <% if item.category == "automator" && @current_user.items.exists?(:name => item.name) %>
+
+    <% else %>
+
       <%= form_tag('/shop/buy/', method: 'get' ) do %>
       <%= hidden_field_tag :name, item.name %>
             <%= button_tag :submit do %>
               Buy for <%= item.shop_price %>  <i class='fas fa-coins gold'></i>
             <% end %>
+            <% end %>
+
+
       <% end %>
 
 
