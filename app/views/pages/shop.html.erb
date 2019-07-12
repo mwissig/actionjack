@@ -1,9 +1,13 @@
 <div class="box">
   <h2>Shop</h2>
+    <h2>Buy</h2>
   <%= flash[:shop].html_safe unless flash[:shop].blank? %>
 
   <% @location = "shop" %>
 
   <%= render 'layouts/items' %>
-
+  <% if logged_in? && @current_user.items.first != nil %>
+    <h2>Sell</h2>
+      <%= render 'layouts/sellitems' %>
+  <% end %>
 </div>

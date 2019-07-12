@@ -1,0 +1,30 @@
+<div class="<%= @location %>-container">
+<% @current_user.items.where("sellback_price > ?", 0).each do |item| %>
+<div class="<%= @location %>_item">
+  <h3><%= item.name %></h3>
+
+  <% if item.category == "weapons" %>
+      ATK: <%= item.integer1 %><br>
+    <% elsif item.category == "food" %>
+      <%= item.integer1 %> food<br>
+    <% elsif item.name == "Automatic Pet Feeder" %>
+     <%= item.integer1 %> food<br>
+    <% end %>
+
+  <%= image_tag("items/#{item.image}", title: item.description ) %><br>
+
+      <% if @current_user.items.exists?(name: item.name) %>
+      <%= form_tag('/shop/sell/', method: 'get' ) do %>
+      <%= hidden_field_tag :name, item.name %>
+            <%= button_tag :submit do %>
+              Sell for <%= item.sellback_price %>  <i class='fas fa-coins gold'></i>
+            <% end %>
+      <% end %>
+      <% end %>
+
+
+
+
+</div>
+<% end %>
+</div>

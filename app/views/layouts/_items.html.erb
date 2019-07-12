@@ -52,14 +52,6 @@
             <% end %>
       <% end %>
 
-      <% if @current_user.items.exists?(name: item.name) %>
-      <%= form_tag('/shop/sell/', method: 'get' ) do %>
-      <%= hidden_field_tag :name, item.name %>
-            <%= button_tag :submit do %>
-              Sell for <%= item.sellback_price %>  <i class='fas fa-coins gold'></i>
-            <% end %>
-      <% end %>
-      <% end %>
 
     <% end %>
 
@@ -94,6 +86,8 @@
         <% end %>
       <% end %>
     <% end %>
+
+
 
 </div>
 <% end %>
