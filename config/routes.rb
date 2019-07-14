@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
 
+
   get 'admin' => 'pages#admin'
 
   get 'checkers/new'
@@ -40,6 +41,8 @@ Rails.application.routes.draw do
 
   get 'games/pictionary' => 'pages#pictionary'
   post 'games/pictionary/update', to: 'pages#pic2'
+
+  get 'mine' => 'pages#mine'
 
   get 'password_resets/new'
   get 'password_resets/edit'

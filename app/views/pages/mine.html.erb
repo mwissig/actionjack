@@ -1,0 +1,151 @@
+<div class="box">
+  <div class="minecontainer">
+
+    <div class="minemap">
+      <% @object = "empty" %>
+        <% @coords.each do |coords| %>
+
+          <% @c = coords.split("_") %>
+            <% if @c[0].to_i <= 15 %>
+              <% @type = "sky-background" %>
+              <% if @c[0].to_i == 15 %>
+              <% @nums = (1..17).to_a %>
+                <% @rand = @nums.sample %>
+                  <% if @rand == 3 %>
+                    <% @object = "rock" %>
+                  <% elsif @rand == 4 %>
+                    <% @object = "wood" %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% @type = "cave-background" %>
+
+                  <% @nums = (1..17).to_a %>
+                    <% @rand = @nums.sample %>
+                      <% if @rand == 3 %>
+                        <% @object = "rock" %>
+                        <% else %>
+                          <% @object = "soil" %>
+                            <% p coords %><% end %>
+                          <% end %>
+
+                          <div id="<%= coords %>_background" class="minesquare <%= @type %>">
+
+                            <div id="<%= coords %>_foreground" class="<%= @object %>" title="mine"></div>
+                          </div>
+                        <% end %>
+
+                        <div id="player" class="player">Player<br>
+                          <i class="fas fa-walking mineicon"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="text" id="coordbox">
+                  </div>
+
+                  <script>
+                    console.log("play");
+
+                    var deltaY = 785;
+                    var deltaX = 275;
+
+                    var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (
+                      Math.floor(deltaX / 30) + 1
+                    );
+                    var foreground = document.getElementById(mycoords + '_foreground');
+                    var background = document.getElementById(mycoords + '_background');
+                    var object = foreground.classList.item(0);
+
+                    function movePlayer() {
+                      var player = document.getElementById('player');
+                      var minemap = document.getElementById('minemap');
+                      var coordbox = document.getElementById('coordbox');
+                      player.style.bottom = deltaY + "px";
+                      player.style.left = deltaX + "px";
+                      player.scrollIntoView({behavior: "smooth", block: 'start'});
+                      var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (
+                        Math.floor(deltaX / 30) + 1
+                      );
+                      foreground = document.getElementById(mycoords + '_foreground');
+                      background = document.getElementById(mycoords + '_background');
+                      object = foreground.classList.item(0);
+                      coordbox.value = mycoords + " " + object;
+
+                    }
+
+                    window.addEventListener("keydown", keysPressed, false);
+                    window.addEventListener("keyup", keysReleased, false);
+
+                    var keys = [];
+
+                    function keysPressed(e) {
+                      // store an entry for every key pressed
+                      keys[e.keyCode] = true;
+                      var nextbox;
+                      // left
+                      if (keys[37]) {
+                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + Math.floor(deltaX / 30) + '_foreground');
+                        if (deltaX > 15 && nextbox.classList.item(0) == "empty") {
+                          deltaX -= 30;
+                        }
+                      }
+
+                      // right
+                      if (keys[39]) {
+                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (
+                          Math.floor(deltaX / 30) + 2
+                        ) + '_foreground');
+                        if (deltaX < 8955 && nextbox.classList.item(0) == "empty") {
+                          deltaX += 30;
+                        }
+                      }
+
+                      // down
+                      if (keys[38]) {
+                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30)) + "_" + (
+                          Math.floor(deltaX / 30) + 1
+                        ) + '_foreground');
+                        if (deltaY < 1185 && nextbox.classList.item(0) == "empty") {
+                          deltaY += 30;
+
+                        }
+                      }
+
+                      // up
+                      if (keys[40]) {
+                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (
+                          Math.floor(deltaX / 30) + 1
+                        ) + '_foreground');
+                        if (deltaY > 45 && nextbox.classList.item(0) == "empty") {
+                          deltaY -= 30;
+                        }
+                      }
+
+                      if (keys[32]){
+                            nextbox.className = "empty"
+                          }
+
+                      e.preventDefault();
+
+                      movePlayer();
+                    }
+
+                    function keysReleased(e) {
+                      // mark keys that were released
+                      keys[e.keyCode] = false;
+                    }
+
+var gravTimer;
+
+window.setInterval( function(){
+  var gnextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+  if (deltaY > 45 && gnextbox.classList.item(0) == "empty") {
+
+    deltaY -= 30;
+    movePlayer();
+  }
+}
+  ,500)
+
+
+                  </script>

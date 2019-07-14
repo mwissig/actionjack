@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 
 
     if logged_in?
-          @random_opponent = @thisweekusers.where.not(user_id: @current_user.id).sample.user
+          @random_opponent = @thisweekusers.where.not(user_id: @current_user.id).sample
           @users = User.all.where.not(id: @current_user.id).order(:id)
           @usernames = []
           @users.each do |user|
@@ -148,6 +148,18 @@ def pic2
     color: params[:color],
     size: params[:size]
   head :ok
+end
+
+def mine
+    @x_axis = (1..40).to_a
+    @y_axis = (1..300).to_a
+
+    @coords = []
+    @x_axis.each do |x|
+      @y_axis.each do |y|
+        @coords.push(x.to_s + '_' + y.to_s)
+      end
+end
 end
 
   def shop

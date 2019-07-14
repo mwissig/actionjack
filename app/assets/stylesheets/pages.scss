@@ -119,3 +119,54 @@ $box-shadow2: ();
     margin-left: 80%;
   }
 }
+
+.minemap {
+  display: grid;
+  grid-template-columns: repeat(300, 30px);
+  grid-template-rows: repeat(40, 30px);
+  overflow: scroll;
+  max-height: 70vh;
+}
+.minesquare {
+  border: 1px dotted rgba(181, 182, 185, 0.5);
+}
+.mineforeground {
+  width: 100%;
+  height: 100%;
+}
+.sky-background {
+  background-color: rgb(149, 206, 244);
+}
+.cave-background {
+  background-color: rgb(46, 23, 7);
+}
+.rock {
+  background-color: gray !important;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+.soil {
+  background-color: rgb(96, 57, 40) !important;
+  width: 100%;
+  height: 100%;
+}
+.wood {
+  background-color: rgb(189, 143, 100) !important;
+  width: 100%;
+  height: 100%;
+}
+#player {
+  position: relative;
+  bottom: 785px;
+  left: 275px;
+  transition-property: left, bottom;
+  transition-duration: .1s;
+}
+.player {
+  font-size: 10px;
+    text-shadow: 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white, -1px -1px 0 white, 1px 0px 0 white, 0px 1px 0 white, -1px 0px 0 white, 0px -1px 0 white, 1px 1px 1px rgba(0, 0, 0, 0);
+}
+.mineicon {
+  font-size: 25px;
+}
