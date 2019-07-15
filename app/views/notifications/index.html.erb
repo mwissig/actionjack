@@ -43,15 +43,23 @@
 
         <% elsif note.game == 'message' %>
           <li>
-          <%= link_to User.find_by(id: note.sender_id).profile.username, user_path(User.find_by(id: note.sender_id)) %> sent you a message
+          <%= link_to User.find_by(id: note.sender_id).profile.username, user_path(User.find_by(id: note.sender_id)) %> sent you
+<% if !note.body.blank? %>
+          a message
+          <% end %>
 <% if note.points > 0 %>
-and <%= note.points %>  <i class='fas fa-coins gold'></i>
+<% if !note.body.blank? %>
+and
 <% end %>
+<%= note.points %>  <i class='fas fa-coins gold'></i>
+<% end %>
+<% if !note.body.blank? %>
           <% @note = note %>
           <%= render 'notifications/timestamp' %>
           <div class='notebody'>
 <%= simple_format(note.body, {}, sanitize: false)%>
           </div>
+          <% end %>
 
           </li>
 
