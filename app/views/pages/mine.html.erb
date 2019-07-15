@@ -8,6 +8,15 @@
           <% @c = coords.split("_") %>
             <% if @c[0].to_i <= 15 %>
               <% @type = "sky-background" %>
+
+<% if @c[0].to_i <= 12 %>
+              <% @nums = (1..20).to_a %>
+                <% @rand = @nums.sample %>
+                  <% if @rand == 1 %>
+                      <% @type = "sky-background bgcloud" %>
+                      <% end %>
+                      <% end %>
+
               <% if @c[0].to_i == 15 %>
                 <% @nums = (1..17).to_a %>
                   <% @rand = @nums.sample %>
