@@ -162,9 +162,21 @@ $box-shadow2: ();
   width: 100%;
   height: 100%;
 }
+.silverore {
+clip-path: polygon(50% 0%, 98% 11%, 83% 65%, 18% 100%, 0% 38%);
+  background-color: rgb(90, 90, 90) !important;
+  width: 100%;
+  height: 100%;
+}
 .goldore {
   clip-path: polygon(50% 0%, 100% 11%, 88% 78%, 50% 100%, 0% 75%, 6% 27%);
   background-color: rgb(161, 130, 0) !important;
+  width: 100%;
+  height: 100%;
+}
+.diamond {
+  clip-path: polygon(70% 0, 100% 30%, 50% 100%, 0 30%, 30% 0);
+  background-color: rgb(200, 200, 200) !important;
   width: 100%;
   height: 100%;
 }
