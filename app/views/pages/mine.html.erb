@@ -67,7 +67,7 @@
 
                           <div id="<%= coords %>_background" class="minesquare <%= @type %>">
 
-                            <div id="<%= coords %>_foreground" class="<%= @object %>" title="mine"></div>
+                            <div id="<%= coords %>_foreground" class="<%= @object %>" onClick="select_box(this.id)"></div>
                           </div>
                         <% end %>
 
@@ -78,7 +78,8 @@
                     </div>
                     <input type="text" id="coordbox">
                     <input type="text" id="myItems"><br>
-                    Arrow keys, space to mine, S R W to place soil, rock, wood
+                    Arrow keys and space to mine<br>
+                    Mouse and S R W to place soil, rock, wood
                   </div>
 
                   <script>
@@ -102,7 +103,7 @@
                     var object = foreground.classList.item(0);
                     var doublebox = document.getElementById((40 - Math.floor(deltaY / 30) + 3) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                     var groundbox = document.getElementById((40 - Math.floor(deltaY / 30)) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
-                    var rightbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 2) + '_foreground');
+                    var selected;
 
                     function movePlayer() {
                       var player = document.getElementById('player');
@@ -198,24 +199,24 @@
 
                     //s for soil placement
                     if (keys[83]) {
-                      if (rightbox.className == "empty" && mySoil > 0) {
-                        rightbox.className = "soil";
+                      if (selected.classList.item(0) == "empty" && mySoil > 0) {
+                        selected.className = "soil";
                         mySoil -= 1
                       }
                     }
 
                     //w for wood placement
                     if (keys[87]) {
-                      if (rightbox.className == "empty" && myWood > 0) {
-                        rightbox.className = "wood";
+                      if (selected.classList.item(0) == "empty" && myWood > 0) {
+                        selected.className = "wood";
                         myWood -= 1
                       }
                     }
 
                     //r for rock placement
                     if (keys[82]) {
-                      if (rightbox.className == "empty" && myRocks > 0) {
-                        rightbox.className = "rock";
+                      if (selected.classList.item(0) == "empty" && myRocks > 0) {
+                        selected.className = "rock";
                         myRocks -= 1
                       }
                     }
@@ -234,7 +235,6 @@ var gravTimer;
 
 window.setInterval( function(){
   var myItems = document.getElementById('myItems');
-  rightbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 2) + '_foreground');
   myItems.value = mySoil + " soil, " + myWood + " wood, " + myRocks + " rocks, " + myIronOre + " iron ore, " + mySilverOre + " silver ore, " + myGoldOre + " gold ore, " + myDiamonds + " diamonds";
   var gnextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
   if (deltaY > 45 && gnextbox.classList.item(0) == "empty") {
@@ -244,6 +244,14 @@ window.setInterval( function(){
   }
 }
   ,500)
+
+  function select_box(id)
+{
+    console.log(id);
+    selected = document.getElementById(id);
+     selected.classList.add('highlight');
+    setTimeout(function(){ selected.classList.remove('highlight') }, 500);
+}
 
 
                   </script>
