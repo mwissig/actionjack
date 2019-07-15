@@ -36,8 +36,12 @@
                       <% if @rand == 3 %>
                         <% @object = "rock" %>
                         <% else %>
+                        <% if @c[0].to_i <= 30 %>
                           <% @object = "soil" %>
+                          <% else %>
+                          <% @object = "deepsoil" %>
                             <% end %>
+                              <% end %>
 
                             <% if @c[0].to_i > 25 %>
                             <% @nums = (1..35).to_a %>
@@ -235,6 +239,9 @@ var pickaxeLevel = 0;
                       if (nextbox.className == "soil") {
                         mySoil += 1;
                         nextbox.className = "empty"
+                      }
+                      if (nextbox.className == "deepsoil" && pickaxeLevel >= 1 ) {
+                        nextbox.className = "soil"
                       }
                       else if (nextbox.className == "wood") {
                         myWood += 1;

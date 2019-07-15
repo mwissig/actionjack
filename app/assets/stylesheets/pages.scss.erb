@@ -158,6 +158,16 @@ width: 60px;
 height: 30px;
   background-image: url('<%= image_path('mine/bgcloud.png') %>');
   z-index: 2;
+  animation: hover 2s infinite;
+  animation-direction: alternate-reverse;
+}
+@keyframes hover {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 4px;
+  }
 }
 .cave-background {
   background-color: rgb(46, 23, 7);
@@ -181,6 +191,11 @@ height: 30px;
 }
 .soil {
   background-color: rgb(96, 57, 40) !important;
+  width: 100%;
+  height: 100%;
+}
+.deepsoil {
+  background-color: rgb(74, 41, 26) !important;
   width: 100%;
   height: 100%;
 }
