@@ -100,6 +100,9 @@
                     var foreground = document.getElementById(mycoords + '_foreground');
                     var background = document.getElementById(mycoords + '_background');
                     var object = foreground.classList.item(0);
+                    var doublebox = document.getElementById((40 - Math.floor(deltaY / 30) + 3) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+                    var groundbox = document.getElementById((40 - Math.floor(deltaY / 30)) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+                    var rightbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 2) + '_foreground');
 
                     function movePlayer() {
                       var player = document.getElementById('player');
@@ -137,30 +140,31 @@
 
                       // right
                       if (keys[39]) {
-                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (
-                          Math.floor(deltaX / 30) + 2
-                        ) + '_foreground');
+                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 2) + '_foreground');
                         if (deltaX < 8955 && nextbox.classList.item(0) == "empty") {
                           deltaX += 30;
                         }
                       }
 
-                      // down
+                      // up
                       if (keys[38]) {
-                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30)) + "_" + (
-                          Math.floor(deltaX / 30) + 1
-                        ) + '_foreground');
-                        if (deltaY < 1185 && nextbox.classList.item(0) == "empty") {
-                          deltaY += 30;
+                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30)) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+                        doublebox = document.getElementById((40 - Math.floor(deltaY / 30) - 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+                        groundbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+                        if (groundbox.classList.item(0) != "empty") {
 
+                        if (deltaY < 1185 && nextbox.classList.item(0) == "empty" && doublebox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty") {
+                          deltaY += 60;
+                        }
+                          else if (deltaY > 45 && nextbox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty") {
+                            deltaY += 30;
+                          }
                         }
                       }
 
-                      // up
+                      // down
                       if (keys[40]) {
-                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (
-                          Math.floor(deltaX / 30) + 1
-                        ) + '_foreground');
+                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         if (deltaY > 45 && nextbox.classList.item(0) == "empty") {
                           deltaY -= 30;
                         }
@@ -194,24 +198,24 @@
 
                     //s for soil placement
                     if (keys[83]) {
-                      if (nextbox.className == "empty" && mySoil > 0) {
-                        nextbox.className = "soil";
+                      if (rightbox.className == "empty" && mySoil > 0) {
+                        rightbox.className = "soil";
                         mySoil -= 1
                       }
                     }
 
                     //w for wood placement
                     if (keys[87]) {
-                      if (nextbox.className == "empty" && myWood > 0) {
-                        nextbox.className = "wood";
+                      if (rightbox.className == "empty" && myWood > 0) {
+                        rightbox.className = "wood";
                         myWood -= 1
                       }
                     }
 
                     //r for rock placement
                     if (keys[82]) {
-                      if (nextbox.className == "empty" && myRocks > 0) {
-                        nextbox.className = "rock";
+                      if (rightbox.className == "empty" && myRocks > 0) {
+                        rightbox.className = "rock";
                         myRocks -= 1
                       }
                     }
@@ -230,6 +234,7 @@ var gravTimer;
 
 window.setInterval( function(){
   var myItems = document.getElementById('myItems');
+  rightbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 2) + '_foreground');
   myItems.value = mySoil + " soil, " + myWood + " wood, " + myRocks + " rocks, " + myIronOre + " iron ore, " + mySilverOre + " silver ore, " + myGoldOre + " gold ore, " + myDiamonds + " diamonds";
   var gnextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
   if (deltaY > 45 && gnextbox.classList.item(0) == "empty") {
