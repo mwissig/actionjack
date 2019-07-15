@@ -75,7 +75,6 @@
                           <% end %>
 
                           <div id="<%= coords %>_background" class="minesquare <%= @type %>">
-
                             <div id="<%= coords %>_foreground" class="<%= @object %>" onClick="select_box(this.id)"></div>
                           </div>
                         <% end %>
@@ -83,15 +82,17 @@
                         <div id="player" class="player">
 <% if logged_in? %>
 <%= @current_user.profile.username %>
+  <% @playercolor = @current_user.profile.color %>
 <% else %>
                           Player
+                          <% @playercolor = '000000' %>
 <% end %>
                           <br>
-                          <i class="fas fa-walking mineicon"></i>
+                          <span style="color:#<%= @playercolor %>"> <i class="fas fa-walking mineicon"></i></span>
                         </div>
                       </div>
                     </div>
-                    <input type="text" id="coordbox">
+                    <input type="hidden" id="coordbox">
                     <input type="text" id="myItems"><br>
                     Arrow keys and space to mine<br>
                     Mouse and L S R W to place ladders, soil, rock, wood
