@@ -128,7 +128,7 @@ $box-shadow2: ();
   max-height: 70vh;
 }
 .minesquare {
-  border: 1px dotted rgba(181, 182, 185, 0.5);
+  border: 1px dotted rgba(255, 255, 255, 0.2);
 }
 .mineforeground {
   width: 100%;
@@ -153,6 +153,18 @@ $box-shadow2: ();
 }
 .wood {
   background-color: rgb(189, 143, 100) !important;
+  width: 100%;
+  height: 100%;
+}
+.ironore {
+  clip-path: polygon(12% 44%, 100% 0, 93% 78%, 0 100%);
+  background-color: rgb(51, 51, 51) !important;
+  width: 100%;
+  height: 100%;
+}
+.goldore {
+  clip-path: polygon(50% 0%, 100% 11%, 88% 78%, 50% 100%, 0% 75%, 6% 27%);
+  background-color: rgb(161, 130, 0) !important;
   width: 100%;
   height: 100%;
 }
