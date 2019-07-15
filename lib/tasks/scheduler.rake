@@ -169,14 +169,15 @@ desc "adds items to shop"
 task :add_shop_items => :environment do
   puts "Populating shop"
   Shopitem.create(
-    name: "Cassava Bread",
-    category: "food",
-    image: "cassava_bread.png",
-    shop_price: 200,
-    sellback_price: 100,
-    description: "Bread made from cassava flour.",
-    long_description: "Cassava bread. Integer1 value of food is the amount it reduces hunger.",
-    integer1: 100
+    name: "Iron Pickaxe",
+    category: "pickaxes",
+    material: "steel",
+    image: "pickaxe_iron.png",
+    shop_price: 500,
+    sellback_price: 250,
+    description: "An iron pickaxe.",
+    long_description: "An iron pickaxe. Can mine rock. Integer1 value of pickaxe is level.",
+    integer1: 1
   )
   puts "done."
 end
@@ -195,6 +196,39 @@ task :create_item => :environment do
     description: "A wooden sword.",
     long_description: "A basic wooden sword. Integer1 value of weapons is attack power.",
     integer1: 10
+  )
+  Shopitem.create(
+    name: "Iron Pickaxe",
+    category: "pickaxes",
+    material: "steel",
+    image: "pickaxe_iron.png",
+    shop_price: 500,
+    sellback_price: 250,
+    description: "An iron pickaxe.",
+    long_description: "An iron pickaxe. Can mine rock. Integer1 value of pickaxe is level.",
+    integer1: 1
+  )
+  Shopitem.create(
+    name: "Steel Pickaxe",
+    category: "pickaxes",
+    material: "steel",
+    image: "pickaxe_steel.png",
+    shop_price: 2000,
+    sellback_price: 1000,
+    description: "A steel pickaxe.",
+    long_description: "A steel pickaxe. Can mine iron ore. Integer1 value of pickaxe is level.",
+    integer1: 2
+  )
+  Shopitem.create(
+    name: "Titanium Pickaxe",
+    category: "pickaxes",
+    material: "titanium",
+    image: "pickaxe_titanium.png",
+    shop_price: 1000,
+    sellback_price: 500,
+    description: "A titanium pickaxe.",
+    long_description: "A titanium pickaxe. Can mine silver ore. Integer1 value of pickaxe is level.",
+    integer1: 3
   )
   Shopitem.create(
     name: "Plum",

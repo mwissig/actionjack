@@ -82,9 +82,33 @@
                         <div id="player" class="player">
 <% if logged_in? %>
 <%= @current_user.profile.username %>
+<script>
+var player_name = "<%= @current_user.profile.username %>"
+</script>
+<% if @current_user.items.exists?(name: "Steel Pickaxe") %>
+<script>
+var pickaxeName = "Steel Pickaxe";
+var pickaxeLevel = 2;
+</script>
+<% elsif @current_user.items.exists?(name: "Iron Pickaxe") %>
+<script>
+var pickaxeName = "Iron Pickaxe";
+var pickaxeLevel = 1;
+</script>
+<%else %>
+<script>
+var pickaxeName = "Bare hands";
+var pickaxeLevel = 0;
+</script>
+<% end %>
   <% @playercolor = @current_user.profile.color %>
 <% else %>
                           Player
+                          <script>
+                          var player_name = "Player";
+                          var pickaxeName = "Bare hands";
+                          var pickaxeLevel = 0;
+                          </script>
                           <% @playercolor = '000000' %>
 <% end %>
                           <br>
@@ -99,7 +123,9 @@
                   </div>
 
                   <script>
-                    console.log("play");
+
+                    console.log(player_name);
+
 
                     var deltaY = 785;
                     var deltaX = 275;
@@ -194,29 +220,37 @@
                       if (keys[32]){
                         if (nextbox.className == "ladder") {
                           myLadders += 1;
+                          nextbox.className = "empty"
                         }
                       if (nextbox.className == "soil") {
                         mySoil += 1;
+                        nextbox.className = "empty"
                       }
                       else if (nextbox.className == "wood") {
                         myWood += 1;
+                        nextbox.className = "empty"
                       }
-                      else if (nextbox.className == "rock") {
+                      else if (nextbox.className == "rock" && pickaxeLevel >= 1 ) {
                         myRocks += 1;
+                        nextbox.className = "empty"
                       }
-                      else if (nextbox.className == "ironore") {
+                      else if (nextbox.className == "ironore" && pickaxeLevel >= 2 ) {
                         myIronOre += 1;
+                        nextbox.className = "empty"
                       }
-                      else if (nextbox.className == "silverore") {
+                      else if (nextbox.className == "silverore" && pickaxeLevel >= 3 ) {
                         mySilverOre += 1;
+                        nextbox.className = "empty"
                       }
-                      else if (nextbox.className == "goldore") {
+                      else if (nextbox.className == "goldore" && pickaxeLevel >= 4 ) {
                         myGoldOre += 1;
+                        nextbox.className = "empty"
                       }
-                      else if (nextbox.className == "diamond") {
+                      else if (nextbox.className == "diamond" && pickaxeLevel >= 5 ) {
                         myDiamonds += 1;
+                        nextbox.className = "empty"
                       }
-                            nextbox.className = "empty"
+
                           }
 
                           //l for ladder placement
@@ -265,7 +299,7 @@ var gravTimer;
 
 window.setInterval( function(){
   var myItems = document.getElementById('myItems');
-  myItems.value = myLadders + " ladders, " + mySoil + " soil, " + myWood + " wood, " + myRocks + " rocks, " + myIronOre + " iron ore, " + mySilverOre + " silver ore, " + myGoldOre + " gold ore, " + myDiamonds + " diamonds";
+  myItems.value = "Pickaxe: " + pickaxeName + ", " + myLadders + " ladders, " + mySoil + " soil, " + myWood + " wood, " + myRocks + " rocks, " + myIronOre + " iron ore, " + mySilverOre + " silver ore, " + myGoldOre + " gold ore, " + myDiamonds + " diamonds";
   var gnextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
   mybox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
   if (deltaY > 45 && gnextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "ladder" && mybox.classList.item(2) != "ladder") {
