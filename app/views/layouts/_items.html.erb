@@ -5,6 +5,8 @@
 
   <% if item.category == "weapons" %>
       ATK: <%= item.integer1 %><br>
+      <% elsif item.category == "pickaxes" %>
+      Level <%= item.integer1 %><br>
     <% elsif item.category == "food" %>
       <%= item.integer1 %> food<br>
     <% elsif @location == "inventory" && item.name == "Automatic Pet Feeder" %>

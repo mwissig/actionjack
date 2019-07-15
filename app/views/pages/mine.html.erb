@@ -85,7 +85,17 @@
 <script>
 var player_name = "<%= @current_user.profile.username %>"
 </script>
-<% if @current_user.items.exists?(name: "Steel Pickaxe") %>
+<% if @current_user.items.exists?(name: "Diamond Pickaxe") %>
+<script>
+var pickaxeName = "Diamond Pickaxe";
+var pickaxeLevel = 4;
+</script>
+<% elsif @current_user.items.exists?(name: "Titanium Pickaxe") %>
+<script>
+var pickaxeName = "Titanium Pickaxe";
+var pickaxeLevel = 3;
+</script>
+<% elsif @current_user.items.exists?(name: "Steel Pickaxe") %>
 <script>
 var pickaxeName = "Steel Pickaxe";
 var pickaxeLevel = 2;
@@ -242,11 +252,11 @@ var pickaxeLevel = 0;
                         mySilverOre += 1;
                         nextbox.className = "empty"
                       }
-                      else if (nextbox.className == "goldore" && pickaxeLevel >= 4 ) {
+                      else if (nextbox.className == "goldore" && pickaxeLevel >= 3 ) {
                         myGoldOre += 1;
                         nextbox.className = "empty"
                       }
-                      else if (nextbox.className == "diamond" && pickaxeLevel >= 5 ) {
+                      else if (nextbox.className == "diamond" && pickaxeLevel >= 4 ) {
                         myDiamonds += 1;
                         nextbox.className = "empty"
                       }
