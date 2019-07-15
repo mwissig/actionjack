@@ -80,7 +80,13 @@
                           </div>
                         <% end %>
 
-                        <div id="player" class="player">Player<br>
+                        <div id="player" class="player">
+<% if logged_in? %>
+<%= @current_user.profile.username %>
+<% else %>
+                          Player
+<% end %>
+                          <br>
                           <i class="fas fa-walking mineicon"></i>
                         </div>
                       </div>
