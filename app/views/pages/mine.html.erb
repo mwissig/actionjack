@@ -22,8 +22,10 @@
                   <% @rand = @nums.sample %>
                     <% if @rand == 3 %>
                         <% @object = "rock" %>
-                      <% elsif @rand == 4 %>
+                      <% elsif @rand == 4 || @rand == 5 %>
                         <% @object = "wood" %>
+                        <% else %>
+                              <% @object = "empty" %>
                       <% end %>
                       <% end %>
                       <% else %>
