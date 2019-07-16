@@ -184,13 +184,12 @@ height: 30px;
   transition-duration: .5s;
 }
 .rock {
-  background-color: gray !important;
+      background-image: url('<%= image_path('mine/rock.png') %>');
   width: 100%;
   height: 100%;
   border-radius: 5px;
 }
 .soil {
-  // background-color: rgb(96, 57, 40) !important;
   width: 100%;
   height: 100%;
   position: relative;
@@ -207,7 +206,6 @@ height: 34px;
   background-position: center;
 }
 .soil2 {
-  // background-color: rgb(82, 45, 29) !important;
     position: relative;
   width: 100%;
   height: 100%;
@@ -223,10 +221,11 @@ height: 34px;
   z-index: 2;
 }
 .wood {
-  background-color: rgb(189, 143, 100) !important;
+    background-image: url('<%= image_path('mine/wood.png') %>');
   width: 100%;
   height: 100%;
 }
+
 .ironore {
   clip-path: polygon(12% 44%, 100% 0, 93% 78%, 0 100%);
   background-color: rgb(51, 51, 51) !important;
