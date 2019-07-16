@@ -190,14 +190,37 @@ height: 30px;
   border-radius: 5px;
 }
 .soil {
-  background-color: rgb(96, 57, 40) !important;
+  // background-color: rgb(96, 57, 40) !important;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.soil::before {
+  content: "";
+position: absolute;
+left: -2px;
+top: -2px;
+width: 34px;
+height: 34px;
+  background-image: url('<%= image_path('mine/soil.png') %>');
+  z-index: 2;
+  background-position: center;
+}
+.soil2 {
+  // background-color: rgb(82, 45, 29) !important;
+    position: relative;
   width: 100%;
   height: 100%;
 }
-.deepsoil {
-  background-color: rgb(74, 41, 26) !important;
-  width: 100%;
-  height: 100%;
+.soil2::before {
+  content: "";
+position: absolute;
+left: -2px;
+top: -2px;
+width: 34px;
+height: 34px;
+  background-image: url('<%= image_path('mine/soil2.png') %>');
+  z-index: 2;
 }
 .wood {
   background-color: rgb(189, 143, 100) !important;
@@ -233,6 +256,11 @@ clip-path: polygon(50% 0%, 98% 11%, 83% 65%, 18% 100%, 0% 38%);
   background-size: auto;
   background-position: center;
   background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+.unbreakable {
+  background-color: black !important;
   width: 100%;
   height: 100%;
 }

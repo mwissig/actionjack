@@ -39,7 +39,7 @@
                         <% if @c[0].to_i <= 30 %>
                           <% @object = "soil" %>
                           <% else %>
-                          <% @object = "deepsoil" %>
+                          <% @object = "soil2" %>
                             <% end %>
                               <% end %>
 
@@ -74,6 +74,12 @@
                                         <% @object = "diamond" %>
                                             <% end %>
                                             <% end %>
+
+                                            <% if @c[0].to_i == 40 %>
+
+                                                <% @object = "unbreakable" %>
+
+                                                    <% end %>
 
 
                           <% end %>
@@ -240,7 +246,7 @@ var pickaxeLevel = 0;
                         mySoil += 1;
                         nextbox.className = "empty"
                       }
-                      if (nextbox.className == "deepsoil" && pickaxeLevel >= 1 ) {
+                      if (nextbox.className == "soil2" && pickaxeLevel >= 1 ) {
                         nextbox.className = "soil"
                       }
                       else if (nextbox.className == "wood") {
