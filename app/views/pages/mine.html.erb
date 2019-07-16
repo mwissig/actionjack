@@ -17,6 +17,16 @@
                       <% end %>
                       <% end %>
 
+                      <% if @c[0].to_i < 10 %>
+                        <% @nums = (1..17).to_a %>
+                          <% @rand = @nums.sample %>
+                            <% if @rand == 3 %>
+                                <% @object = "empty platform" %>
+                                <% else %>
+                                      <% @object = "empty" %>
+                              <% end %>
+                                <% end %>
+
               <% if @c[0].to_i == 15 %>
                 <% @nums = (1..17).to_a %>
                   <% @rand = @nums.sample %>
@@ -327,7 +337,7 @@ window.setInterval( function(){
   myItems.value = "Pickaxe: " + pickaxeName + ", " + myLadders + " ladders, " + mySoil + " soil, " + myWood + " wood, " + myRocks + " rocks, " + myIronOre + " iron ore, " + mySilverOre + " silver ore, " + myGoldOre + " gold ore, " + myDiamonds + " diamonds";
   var gnextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
   mybox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
-  if (deltaY > 45 && gnextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "ladder" && mybox.classList.item(2) != "ladder") {
+  if (deltaY > 45 && gnextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "ladder" && mybox.classList.item(2) != "ladder" && gnextbox.classList.item(1) != "ladder" && gnextbox.classList.item(2) != "ladder" && gnextbox.classList.item(1) != "platform" && gnextbox.classList.item(2) != "platform") {
 
     deltaY -= 30;
     movePlayer();
