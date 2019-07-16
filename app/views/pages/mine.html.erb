@@ -79,7 +79,7 @@
                                     <% end %>
                                     <% end %>
 
-                                    <% if @c[0].to_i > 38 %>
+                                    <% if @c[0].to_i >= 38 %>
                                     <% @nums = (1..200).to_a %>
                                       <% @rand = @nums.sample %>
                                       <% if @rand == 1 %>
