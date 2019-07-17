@@ -251,6 +251,16 @@ task :create_item => :environment do
     integer1: 100
   )
   Shopitem.create(
+    name: "Wood",
+    category: "mine",
+    image: "wood.png",
+    shop_price: "do not sell in shop?",
+    sellback_price: "calculate based on integer1",
+    description: "Wood",
+    long_description: "Wood. Integer1 for mined items is amount. Write code to generate sellback price based on this number.",
+    integer1: "generate based on number of item in inventory"
+  )
+  Shopitem.create(
     name: "Automatic Pet Feeder",
     category: "automator",
     image: "pet_feeder.png",
