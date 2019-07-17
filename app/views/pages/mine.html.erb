@@ -150,16 +150,16 @@ var pickaxeLevel = 0;
                     </div>
                     <input type="hidden" id="coordbox">
                     <div class="mineinventory">
-                      <div><%= image_tag('items/pickaxe_iron.png') %><span id="pickaxetype"></span></div>
-                      <div><%= image_tag('mine/ladder.png') %><span id="laddercount"></span> L</div>
-                      <div class="platformimg"><%= image_tag('mine/wood.png') %><span id="platformcount"></span> P</div>
-                      <div><%= image_tag('mine/soil.png') %><span id="soilcount"></span> S</div>
-                      <div><%= image_tag('mine/wood.png') %><span id="woodcount"></span> W</div>
-                      <div><%= image_tag('mine/rock.png') %><span id="rockcount"></span> R</div>
-                      <div><%= image_tag('mine/ore_iron.png') %><span id="ironorecount"></span></div>
-                      <div><%= image_tag('mine/ore_silver.png') %><span id="silverorecount"></span></div>
-                      <div><%= image_tag('mine/ore_gold.png') %><span id="goldorecount"></span></div>
-                      <div><%= image_tag('mine/ore_diamond.png') %><span id="diamondcount"></span></div>
+                      <div title="Pickaxe"><%= image_tag('items/pickaxe_iron.png', title: 'Pickaxe' ) %><span id="pickaxetype"></span></div>
+                      <div title="Ladders"><%= image_tag('mine/ladder.png', title: 'Ladders' ) %><span id="laddercount"></span> L</div>
+                      <div  title="Platforms" class="platformimg"><%= image_tag('mine/wood.png', title: 'Platforms' )  %><span id="platformcount"></span> P</div>
+                      <div title="Soil"><%= image_tag('mine/soil.png', title: 'Soil' )  %><span id="soilcount"></span> S</div>
+                      <div title="Wood"><%= image_tag('mine/wood.png', title: 'Wood' )  %><span id="woodcount"></span> W</div>
+                      <div title="Rock"><%= image_tag('mine/rock.png', title: 'Rock' )  %><span id="rockcount"></span> R</div>
+                      <div title="Iron"><%= image_tag('mine/ore_iron.png', title: 'Iron' )  %><span id="ironorecount"></span></div>
+                      <div title="Silver"><%= image_tag('mine/ore_silver.png', title: 'Silver' )  %><span id="silverorecount"></span></div>
+                      <div title="Gold"><%= image_tag('mine/ore_gold.png', title: 'Gold' )  %><span id="goldorecount"></span></div>
+                      <div title="Diamonds"><%= image_tag('mine/ore_diamond.png', title: 'Diamonds' )  %><span id="diamondcount"></span></div>
                     </div>
                     Arrow keys and space to mine<br>
                     Mouse and L P S R W to place ladders, platforms, soil, rock, wood
@@ -220,24 +220,30 @@ var pickaxeLevel = 0;
                     window.addEventListener("keyup", keysReleased, false);
 
                     var keys = [];
+                    var lastEnter = Date.now();
+
 
                     function keysPressed(e) {
                       // store an entry for every key pressed
                       keys[e.keyCode] = true;
                       var nextbox;
+
                       // left
                       if (keys[37]) {
+
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + Math.floor(deltaX / 30) + '_foreground');
-                        if (deltaX > 15 && nextbox.classList.item(0) == "empty") {
+                        if (Date.now() - lastEnter > 200 && deltaX > 15 && nextbox.classList.item(0) == "empty") {
                           deltaX -= 30;
+                          lastEnter = Date.now();
                         }
                       }
 
                       // right
                       if (keys[39]) {
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 2) + '_foreground');
-                        if (deltaX < 8955 && nextbox.classList.item(0) == "empty") {
+                        if (Date.now() - lastEnter > 200 && deltaX < 8955 && nextbox.classList.item(0) == "empty") {
                           deltaX += 30;
+                          lastEnter = Date.now();
                         }
                       }
 
@@ -247,106 +253,123 @@ var pickaxeLevel = 0;
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30)) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         doublebox = document.getElementById((40 - Math.floor(deltaY / 30) - 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         groundbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
-                        if (groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
+                        if (Date.now() - lastEnter > 200 && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
 
                         if (deltaY < 1185 && nextbox.classList.item(0) == "empty" && doublebox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty") {
                           deltaY += 60;
+                          lastEnter = Date.now();
                         }
                           else if (deltaY > 45 && nextbox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder" ) {
                             deltaY += 30;
+                            lastEnter = Date.now();
                           }
                         }
                       }
 
                       // down
                       if (keys[40]) {
-                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
-                        if (deltaY > 45 && nextbox.classList.item(0) == "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
+                      nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+                        if (Date.now() - lastEnter > 200 && deltaY > 45 && nextbox.classList.item(0) == "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
                           deltaY -= 30;
+                          lastEnter = Date.now();
                         }
                       }
 
                       //space to dig
                       if (keys[32]){
-                        if (nextbox.classList.item(1) == "ladder") {
+                        if (Date.now() - lastEnter > 200 && nextbox.classList.item(1) == "ladder") {
                           myLadders += 1;
                           nextbox.className = "empty"
+                          lastEnter = Date.now();
                         }
-                        if (nextbox.classList.item(1) == "platform") {
+                        if (Date.now() - lastEnter > 200 && nextbox.classList.item(1) == "platform") {
                           myPlatforms += 1;
                           nextbox.className = "empty"
+                          lastEnter = Date.now();
                         }
-                      if (nextbox.className == "soil") {
+                      if (Date.now() - lastEnter > 200 && nextbox.className == "soil") {
                         mySoil += 1;
                         nextbox.className = "empty"
+                        lastEnter = Date.now();
                       }
-                      if (nextbox.className == "soil2" && pickaxeLevel >= 1 ) {
+                      if (Date.now() - lastEnter > 200 && nextbox.className == "soil2" && pickaxeLevel >= 1 ) {
                         nextbox.className = "soil"
                       }
-                      else if (nextbox.className == "wood") {
+                      else if (Date.now() - lastEnter > 200 && nextbox.className == "wood") {
                         myWood += 1;
                         nextbox.className = "empty"
+                        lastEnter = Date.now();
                       }
-                      else if (nextbox.className == "rock" && pickaxeLevel >= 1 ) {
+                      else if (Date.now() - lastEnter > 200 && nextbox.className == "rock" && pickaxeLevel >= 1 ) {
                         myRocks += 1;
                         nextbox.className = "empty"
+                        lastEnter = Date.now();
                       }
-                      else if (nextbox.className == "ironore" && pickaxeLevel >= 2 ) {
+                      else if (Date.now() - lastEnter > 200 && nextbox.className == "ironore" && pickaxeLevel >= 2 ) {
                         myIronOre += 1;
                         nextbox.className = "empty"
+                        lastEnter = Date.now();
                       }
-                      else if (nextbox.className == "silverore" && pickaxeLevel >= 3 ) {
+                      else if (Date.now() - lastEnter > 200 && nextbox.className == "silverore" && pickaxeLevel >= 3 ) {
                         mySilverOre += 1;
                         nextbox.className = "empty"
+                        lastEnter = Date.now();
                       }
-                      else if (nextbox.className == "goldore" && pickaxeLevel >= 3 ) {
+                      else if (Date.now() - lastEnter > 200 && nextbox.className == "goldore" && pickaxeLevel >= 3 ) {
                         myGoldOre += 1;
                         nextbox.className = "empty"
+                        lastEnter = Date.now();
                       }
-                      else if (nextbox.className == "diamond" && pickaxeLevel >= 4 ) {
+                      else if (Date.now() - lastEnter > 200 && nextbox.className == "diamond" && pickaxeLevel >= 4 ) {
                         myDiamonds += 1;
                         nextbox.className = "empty"
+                        lastEnter = Date.now();
                       }
 
                           }
 
                           //l for ladder placement
                           if (keys[76]) {
-                            if (selected.classList.item(0) == "empty" && selected.classList.item(1) != "ladder" && selected.classList.item(2) != "ladder" && myLadders > 0) {
+                            if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && selected.classList.item(1) != "ladder" && selected.classList.item(2) != "ladder" && myLadders > 0) {
                               selected.classList.add("ladder");
                               myLadders -= 1
+                              lastEnter = Date.now();
                             }
                           }
 
                           //p for platform placement
                           if (keys[80]) {
-                            if (selected.classList.item(0) == "empty" && selected.classList.item(1) != "platform" && selected.classList.item(2) != "platform" && myPlatforms > 0) {
+                            if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && selected.classList.item(1) != "platform" && selected.classList.item(2) != "platform" && myPlatforms > 0) {
                               selected.classList.add("platform");
                               myPlatforms -= 1
+                              lastEnter = Date.now();
                             }
                           }
 
                     //s for soil placement
                     if (keys[83]) {
-                      if (selected.classList.item(0) == "empty" && mySoil > 0) {
+                      if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && mySoil > 0) {
                         selected.className = "soil";
                         mySoil -= 1
+                        lastEnter = Date.now();
                       }
                     }
 
                     //w for wood placement
                     if (keys[87]) {
-                      if (selected.classList.item(0) == "empty" && myWood > 0) {
+                      if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && myWood > 0) {
                         selected.className = "wood";
                         myWood -= 1
+                        lastEnter = Date.now();
                       }
                     }
 
                     //r for rock placement
                     if (keys[82]) {
-                      if (selected.classList.item(0) == "empty" && myRocks > 0) {
+                      if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && myRocks > 0) {
                         selected.className = "rock";
                         myRocks -= 1
+                        lastEnter = Date.now();
                       }
                     }
 
