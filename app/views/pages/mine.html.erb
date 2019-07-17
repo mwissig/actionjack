@@ -1,7 +1,7 @@
 <div class="box">
-  <div class="minecontainer">
+  <div class="minecontainer" id="mapbox">
 
-    <div class="minemap">
+    <div class="minemap" id="minemap">
       <% @object = "empty" %>
         <% @coords.each do |coords| %>
 
@@ -161,6 +161,8 @@ var pickaxeLevel = 0;
 
                     var deltaY = 785;
                     var deltaX = 275;
+                    minemap.scrollTop = (1200 - deltaY) - (divHeight / 2);
+                    minemap.scrollLeft = deltaX - (divWidth / 2);
                     var myLadders = 20;
                     var mySoil = 0;
                     var myWood = 0;
@@ -169,6 +171,9 @@ var pickaxeLevel = 0;
                     var mySilverOre = 0;
                     var myGoldOre = 0;
                     var myDiamonds = 0;
+                    var mapDiv = document.getElementById("mapbox");
+                    var divWidth = mapDiv.offsetWidth;
+                    var divHeight = mapDiv.offsetHeight;
 
                     var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (
                       Math.floor(deltaX / 30) + 1
@@ -187,7 +192,8 @@ var pickaxeLevel = 0;
                       var coordbox = document.getElementById('coordbox');
                       player.style.bottom = deltaY + "px";
                       player.style.left = deltaX + "px";
-                      player.scrollIntoView({behavior: "smooth", block: 'start'});
+                      minemap.scrollTop = (1200 - deltaY) - (divHeight / 2);
+                      minemap.scrollLeft = deltaX - (divWidth / 2);
                       var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (
                         Math.floor(deltaX / 30) + 1
                       );
@@ -333,6 +339,8 @@ var pickaxeLevel = 0;
 var gravTimer;
 
 window.setInterval( function(){
+  divWidth = mapDiv.offsetWidth;
+  divHeight = mapDiv.offsetHeight;
   var myItems = document.getElementById('myItems');
   myItems.value = "Pickaxe: " + pickaxeName + ", " + myLadders + " ladders, " + mySoil + " soil, " + myWood + " wood, " + myRocks + " rocks, " + myIronOre + " iron ore, " + mySilverOre + " silver ore, " + myGoldOre + " gold ore, " + myDiamonds + " diamonds";
   var gnextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
