@@ -133,8 +133,13 @@ $box-shadow2: ();
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 );
 
 }
+
+.minemap::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;
+}
 .minesquare {
-  // border: 1px dotted rgba(255, 255, 255, 0.2);
   z-index: 1;
 
 }
@@ -143,6 +148,17 @@ $box-shadow2: ();
   height: 100%;
   border: none;
   z-index: 5;
+}
+.mineinventory {
+  margin: .3em 20px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+}
+.mineinventory img {
+  height: 15px;
+  width: 15px;
+  margin-right: .2em;
 }
 .sky-background {
   // background-color: rgb(149, 206, 244);

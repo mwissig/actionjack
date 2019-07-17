@@ -149,7 +149,17 @@ var pickaxeLevel = 0;
                       </div>
                     </div>
                     <input type="hidden" id="coordbox">
-                    <input type="text" id="myItems"><br>
+                    <div class="mineinventory">
+                      <div><%= image_tag('items/pickaxe_iron.png') %><span id="pickaxetype"></span></div>
+                      <div><%= image_tag('mine/ladder.png') %><span id="laddercount"></span> L</div>
+                      <div><%= image_tag('mine/soil.png') %><span id="soilcount"></span> S</div>
+                      <div><%= image_tag('mine/wood.png') %><span id="woodcount"></span> W</div>
+                      <div><%= image_tag('mine/rock.png') %><span id="rockcount"></span> R</div>
+                      <div><%= image_tag('mine/ore_iron.png') %><span id="ironorecount"></span></div>
+                      <div><%= image_tag('mine/ore_silver.png') %><span id="silverorecount"></span></div>
+                      <div><%= image_tag('mine/ore_gold.png') %><span id="goldorecount"></span></div>
+                      <div><%= image_tag('mine/ore_diamond.png') %><span id="diamondcount"></span></div>
+                    </div>
                     Arrow keys and space to mine<br>
                     Mouse and L S R W to place ladders, soil, rock, wood
                   </div>
@@ -342,7 +352,15 @@ window.setInterval( function(){
   divWidth = mapDiv.offsetWidth;
   divHeight = mapDiv.offsetHeight;
   var myItems = document.getElementById('myItems');
-  myItems.value = "Pickaxe: " + pickaxeName + ", " + myLadders + " ladders, " + mySoil + " soil, " + myWood + " wood, " + myRocks + " rocks, " + myIronOre + " iron ore, " + mySilverOre + " silver ore, " + myGoldOre + " gold ore, " + myDiamonds + " diamonds";
+  document.getElementById('pickaxetype').innerHTML = pickaxeName;
+  document.getElementById('laddercount').innerHTML = myLadders;
+  document.getElementById('soilcount').innerHTML = mySoil;
+  document.getElementById('woodcount').innerHTML = myWood;
+  document.getElementById('rockcount').innerHTML = myRocks;
+  document.getElementById('ironorecount').innerHTML = myIronOre;
+  document.getElementById('silverorecount').innerHTML = mySilverOre;
+  document.getElementById('goldorecount').innerHTML = myGoldOre;
+  document.getElementById('diamondcount').innerHTML = myDiamonds;
   var gnextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
   mybox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
   if (deltaY > 45 && gnextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "ladder" && mybox.classList.item(2) != "ladder" && gnextbox.classList.item(1) != "ladder" && gnextbox.classList.item(2) != "ladder" && gnextbox.classList.item(1) != "platform" && gnextbox.classList.item(2) != "platform") {
