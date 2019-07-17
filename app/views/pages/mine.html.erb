@@ -152,6 +152,7 @@ var pickaxeLevel = 0;
                     <div class="mineinventory">
                       <div><%= image_tag('items/pickaxe_iron.png') %><span id="pickaxetype"></span></div>
                       <div><%= image_tag('mine/ladder.png') %><span id="laddercount"></span> L</div>
+                      <div class="platformimg"><%= image_tag('mine/wood.png') %><span id="platformcount"></span> P</div>
                       <div><%= image_tag('mine/soil.png') %><span id="soilcount"></span> S</div>
                       <div><%= image_tag('mine/wood.png') %><span id="woodcount"></span> W</div>
                       <div><%= image_tag('mine/rock.png') %><span id="rockcount"></span> R</div>
@@ -161,7 +162,7 @@ var pickaxeLevel = 0;
                       <div><%= image_tag('mine/ore_diamond.png') %><span id="diamondcount"></span></div>
                     </div>
                     Arrow keys and space to mine<br>
-                    Mouse and L S R W to place ladders, soil, rock, wood
+                    Mouse and L P S R W to place ladders, platforms, soil, rock, wood
                   </div>
 
                   <script>
@@ -173,7 +174,8 @@ var pickaxeLevel = 0;
                     var deltaX = 275;
                     minemap.scrollTop = (1200 - deltaY) - (divHeight / 2);
                     minemap.scrollLeft = deltaX - (divWidth / 2);
-                    var myLadders = 20;
+                    var myLadders = 30;
+                    var myPlatforms = 30;
                     var mySoil = 0;
                     var myWood = 0;
                     var myRocks = 0;
@@ -250,7 +252,7 @@ var pickaxeLevel = 0;
                         if (deltaY < 1185 && nextbox.classList.item(0) == "empty" && doublebox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty") {
                           deltaY += 60;
                         }
-                          else if (deltaY > 45 && nextbox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
+                          else if (deltaY > 45 && nextbox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder" ) {
                             deltaY += 30;
                           }
                         }
@@ -266,8 +268,12 @@ var pickaxeLevel = 0;
 
                       //space to dig
                       if (keys[32]){
-                        if (nextbox.className == "ladder") {
+                        if (nextbox.classList.item(1) == "ladder") {
                           myLadders += 1;
+                          nextbox.className = "empty"
+                        }
+                        if (nextbox.classList.item(1) == "platform") {
+                          myPlatforms += 1;
                           nextbox.className = "empty"
                         }
                       if (nextbox.className == "soil") {
@@ -309,6 +315,14 @@ var pickaxeLevel = 0;
                             if (selected.classList.item(0) == "empty" && selected.classList.item(1) != "ladder" && selected.classList.item(2) != "ladder" && myLadders > 0) {
                               selected.classList.add("ladder");
                               myLadders -= 1
+                            }
+                          }
+
+                          //p for platform placement
+                          if (keys[80]) {
+                            if (selected.classList.item(0) == "empty" && selected.classList.item(1) != "platform" && selected.classList.item(2) != "platform" && myPlatforms > 0) {
+                              selected.classList.add("platform");
+                              myPlatforms -= 1
                             }
                           }
 
@@ -354,6 +368,7 @@ window.setInterval( function(){
   var myItems = document.getElementById('myItems');
   document.getElementById('pickaxetype').innerHTML = pickaxeName;
   document.getElementById('laddercount').innerHTML = myLadders;
+  document.getElementById('platformcount').innerHTML = myPlatforms;
   document.getElementById('soilcount').innerHTML = mySoil;
   document.getElementById('woodcount').innerHTML = myWood;
   document.getElementById('rockcount').innerHTML = myRocks;
