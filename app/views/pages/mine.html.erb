@@ -104,42 +104,11 @@
                         <div id="player" class="player">
 <% if logged_in? %>
 <%= @current_user.profile.username %>
-<script>
-var player_name = "<%= @current_user.profile.username %>"
-</script>
-<% if @current_user.items.exists?(name: "Diamond Pickaxe") %>
-<script>
-var pickaxeName = "Diamond Pickaxe";
-var pickaxeLevel = 4;
-</script>
-<% elsif @current_user.items.exists?(name: "Titanium Pickaxe") %>
-<script>
-var pickaxeName = "Titanium Pickaxe";
-var pickaxeLevel = 3;
-</script>
-<% elsif @current_user.items.exists?(name: "Steel Pickaxe") %>
-<script>
-var pickaxeName = "Steel Pickaxe";
-var pickaxeLevel = 2;
-</script>
-<% elsif @current_user.items.exists?(name: "Iron Pickaxe") %>
-<script>
-var pickaxeName = "Iron Pickaxe";
-var pickaxeLevel = 1;
-</script>
-<%else %>
-<script>
-var pickaxeName = "Bare hands";
-var pickaxeLevel = 0;
-</script>
-<% end %>
   <% @playercolor = @current_user.profile.color %>
 <% else %>
                           Player
                           <script>
                           var player_name = "Player";
-                          var pickaxeName = "Bare hands";
-                          var pickaxeLevel = 0;
                           </script>
                           <% @playercolor = '000000' %>
 <% end %>
@@ -162,16 +131,34 @@ var pickaxeLevel = 0;
                       <div title="Diamonds"><%= image_tag('mine/ore_diamond.png', title: 'Diamonds' )  %><span id="diamondcount"></span></div>
                     </div>
                     Arrow keys and space to mine<br>
-                    Mouse and L P S R W to place ladders, platforms, soil, rock, wood
+                    Mouse and L I P S R W to place ladders, planks, soil, rock, wood
+                    <div class="unhidden">
+                      character movement form
+
+                      <%= form_tag('/mine/move/', method: 'get', :id => 'moveform', remote: true ) do %>
+                      <%= text_field_tag :movedeltax %>
+                      <%= text_field_tag :movedeltay %>
+                      <%= text_field_tag :movecoords %>
+                            <%= button_tag :submit do %>
+                              Move
+                            <% end %>
+                            <% end %>
+                            <br>
+
+                      block placement form
+                      <br>
+                      block removal form
+                    </div>
                   </div>
+
 
                   <script>
 
-                    console.log(player_name);
 
-
-                    var deltaY = 785;
-                    var deltaX = 275;
+                    var pickaxeName = "<%= @pickaxename %>";
+                    var pickaxeLevel = <%= @pickaxelevel %>;
+                    var deltaY = <%= @deltay %>;
+                    var deltaX = <%= @deltax %>;
                     minemap.scrollTop = (1200 - deltaY) - (divHeight / 2);
                     minemap.scrollLeft = deltaX - (divWidth / 2);
                     var myLadders = 30;
@@ -197,22 +184,28 @@ var pickaxeLevel = 0;
                     var doublebox = document.getElementById((40 - Math.floor(deltaY / 30) + 3) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                     var groundbox = document.getElementById((40 - Math.floor(deltaY / 30)) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                     var selected;
+                    var moveSpeed = 200;
 
                     function movePlayer() {
+                      var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1);
                       var player = document.getElementById('player');
                       var minemap = document.getElementById('minemap');
                       var coordbox = document.getElementById('coordbox');
+                      var moveDeltaX = document.getElementById('movedeltax');
+                      moveDeltaX.value = deltaX;
+                      var moveDeltaY = document.getElementById('movedeltay');
+                      moveDeltaY.value = deltaY;
+                      var moveCoords = document.getElementById('movecoords');
+                      moveCoords.value = mycoords;
                       player.style.bottom = deltaY + "px";
                       player.style.left = deltaX + "px";
                       minemap.scrollTop = (1200 - deltaY) - (divHeight / 2);
                       minemap.scrollLeft = deltaX - (divWidth / 2);
-                      var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (
-                        Math.floor(deltaX / 30) + 1
-                      );
+
                       foreground = document.getElementById(mycoords + '_foreground');
                       background = document.getElementById(mycoords + '_background');
                       object = foreground.classList.item(0);
-                      coordbox.value = mycoords + " " + object;
+                      document.getElementById('moveform').submit();
 
                     }
 
@@ -232,7 +225,7 @@ var pickaxeLevel = 0;
                       if (keys[37]) {
                         mybox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + Math.floor(deltaX / 30) + '_foreground');
-                        if (Date.now() - lastEnter > 200 && deltaX > 15 && nextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "wall" && mybox.classList.item(2) != "wall" ) {
+                        if (Date.now() - lastEnter > moveSpeed && deltaX > 15 && nextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "wall" && mybox.classList.item(2) != "wall" ) {
                           deltaX -= 30;
                           lastEnter = Date.now();
                         }
@@ -241,7 +234,7 @@ var pickaxeLevel = 0;
                       // right
                       if (keys[39]) {
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 2) + '_foreground');
-                        if (Date.now() - lastEnter > 200 && deltaX < 8955 && nextbox.classList.item(0) == "empty" && nextbox.classList.item(1) != "wall" && nextbox.classList.item(2) != "wall" ) {
+                        if (Date.now() - lastEnter > moveSpeed && deltaX < 8955 && nextbox.classList.item(0) == "empty" && nextbox.classList.item(1) != "wall" && nextbox.classList.item(2) != "wall" ) {
                           deltaX += 30;
                           lastEnter = Date.now();
                         }
@@ -253,7 +246,7 @@ var pickaxeLevel = 0;
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30)) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         doublebox = document.getElementById((40 - Math.floor(deltaY / 30) - 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         groundbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
-                        if (Date.now() - lastEnter > 200 && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
+                        if (Date.now() - lastEnter > moveSpeed && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
 
                         if (deltaY < 1185 && nextbox.classList.item(0) == "empty" && doublebox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "platform" || mybox.classList.item(2) == "platform" ) {
                           deltaY += 60;
@@ -269,7 +262,7 @@ var pickaxeLevel = 0;
                       // down
                       if (keys[40]) {
                       nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
-                        if (Date.now() - lastEnter > 200 && deltaY > 45 && nextbox.classList.item(0) == "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
+                        if (Date.now() - lastEnter > moveSpeed && deltaY > 45 && nextbox.classList.item(0) == "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
                           deltaY -= 30;
                           lastEnter = Date.now();
                         }
@@ -277,55 +270,55 @@ var pickaxeLevel = 0;
 
                       //space to dig
                       if (keys[32]){
-                        if (Date.now() - lastEnter > 200 && nextbox.classList.item(1) == "ladder") {
+                        if (Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "ladder") {
                           myLadders += 1;
                           nextbox.className = "empty"
                           lastEnter = Date.now();
                         }
-                        if (Date.now() - lastEnter > 200 && nextbox.classList.item(1) == "platform") {
+                        if (Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "platform") {
                           myPlatforms += 1;
                           nextbox.className = "empty"
                           lastEnter = Date.now();
                         }
-                        if (Date.now() - lastEnter > 200 && nextbox.classList.item(1) == "wall") {
+                        if (Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "wall") {
                           myPlatforms += 1;
                           nextbox.className = "empty"
                           lastEnter = Date.now();
                         }
-                      if (Date.now() - lastEnter > 200 && nextbox.className == "soil") {
+                      if (Date.now() - lastEnter > moveSpeed && nextbox.className == "soil") {
                         mySoil += 1;
                         nextbox.className = "empty"
                         lastEnter = Date.now();
                       }
-                      if (Date.now() - lastEnter > 200 && nextbox.className == "soil2" && pickaxeLevel >= 1 ) {
+                      if (Date.now() - lastEnter > moveSpeed && nextbox.className == "soil2" && pickaxeLevel >= 1 ) {
                         nextbox.className = "soil"
                       }
-                      else if (Date.now() - lastEnter > 200 && nextbox.className == "wood") {
+                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "wood") {
                         myWood += 1;
                         nextbox.className = "empty"
                         lastEnter = Date.now();
                       }
-                      else if (Date.now() - lastEnter > 200 && nextbox.className == "rock" && pickaxeLevel >= 1 ) {
+                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "rock" && pickaxeLevel >= 1 ) {
                         myRocks += 1;
                         nextbox.className = "empty"
                         lastEnter = Date.now();
                       }
-                      else if (Date.now() - lastEnter > 200 && nextbox.className == "ironore" && pickaxeLevel >= 2 ) {
+                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "ironore" && pickaxeLevel >= 2 ) {
                         myIronOre += 1;
                         nextbox.className = "empty"
                         lastEnter = Date.now();
                       }
-                      else if (Date.now() - lastEnter > 200 && nextbox.className == "silverore" && pickaxeLevel >= 3 ) {
+                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "silverore" && pickaxeLevel >= 3 ) {
                         mySilverOre += 1;
                         nextbox.className = "empty"
                         lastEnter = Date.now();
                       }
-                      else if (Date.now() - lastEnter > 200 && nextbox.className == "goldore" && pickaxeLevel >= 3 ) {
+                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "goldore" && pickaxeLevel >= 3 ) {
                         myGoldOre += 1;
                         nextbox.className = "empty"
                         lastEnter = Date.now();
                       }
-                      else if (Date.now() - lastEnter > 200 && nextbox.className == "diamond" && pickaxeLevel >= 4 ) {
+                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "diamond" && pickaxeLevel >= 4 ) {
                         myDiamonds += 1;
                         nextbox.className = "empty"
                         lastEnter = Date.now();
@@ -335,7 +328,7 @@ var pickaxeLevel = 0;
 
                           //l for ladder placement
                           if (keys[76]) {
-                            if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && selected.classList.item(1) != "ladder" && selected.classList.item(2) != "ladder" && myLadders > 0) {
+                            if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "ladder" && selected.classList.item(2) != "ladder" && myLadders > 0) {
                               selected.classList.add("ladder");
                               myLadders -= 1
                               lastEnter = Date.now();
@@ -344,7 +337,7 @@ var pickaxeLevel = 0;
 
                           //p for platform placement
                           if (keys[80]) {
-                            if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && selected.classList.item(1) != "platform" && selected.classList.item(2) != "platform" && myPlatforms > 0) {
+                            if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "platform" && selected.classList.item(2) != "platform" && myPlatforms > 0) {
                               selected.classList.add("platform");
                               myPlatforms -= 1
                               lastEnter = Date.now();
@@ -353,7 +346,7 @@ var pickaxeLevel = 0;
 
                           //i for vert plank placement
                           if (keys[73]) {
-                            if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && selected.classList.item(1) != "wall" && selected.classList.item(2) != "wall" && myPlatforms > 0) {
+                            if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "wall" && selected.classList.item(2) != "wall" && myPlatforms > 0) {
                               selected.classList.add("wall");
                               myPlatforms -= 1
                               lastEnter = Date.now();
@@ -363,7 +356,7 @@ var pickaxeLevel = 0;
 
                     //s for soil placement
                     if (keys[83]) {
-                      if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && mySoil > 0) {
+                      if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && mySoil > 0) {
                         selected.className = "soil";
                         mySoil -= 1
                         lastEnter = Date.now();
@@ -372,7 +365,7 @@ var pickaxeLevel = 0;
 
                     //w for wood placement
                     if (keys[87]) {
-                      if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && myWood > 0) {
+                      if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && myWood > 0) {
                         selected.className = "wood";
                         myWood -= 1
                         lastEnter = Date.now();
@@ -381,7 +374,7 @@ var pickaxeLevel = 0;
 
                     //r for rock placement
                     if (keys[82]) {
-                      if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && myRocks > 0) {
+                      if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && myRocks > 0) {
                         selected.className = "rock";
                         myRocks -= 1
                         lastEnter = Date.now();
@@ -397,8 +390,6 @@ var pickaxeLevel = 0;
                       // mark keys that were released
                       keys[e.keyCode] = false;
                     }
-
-var gravTimer;
 
 window.setInterval( function(){
   divWidth = mapDiv.offsetWidth;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_24_210343) do
+ActiveRecord::Schema.define(version: 2019_07_18_030442) do
 
   create_table "blackjacks", force: :cascade do |t|
     t.integer "player_id"
@@ -74,6 +74,18 @@ ActiveRecord::Schema.define(version: 2019_06_24_210343) do
     t.integer "user_id"
     t.string "body"
     t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mineplayers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "deltax"
+    t.integer "deltay"
+    t.string "coords"
+    t.string "pickaxe"
+    t.integer "axelvl"
+    t.integer "speed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

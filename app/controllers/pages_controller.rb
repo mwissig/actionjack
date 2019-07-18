@@ -153,13 +153,56 @@ end
 def mine
     @x_axis = (1..40).to_a
     @y_axis = (1..300).to_a
-
     @coords = []
     @x_axis.each do |x|
       @y_axis.each do |y|
         @coords.push(x.to_s + '_' + y.to_s)
       end
-end
+    end
+
+    if logged_in?
+      @pickaxes = @current_user.items.where(category: "pickaxes").order(integer1: :desc)
+      @playerspeed = 200
+
+        if @pickaxes.first != nil
+          @pickaxe = @pickaxes.first
+          @pickaxename = @pickaxe.name
+          @pickaxelevel = @pickaxe.integer1
+        else
+          @pickaxename = "Bare Hands"
+          @pickaxelevel = 0
+
+        end
+
+      if @current_user.mineplayer != nil
+        @current_player = @current_user.mineplayer
+        @current_player.pickaxe = @pickaxename
+        @current_player.axelvl = @pickaxelevel
+        @current_player.speed = @playerspeed
+        @current_player.save!
+      else
+        @current_player = Mineplayer.create(
+          user_id: @current_user.id,
+          deltax: 275,
+          deltay: 785,
+          coords: "15_10",
+          pickaxe: @pickaxename,
+          axelvl: @pickaxelevel,
+          speed: @playerspeed,
+        )
+      end
+
+      @deltax = @current_player.deltax
+      @deltay = @current_player.deltay
+      @mycoords = @current_player.coords
+    else
+      @pickaxename = "Bare Hands"
+      @pickaxelevel = 0
+      @deltax = 275
+      @deltay = 785
+      @mycoords = "15_10"
+    end
+
 end
 
   def shop

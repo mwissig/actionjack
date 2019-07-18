@@ -6,6 +6,7 @@ class User < ApplicationRecord
     has_many :notifications
     has_one :profile
     has_one :pictionary
+    has_one :mineplayer
     has_many :friends
     has_many :items
   before_save :default_values
