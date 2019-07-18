@@ -1,5 +1,7 @@
 <div class="box">
+      <% if logged_in? %>
   <div class="minecontainer" id="mapbox">
+
 
     <div class="minemap" id="minemap">
       <% @object = "empty" %>
@@ -101,23 +103,21 @@
                           </div>
                         <% end %>
 
-                        <div id="player" class="player">
-<% if logged_in? %>
-<%= @current_user.profile.username %>
-  <% @playercolor = @current_user.profile.color %>
-<% else %>
-                          Player
-                          <script>
-                          var player_name = "Player";
-                          </script>
-                          <% @playercolor = '000000' %>
-<% end %>
-                          <br>
-                          <span style="color:#<%= @playercolor %>"> <i class="fas fa-walking mineicon"></i></span>
-                        </div>
+                        <% @activeplayers.each do |player| %>
+                          <div id="player<%= player.user_id %>" class="player">
+
+                              <%= player.user.profile.username %>
+                              <br>
+                              <span style="color:#<%= player.user.profile.color %>"> <i class="fas fa-walking mineicon"></i></span>
+                          </div>
+                        <% end %>
+
+
+
                       </div>
+
                     </div>
-                    <input type="hidden" id="coordbox">
+
                     <div class="mineinventory">
                       <div title="Pickaxe"><%= image_tag('items/pickaxe_iron.png', title: 'Pickaxe' ) %><span id="pickaxetype"></span></div>
                       <div title="Ladders"><%= image_tag('mine/ladder.png', title: 'Ladders' ) %><span id="laddercount"></span> L</div>
@@ -132,7 +132,10 @@
                     </div>
                     Arrow keys and space to mine<br>
                     Mouse and L I P S R W to place ladders, planks, soil, rock, wood
-                    <div class="unhidden">
+                    <div class="hidden">
+
+
+
                       character movement form
 
                       <%= form_tag('/mine/move/', method: 'get', :id => 'moveform', remote: true ) do %>
@@ -149,9 +152,12 @@
                       <br>
                       block removal form
                     </div>
+                    <% else %>
+                    You must be logged in to play
+                    <% end %>
                   </div>
 
-
+      <% if logged_in? %>
                   <script>
 
 
@@ -188,7 +194,7 @@
 
                     function movePlayer() {
                       var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1);
-                      var player = document.getElementById('player');
+                      var player = document.getElementById('player<%= @current_user.id %>');
                       var minemap = document.getElementById('minemap');
                       var coordbox = document.getElementById('coordbox');
                       var moveDeltaX = document.getElementById('movedeltax');
@@ -205,7 +211,8 @@
                       foreground = document.getElementById(mycoords + '_foreground');
                       background = document.getElementById(mycoords + '_background');
                       object = foreground.classList.item(0);
-                      document.getElementById('moveform').submit();
+                      var form = document.getElementById('moveform')
+                      Rails.fire(form, 'submit');
 
                     }
 
@@ -425,3 +432,4 @@ window.setInterval( function(){
 
 
                   </script>
+                            <% end %>

@@ -4,14 +4,19 @@ class MineController < ApplicationController
     @deltax = params[:movedeltax]
     @deltay = params[:movedeltay]
     @coords = params[:movecoords]
-    p @coords
-    p "=============================="
     if logged_in?
       @current_player.deltax = @deltax
       @current_player.deltay = @deltay
       @current_player.coords = @coords
       @current_player.save!
-          redirect_to mine_path
+      if @current_player.save
+        ActionCable.server.broadcast 'mineplayer_channel',
+                    id: @current_player.user_id,
+                    deltax: @current_player.deltax,
+                    deltay: @current_player.deltay,
+                    coords: @current_player.coords
+      end
+      redirect_to mine_path
     end
   end
 

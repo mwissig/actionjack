@@ -120,7 +120,8 @@ $box-shadow2: ();
   }
 }
 .hidden {
-  // visibility: hidden;
+  visibility: hidden;
+  max-height: 0px;
 }
 .minemap {
   display: grid;
@@ -329,6 +330,9 @@ height: 34px;
     z-index: 5;
 }
 #player {
+
+}
+.player {
   position: relative;
   bottom: 785px;
   left: 275px;
@@ -336,8 +340,6 @@ height: 34px;
   transition-duration: .1s;
   z-index: 6;
     pointer-events: none;
-}
-.player {
   font-size: 10px;
     text-shadow: 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white, -1px -1px 0 white, 1px 0px 0 white, 0px 1px 0 white, -1px 0px 0 white, 0px -1px 0 white, 1px 1px 1px rgba(0, 0, 0, 0);
 }

@@ -151,6 +151,8 @@ def pic2
 end
 
 def mine
+    @players = Mineplayer.all
+    @activeplayers = @players.where('updated_at > ?', 1.hour.ago)
     @x_axis = (1..40).to_a
     @y_axis = (1..300).to_a
     @coords = []
@@ -179,6 +181,8 @@ def mine
         @current_player.pickaxe = @pickaxename
         @current_player.axelvl = @pickaxelevel
         @current_player.speed = @playerspeed
+        @current_player.controls = "standard"
+        @current_player.updated_at = DateTime.now
         @current_player.save!
       else
         @current_player = Mineplayer.create(
@@ -189,6 +193,7 @@ def mine
           pickaxe: @pickaxename,
           axelvl: @pickaxelevel,
           speed: @playerspeed,
+          controls: "standard"
         )
       end
 
