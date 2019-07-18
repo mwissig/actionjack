@@ -152,7 +152,7 @@ var pickaxeLevel = 0;
                     <div class="mineinventory">
                       <div title="Pickaxe"><%= image_tag('items/pickaxe_iron.png', title: 'Pickaxe' ) %><span id="pickaxetype"></span></div>
                       <div title="Ladders"><%= image_tag('mine/ladder.png', title: 'Ladders' ) %><span id="laddercount"></span> L</div>
-                      <div  title="Platforms" class="platformimg"><%= image_tag('mine/wood.png', title: 'Platforms' )  %><span id="platformcount"></span> P</div>
+                      <div  title="Planks" class="platformimg"><%= image_tag('mine/wood.png', title: 'Planks' )  %><span id="platformcount"></span>I / P</div>
                       <div title="Soil"><%= image_tag('mine/soil.png', title: 'Soil' )  %><span id="soilcount"></span> S</div>
                       <div title="Wood"><%= image_tag('mine/wood.png', title: 'Wood' )  %><span id="woodcount"></span> W</div>
                       <div title="Rock"><%= image_tag('mine/rock.png', title: 'Rock' )  %><span id="rockcount"></span> R</div>
@@ -230,9 +230,9 @@ var pickaxeLevel = 0;
 
                       // left
                       if (keys[37]) {
-
+                        mybox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + Math.floor(deltaX / 30) + '_foreground');
-                        if (Date.now() - lastEnter > 200 && deltaX > 15 && nextbox.classList.item(0) == "empty") {
+                        if (Date.now() - lastEnter > 200 && deltaX > 15 && nextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "wall" && mybox.classList.item(2) != "wall" ) {
                           deltaX -= 30;
                           lastEnter = Date.now();
                         }
@@ -241,7 +241,7 @@ var pickaxeLevel = 0;
                       // right
                       if (keys[39]) {
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 2) + '_foreground');
-                        if (Date.now() - lastEnter > 200 && deltaX < 8955 && nextbox.classList.item(0) == "empty") {
+                        if (Date.now() - lastEnter > 200 && deltaX < 8955 && nextbox.classList.item(0) == "empty" && nextbox.classList.item(1) != "wall" && nextbox.classList.item(2) != "wall" ) {
                           deltaX += 30;
                           lastEnter = Date.now();
                         }
@@ -255,11 +255,11 @@ var pickaxeLevel = 0;
                         groundbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         if (Date.now() - lastEnter > 200 && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
 
-                        if (deltaY < 1185 && nextbox.classList.item(0) == "empty" && doublebox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty") {
+                        if (deltaY < 1185 && nextbox.classList.item(0) == "empty" && doublebox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "platform" || mybox.classList.item(2) == "platform" ) {
                           deltaY += 60;
                           lastEnter = Date.now();
                         }
-                          else if (deltaY > 45 && nextbox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder" ) {
+                          else if (deltaY > 45 && nextbox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder" || mybox.classList.item(1) == "platform" || mybox.classList.item(2) == "platform" ) {
                             deltaY += 30;
                             lastEnter = Date.now();
                           }
@@ -283,6 +283,11 @@ var pickaxeLevel = 0;
                           lastEnter = Date.now();
                         }
                         if (Date.now() - lastEnter > 200 && nextbox.classList.item(1) == "platform") {
+                          myPlatforms += 1;
+                          nextbox.className = "empty"
+                          lastEnter = Date.now();
+                        }
+                        if (Date.now() - lastEnter > 200 && nextbox.classList.item(1) == "wall") {
                           myPlatforms += 1;
                           nextbox.className = "empty"
                           lastEnter = Date.now();
@@ -345,6 +350,16 @@ var pickaxeLevel = 0;
                               lastEnter = Date.now();
                             }
                           }
+
+                          //i for vert plank placement
+                          if (keys[73]) {
+                            if (Date.now() - lastEnter > 200 && selected.classList.item(0) == "empty" && selected.classList.item(1) != "wall" && selected.classList.item(2) != "wall" && myPlatforms > 0) {
+                              selected.classList.add("wall");
+                              myPlatforms -= 1
+                              lastEnter = Date.now();
+                            }
+                          }
+
 
                     //s for soil placement
                     if (keys[83]) {
