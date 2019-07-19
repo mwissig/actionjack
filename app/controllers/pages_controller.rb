@@ -153,7 +153,7 @@ end
 def mine
     @players = Mineplayer.all
     @activeplayers = @players.where('updated_at > ?', 1.hour.ago)
-    @tiles = Minetile.all
+    @tiles = Minetile.all.order("created_at ASC")
 
     if logged_in?
       @pickaxes = @current_user.items.where(category: "pickaxes").order(integer1: :desc)
