@@ -4,113 +4,23 @@
 
 
     <div class="minemap" id="minemap">
-      <% @object = "empty" %>
-        <% @coords.each do |coords| %>
 
-          <% @c = coords.split("_") %>
-            <% if @c[0].to_i <= 15 %>
-              <% @type = "sky-background" %>
+      <% @tiles.each do |tile| %>
+      <% if tile.bgclass != nil %>
+        <% @type = tile.bgclass %>
+      <% else %>
+      <% @type = "" %>
+      <% end %>
 
-<% if @c[0].to_i <= 12 %>
-              <% @nums = (1..20).to_a %>
-                <% @rand = @nums.sample %>
-                  <% if @rand == 1 %>
-                      <% @type = "sky-background bgcloud" %>
-                      <% end %>
-                      <% end %>
-
-                      <% if @c[0].to_i < 10 %>
-                        <% @nums = (1..17).to_a %>
-                          <% @rand = @nums.sample %>
-                            <% if @rand == 3 %>
-                                <% @object = "empty platform" %>
-                                <% else %>
-                                      <% @object = "empty" %>
-                              <% end %>
-                                <% end %>
+      <% if tile.fgclass != nil %>
+        <% @object = tile.fgclass %>
+      <% else %>
+      <% @object = "" %>
+      <% end %>
 
 
-              <% if @c[0].to_i == 15 %>
-
-                <% @nums = (1..17).to_a %>
-                  <% @rand = @nums.sample %>
-                    <% if @rand == 3 %>
-                        <% @object = "rock" %>
-                      <% elsif @rand == 4 || @rand == 5 %>
-                        <% @object = "wood" %>
-                        <% else %>
-                              <% @object = "empty" %>
-                      <% end %>
-                      <% end %>
-                      <% else %>
-                <% @type = "cave-background" %>
-
-
-
-                  <% @nums = (1..17).to_a %>
-                    <% @rand = @nums.sample %>
-                      <% if @rand == 3 %>
-                        <% @object = "rock" %>
-                        <% else %>
-                        <% if @c[0].to_i <= 30 %>
-                          <% @object = "soil" %>
-                          <% else %>
-                          <% @object = "soil2" %>
-                            <% end %>
-                              <% end %>
-
-                            <% if @c[0].to_i > 25 %>
-                            <% @nums = (1..35).to_a %>
-                              <% @rand = @nums.sample %>
-                              <% if @rand == 1 %>
-                                <% @object = "ironore" %>
-                                    <% end %>
-                                <% end %>
-
-                                <% if @c[0].to_i > 30 %>
-                                <% @nums = (1..50).to_a %>
-                                  <% @rand = @nums.sample %>
-                                  <% if @rand == 1 %>
-                                    <% @object = "silverore" %>
-                                        <% end %>
-                                        <% end %>
-
-                            <% if @c[0].to_i > 35 %>
-                            <% @nums = (1..60).to_a %>
-                              <% @rand = @nums.sample %>
-                              <% if @rand == 1 %>
-                                <% @object = "goldore" %>
-                                    <% end %>
-                                    <% end %>
-
-                                    <% if @c[0].to_i >= 38 %>
-                                    <% @nums = (1..200).to_a %>
-                                      <% @rand = @nums.sample %>
-                                      <% if @rand == 1 %>
-                                        <% @object = "diamond" %>
-                                            <% end %>
-                                            <% end %>
-
-<% if @c[0].to_i == 16 %>
-<% @nums = (1..2).to_a %>
-  <% @rand = @nums.sample %>
-            <% if @rand == 1 %>
-              <% @type = "bggrass" %>
-              <% else %>
-              <% @type = "cave-background" %>
-              <% end %>
-              <% end %>
-                                            <% if @c[0].to_i == 40 %>
-
-                                                <% @object = "unbreakable" %>
-
-                                                    <% end %>
-
-
-                          <% end %>
-
-                          <div id="<%= coords %>_background" class="minesquare <%= @type %>">
-                            <div id="<%= coords %>_foreground" class="<%= @object %>" onClick="select_box(this.id)"></div>
+                          <div id="<%= tile.coords %>_background" class="minesquare <%= @type %>">
+                            <div id="<%= tile.coords %>_foreground" class="<%= @object %>" onClick="select_box(this.id)"></div>
                           </div>
                         <% end %>
                         <% @shift = 0 %>

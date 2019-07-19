@@ -102,6 +102,120 @@ task :build_slot => :environment do
   puts "done."
 end
 
+desc "Build mine"
+task :build_mine => :environment do
+  puts "Creating mine tiles"
+  @x_axis = (1..40).to_a
+  @y_axis = (1..300).to_a
+  @coords = []
+  @x_axis.each do |x|
+    @y_axis.each do |y|
+      Minetile.create(
+      xcoord: x,
+      ycoord: y,
+      coords: x.to_s + '_' + y.to_s
+    )
+    end
+  end
+  puts "done."
+end
+
+desc "Shape mine"
+task :shape_mine => :environment do
+  puts "Changing mine tiles"
+  Minetile.all.each do |tile|
+    if tile.xcoord <= 15
+      tile.bgclass = "sky-background"
+      tile.fgclass = "empty"
+
+      if tile.xcoord <= 12
+          @nums = (1..20).to_a
+          @rand = @nums.sample
+            if @rand == 1
+              tile.bgclass = "sky-background bgcloud"
+              tile.fgclass = "empty"
+            end
+        end
+
+         if tile.xcoord == 15
+          @nums = (1..17).to_a
+          @rand = @nums.sample
+            if @rand == 3
+              tile.fgclass = "rock"
+            elsif @rand == 4 || @rand == 5
+              tile.fgclass = "wood"
+            else
+              tile.fgclass = "empty"
+            end
+        end
+
+    else
+
+      tile.bgclass = "cave-background"
+      @nums = (1..17).to_a
+      @rand = @nums.sample
+        if @rand == 3
+          tile.fgclass = "rock"
+            else
+              if tile.xcoord <= 30
+                tile.fgclass = "soil"
+              else
+                tile.fgclass = "soil2"
+              end
+            end
+
+            if tile.xcoord > 25
+              @nums = (1..35).to_a
+              @rand = @nums.sample
+              if @rand == 1
+                tile.fgclass = "ironore"
+              end
+            end
+
+            if tile.xcoord > 30
+              @nums = (1..50).to_a
+              @rand = @nums.sample
+              if @rand == 1
+                tile.fgclass = "silverore"
+              end
+            end
+
+            if tile.xcoord > 35
+              @nums = (1..60).to_a
+              @rand = @nums.sample
+              if @rand == 1
+                tile.fgclass = "goldore"
+              end
+            end
+
+            if tile.xcoord >= 38
+              @nums = (1..200).to_a
+              @rand = @nums.sample
+              if @rand == 1
+                tile.fgclass = "diamond"
+              end
+            end
+
+            if tile.xcoord == 16
+              @nums = (1..2).to_a
+              @rand = @nums.sample
+              if @rand == 1
+                tile.bgclass = "bggrass"
+              else
+                tile.bgclass = "cave-background"
+              end
+            end
+
+            if tile.xcoord == 40
+              tile.fgclass = "unbreakable"
+            end
+
+          end
+          tile.save!
+        end
+  puts "mine generated"
+end
+
 desc "Hatches the egg"
 task :hatch_eggs => :environment do
   puts "Hatching egg"

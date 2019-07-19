@@ -153,14 +153,7 @@ end
 def mine
     @players = Mineplayer.all
     @activeplayers = @players.where('updated_at > ?', 1.hour.ago)
-    @x_axis = (1..40).to_a
-    @y_axis = (1..300).to_a
-    @coords = []
-    @x_axis.each do |x|
-      @y_axis.each do |y|
-        @coords.push(x.to_s + '_' + y.to_s)
-      end
-    end
+    @tiles = Minetile.all
 
     if logged_in?
       @pickaxes = @current_user.items.where(category: "pickaxes").order(integer1: :desc)
