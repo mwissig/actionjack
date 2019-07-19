@@ -104,7 +104,7 @@
                         <% end %>
 
                         <% @activeplayers.each do |player| %>
-                          <div id="player<%= player.user_id %>" class="player">
+                          <div id="player<%= player.user.id %>" class="player">
 
                               <%= player.user.profile.username %>
                               <br>
