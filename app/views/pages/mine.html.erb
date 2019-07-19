@@ -216,6 +216,19 @@
 
                     }
 
+                    function locatePlayer() {
+                      deltaY = <%= @deltay %>;
+                      deltaX = <%= @deltax %>;
+                      var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1);
+                      var player = document.getElementById('player<%= @current_user.id %>');
+                      var minemap = document.getElementById('minemap');
+                      moveCoords.value = mycoords;
+                      player.style.bottom = deltaY + "px";
+                      player.style.left = deltaX + "px";
+                      minemap.scrollTop = (1200 - deltaY) - (divHeight / 2);
+                      minemap.scrollLeft = deltaX - (divWidth / 2);
+                    }
+
                     window.addEventListener("keydown", keysPressed, false);
                     window.addEventListener("keyup", keysReleased, false);
 
@@ -429,7 +442,7 @@ window.setInterval( function(){
      selected.classList.add('highlight');
     setTimeout(function(){ selected.classList.remove('highlight') }, 500);
 }
-
+locatePlayer();
 
                   </script>
                             <% end %>

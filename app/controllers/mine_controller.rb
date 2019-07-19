@@ -11,7 +11,7 @@ class MineController < ApplicationController
       @current_player.save!
       if @current_player.save
         ActionCable.server.broadcast 'mineplayer_channel',
-                    id: @current_player.user_id,
+                    playerid: @current_player.user_id,
                     deltax: @current_player.deltax,
                     deltay: @current_player.deltay,
                     coords: @current_player.coords

@@ -7,5 +7,5 @@ App.mineplayer = App.cable.subscriptions.create "MineplayerChannel",
 
   received: (data) ->
      unless data.deltax.blank?
-      $('#player' + data.id ).style.bottom = data.deltay + "px";
-      $('#player' + data.id ).style.left = data.deltax + "px";
+      $('#player' + data.playerid ).style.bottom = data.deltay + "px";
+      $('#player' + data.playerid ).style.left = data.deltax + "px";
