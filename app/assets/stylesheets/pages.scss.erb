@@ -194,6 +194,21 @@ height: 30px;
     left: 4px;
   }
 }
+.bggrass {
+  position: relative;
+}
+.bggrass::before {
+  content: "";
+position: absolute;
+left: -5px;
+top: -20px;
+width: 40px;
+height: 50px;
+  background-image: url('<%= image_path('mine/bggrass.png') %>');
+  z-index: 1;
+
+  pointer-events: none;
+}
 .cave-background {
   position: relative;
 }
