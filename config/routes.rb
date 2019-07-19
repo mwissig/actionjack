@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
   get 'mine' => 'pages#mine'
   get 'mine/move'
+  post 'mine/move'
   get 'mine/dig'
   get 'mine/place'
 

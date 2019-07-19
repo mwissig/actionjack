@@ -1,23 +1,22 @@
 class MineController < ApplicationController
   def move
-    @current_player = @current_user.mineplayer
-    @deltax = params[:movedeltax]
-    @deltay = params[:movedeltay]
-    @coords = params[:movecoords]
-    if logged_in?
-      @current_player.deltax = @deltax
-      @current_player.deltay = @deltay
-      @current_player.coords = @coords
-      @current_player.save!
-      if @current_player.save
-        ActionCable.server.broadcast 'mineplayer_channel',
-                    playerid: @current_player.user.id,
-                    deltax: @current_player.deltax,
-                    deltay: @current_player.deltay,
-                    coords: @current_player.coords
-      end
-      redirect_to mine_path
-    end
+    ActionCable.server.broadcast 'mineplayer_channel',
+      playerid: params[:playerid],
+      deltax: params[:deltax],
+      deltay: params[:deltay],
+      coords: params[:coords]
+    head :ok
+
+    @user = User.find_by(id: params[:playerid])
+    @player = @user.mineplayer
+    @deltax = params[:deltax]
+    @deltay = params[:deltay]
+    @coords = params[:coords]
+    @player.deltax = @deltax
+    @player.deltay = @deltay
+    @player.coords = @coords
+    @player.save!
+
   end
 
   def dig

@@ -163,10 +163,11 @@
 
                     var pickaxeName = "<%= @pickaxename %>";
                     var pickaxeLevel = <%= @pickaxelevel %>;
+                    var player = document.getElementById('player<%= @current_user.id %>');
+                    var minemap = document.getElementById('minemap');
+                    var userid = parseInt('<%= @current_user.id %>');
                     var deltaY = <%= @deltay %>;
                     var deltaX = <%= @deltax %>;
-                    minemap.scrollTop = (1200 - deltaY) - (divHeight / 2);
-                    minemap.scrollLeft = deltaX - (divWidth / 2);
                     var myLadders = 30;
                     var myPlatforms = 30;
                     var mySoil = 0;
@@ -179,6 +180,8 @@
                     var mapDiv = document.getElementById("mapbox");
                     var divWidth = mapDiv.offsetWidth;
                     var divHeight = mapDiv.offsetHeight;
+                    minemap.scrollTop = (1200 - deltaY) - (divHeight / 2);
+                    minemap.scrollLeft = deltaX - (divWidth / 2);
 
                     var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (
                       Math.floor(deltaX / 30) + 1
@@ -194,8 +197,6 @@
 
                     function movePlayer() {
                       var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1);
-                      var player = document.getElementById('player<%= @current_user.id %>');
-                      var minemap = document.getElementById('minemap');
                       var coordbox = document.getElementById('coordbox');
                       var moveDeltaX = document.getElementById('movedeltax');
                       moveDeltaX.value = deltaX;
@@ -203,16 +204,27 @@
                       moveDeltaY.value = deltaY;
                       var moveCoords = document.getElementById('movecoords');
                       moveCoords.value = mycoords;
-                      player.style.bottom = deltaY + "px";
-                      player.style.left = deltaX + "px";
-                      minemap.scrollTop = (1200 - deltaY) - (divHeight / 2);
-                      minemap.scrollLeft = deltaX - (divWidth / 2);
+
+
 
                       foreground = document.getElementById(mycoords + '_foreground');
                       background = document.getElementById(mycoords + '_background');
                       object = foreground.classList.item(0);
-                      var form = document.getElementById('moveform')
-                      Rails.fire(form, 'submit');
+                      console.log(userid);
+                      console.log(deltaX);
+                      console.log(deltaY);
+                      console.log(mycoords);
+
+                      $.ajax({
+                        method: 'POST',
+                        url: '/mine/move',
+                        data: {
+                          'playerid': userid,
+                          'deltax': deltaX,
+                          'deltay': deltaY,
+                          'coords': mycoords
+                        }
+                      });
 
                     }
 
@@ -220,8 +232,6 @@
                       deltaY = <%= @deltay %>;
                       deltaX = <%= @deltax %>;
                       var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1);
-                      var player = document.getElementById('player<%= @current_user.id %>');
-                      var minemap = document.getElementById('minemap');
                       moveCoords.value = mycoords;
                       player.style.bottom = deltaY + "px";
                       player.style.left = deltaX + "px";
@@ -428,7 +438,8 @@ window.setInterval( function(){
   var gnextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
   mybox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
   if (deltaY > 45 && gnextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "ladder" && mybox.classList.item(2) != "ladder" && gnextbox.classList.item(1) != "ladder" && gnextbox.classList.item(2) != "ladder" && gnextbox.classList.item(1) != "platform" && gnextbox.classList.item(2) != "platform") {
-
+    minemap.scrollTop = (1200 - deltaY) - (divHeight / 2);
+    minemap.scrollLeft = deltaX - (divWidth / 2);
     deltaY -= 30;
     movePlayer();
   }
