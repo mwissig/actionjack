@@ -6,7 +6,9 @@ class MineController < ApplicationController
       deltay: params[:deltay],
       coords: params[:coords]
     head :ok
-
+@range = (1..5).to_a
+@chance = @range.sample
+if @chance == 1
     @user = User.find_by(id: params[:playerid])
     @player = @user.mineplayer
     @deltax = params[:deltax]
@@ -16,7 +18,7 @@ class MineController < ApplicationController
     @player.deltay = @deltay
     @player.coords = @coords
     @player.save!
-
+end
   end
 
   def dig
