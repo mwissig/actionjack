@@ -102,14 +102,15 @@
                             <div id="<%= coords %>_foreground" class="<%= @object %>" onClick="select_box(this.id)"></div>
                           </div>
                         <% end %>
-
+                        <% @shift = 0 %>
                         <% @activeplayers.each do |player| %>
-                          <div id="player<%= player.user.id %>" class="player">
+                          <div style="margin-left:<%= @shift %>px" id="player<%= player.user.id %>" class="player">
 
                               <%= player.user.profile.username %>
                               <br>
                               <span style="color:#<%= player.user.profile.color %>"> <i class="fas fa-walking mineicon"></i></span>
                           </div>
+                          <% @shift -= 30 %>
                         <% end %>
 
 
