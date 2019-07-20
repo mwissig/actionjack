@@ -6,9 +6,30 @@
   Click the game window to resume play.
   </div>
 </div>
+<div id="helpmodal" class="hidden">
+  <div id="helpinner">
+    <div class="closehelp" onclick="closeHelp()"><i class="fas fa-times-circle"></i></div>
+
+    <h3>How to play</h3>
+    Use arrow keys to move<br>
+    Hold space and use arrow keys to mine<br>
+    Use mouse to select tiles then press:<br>
+    <ul>
+    <li>L to place ladders</li>
+    <li>I to place planks vertically (walls)</li>
+    <li>P to place planks horizontally (platforms)</li>
+    <li>S to place soil</li>
+    <li>R to place rocks</li>
+    <li>W to place wood</li>
+  </ul>
+  Get a more powerful pickaxe to mine harder blocks.<br>
+  This game is under construction and the blocks you mine are currently not saved. There are some bugs when interacting with ladders and platforms. Other users that come online while you are playing will not be visible unless you reload.
+  </div>
+</div>
+
+
 
     <div class="minemap" id="minemap">
-
       <% @tiles.each do |tile| %>
       <% if tile.bgclass != nil %>
         <% @type = tile.bgclass %>
@@ -55,20 +76,9 @@
                       <div title="Silver"><%= image_tag('mine/ore_silver.png', title: 'Silver' )  %><span id="silverorecount"></span></div>
                       <div title="Gold"><%= image_tag('mine/ore_gold.png', title: 'Gold' )  %><span id="goldorecount"></span></div>
                       <div title="Diamonds"><%= image_tag('mine/ore_diamond.png', title: 'Diamonds' )  %><span id="diamondcount"></span></div>
-                    </div>
-                    Arrow keys and space to mine<br>
-                    Mouse and L I P S R W to place ladders, planks, soil, rock, wood
-                    <div class="hidden">
-                      <%= form_tag('/mine/move/', method: 'get', :id => 'moveform', remote: true ) do %>
-                      <%= text_field_tag :movedeltax %>
-                      <%= text_field_tag :movedeltay %>
-                      <%= text_field_tag :movecoords %>
-                            <%= button_tag :submit do %>
-                              Move
-                            <% end %>
-                            <% end %>
-                            <br>
-                    </div>
+<span id="questionmark" onclick="openHelp()"><i class="fas fa-question-circle"></i></span>
+
+
                     <% else %>
                     You must be logged in to play
                     <% end %>
@@ -77,10 +87,17 @@
       <% if logged_in? %>
                   <script>
                   var focusmodal = document.getElementById('focus');
+                  var helpmodal = document.getElementById('helpmodal');
                   var chatFocus = true;
                   function focusGame() {
                     focusmodal.classList.add("hidden");
                     chatFocus = false;
+                  }
+                  function closeHelp() {
+                    helpmodal.classList.add("hidden");
+                  }
+                  function openHelp() {
+                    helpmodal.classList.remove("hidden");
                   }
 
                     var pickaxeName = "<%= @pickaxename %>";
@@ -119,16 +136,6 @@
 
                     function movePlayer() {
                       var mycoords = (40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1);
-                      var coordbox = document.getElementById('coordbox');
-                      var moveDeltaX = document.getElementById('movedeltax');
-                      moveDeltaX.value = deltaX;
-                      var moveDeltaY = document.getElementById('movedeltay');
-                      moveDeltaY.value = deltaY;
-                      var moveCoords = document.getElementById('movecoords');
-                      moveCoords.value = mycoords;
-
-
-
                       foreground = document.getElementById(mycoords + '_foreground');
                       background = document.getElementById(mycoords + '_background');
                       object = foreground.classList.item(0);

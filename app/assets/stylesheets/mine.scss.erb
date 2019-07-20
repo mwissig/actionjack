@@ -11,7 +11,8 @@
 
   z-index: 10;
 }
-#focus{
+
+#focus, #helpmodal{
   position: absolute;
   width: 100%;
   height: 100%;
@@ -23,11 +24,29 @@
 align-items: center;
 justify-content: center;
 }
-#focusinner {
+#focusinner, #helpinner {
     background-color: white;
     padding: 5px 10px;
     border-radius: 2px;
+position: relative;
+}
+#helpinner {
+    max-width: calc(100% - 8em);
+    padding: 1.5em 2em;
+}
+#questionmark {
+color: black;
+}
+.closehelp {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
 
+  font-size: 30px;
+  color: red;
+}
+.closehelp:hover {
+  color: rgb(92, 0, 0);
 }
 .minemap, .minelink {
   display: grid;
