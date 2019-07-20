@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default :from => "auto.mailer.for.development@gmail.com"
+  default :from => "app136272442@heroku.com"
 
 def registration_confirmation(user)
   @user = user
