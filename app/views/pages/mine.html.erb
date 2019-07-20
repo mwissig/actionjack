@@ -11,6 +11,7 @@
     <div class="closehelp" onclick="closeHelp()"><i class="fas fa-times-circle"></i></div>
 
     <h3>How to play</h3>
+    <p>
     Use arrow keys to move<br>
     Hold space and use arrow keys to mine<br>
     Use mouse to select tiles then press:<br>
@@ -22,8 +23,16 @@
     <li>R to place rocks</li>
     <li>W to place wood</li>
   </ul>
-  Get a more powerful pickaxe to mine harder blocks.<br>
-  This game is under construction and the blocks you mine are currently not saved. There are some bugs when interacting with ladders and platforms. Other users that come online while you are playing will not be visible unless you reload.
+  Get a more powerful pickaxe to mine harder blocks.
+</p><p>
+  This game is under construction:
+  <ul>
+    <li>Items in your inventory are currently not saved.</li>
+   <li>There are some bugs when interacting with ladders and platforms.</li>
+   <li>Other users that come online while you are playing will not be visible unless you reload.</li>
+   <li>Pickaxes above Iron have not yet been programmed into the game, making resources harder than Rock inaccessible.</li>
+ </ul>
+</p>
   </div>
 </div>
 
@@ -67,11 +76,11 @@
 
                     <div class="mineinventory">
                       <div title="Pickaxe"><%= image_tag('items/pickaxe_iron.png', title: 'Pickaxe' ) %><span id="pickaxetype"></span></div>
-                      <div title="Ladders"><%= image_tag('mine/ladder.png', title: 'Ladders' ) %><span id="laddercount"></span> L</div>
-                      <div  title="Planks" class="platformimg"><%= image_tag('mine/wood.png', title: 'Planks' )  %><span id="platformcount"></span>I / P</div>
-                      <div title="Soil"><%= image_tag('mine/soil.png', title: 'Soil' )  %><span id="soilcount"></span> S</div>
-                      <div title="Wood"><%= image_tag('mine/wood.png', title: 'Wood' )  %><span id="woodcount"></span> W</div>
-                      <div title="Rock"><%= image_tag('mine/rock.png', title: 'Rock' )  %><span id="rockcount"></span> R</div>
+                      <div title="Ladders"><%= image_tag('mine/ladder.png', title: 'Ladders' ) %><span id="laddercount"></span></div>
+                      <div  title="Planks" class="platformimg"><%= image_tag('mine/wood.png', title: 'Planks' )  %><span id="platformcount"></span></div>
+                      <div title="Soil"><%= image_tag('mine/soil.png', title: 'Soil' )  %><span id="soilcount"></span></div>
+                      <div title="Wood"><%= image_tag('mine/wood.png', title: 'Wood' )  %><span id="woodcount"></span></div>
+                      <div title="Rock"><%= image_tag('mine/rock.png', title: 'Rock' )  %><span id="rockcount"></span></div>
                       <div title="Iron"><%= image_tag('mine/ore_iron.png', title: 'Iron' )  %><span id="ironorecount"></span></div>
                       <div title="Silver"><%= image_tag('mine/ore_silver.png', title: 'Silver' )  %><span id="silverorecount"></span></div>
                       <div title="Gold"><%= image_tag('mine/ore_gold.png', title: 'Gold' )  %><span id="goldorecount"></span></div>
