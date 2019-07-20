@@ -13,7 +13,7 @@ class PagesController < ApplicationController
 
     if logged_in?
           @random_opponent = @thisweekusers.where.not(user_id: @current_user.id).sample
-          @users = User.all.where.not(id: @current_user.id).order(:id)
+          @users = User.all.where(email_confirmed: true).where.not(id: @current_user.id).order(:id)
           @usernames = []
           @users.each do |user|
             @usernames.push user.profile.username

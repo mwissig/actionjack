@@ -50,7 +50,7 @@ end
   end
 
   def index
-    @users = User.all
+    @users = User.all.where(email_confirmed: true)
   end
 
   def destroy
