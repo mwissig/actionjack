@@ -1,7 +1,11 @@
 <div class="box">
       <% if logged_in? %>
   <div class="minecontainer" id="mapbox">
-
+<div id="focus" onclick="focusGame()">
+  <div id="focusinner">Controls deactivated while chat is in use.<br>
+  Click the game window to resume play.
+  </div>
+</div>
 
     <div class="minemap" id="minemap">
 
@@ -72,7 +76,12 @@
 
       <% if logged_in? %>
                   <script>
-
+                  var focusmodal = document.getElementById('focus');
+                  var chatFocus = true;
+                  function focusGame() {
+                    focusmodal.classList.add("hidden");
+                    chatFocus = false;
+                  }
 
                     var pickaxeName = "<%= @pickaxename %>";
                     var pickaxeLevel = <%= @pickaxelevel %>;
@@ -164,7 +173,7 @@
                       if (keys[37]) {
                         mybox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + Math.floor(deltaX / 30) + '_foreground');
-                        if (Date.now() - lastEnter > moveSpeed && deltaX > 15 && nextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "wall" && mybox.classList.item(2) != "wall" ) {
+                        if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaX > 15 && nextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "wall" && mybox.classList.item(2) != "wall" ) {
                           deltaX -= 30;
                           lastEnter = Date.now();
                         }
@@ -173,7 +182,7 @@
                       // right
                       if (keys[39]) {
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 2) + '_foreground');
-                        if (Date.now() - lastEnter > moveSpeed && deltaX < 8955 && nextbox.classList.item(0) == "empty" && nextbox.classList.item(1) != "wall" && nextbox.classList.item(2) != "wall" ) {
+                        if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaX < 8955 && nextbox.classList.item(0) == "empty" && nextbox.classList.item(1) != "wall" && nextbox.classList.item(2) != "wall" ) {
                           deltaX += 30;
                           lastEnter = Date.now();
                         }
@@ -185,7 +194,7 @@
                         nextbox = document.getElementById((40 - Math.floor(deltaY / 30)) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         doublebox = document.getElementById((40 - Math.floor(deltaY / 30) - 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
                         groundbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
-                        if (Date.now() - lastEnter > moveSpeed && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
+                        if (chatFocus == false && Date.now() - lastEnter > moveSpeed && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
 
                         if (deltaY < 1185 && nextbox.classList.item(0) == "empty" && doublebox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "platform" || mybox.classList.item(2) == "platform" ) {
                           deltaY += 60;
@@ -201,7 +210,7 @@
                       // down
                       if (keys[40]) {
                       nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
-                        if (Date.now() - lastEnter > moveSpeed && deltaY > 45 && nextbox.classList.item(0) == "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
+                        if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaY > 45 && nextbox.classList.item(0) == "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
                           deltaY -= 30;
                           lastEnter = Date.now();
                         }
@@ -217,7 +226,7 @@
                           var changeto = "empty";
                           var classarray = [].slice.apply(nextbox.classList);
                           var changefrom = classarray.join(" ");
-                          if (Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "ladder") {
+                          if (chatFocus == false && Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "ladder") {
                             myLadders += 1;
 
                             success = true;
@@ -298,7 +307,7 @@
 
                           //l for ladder placement
                           if (keys[76]) {
-                            if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "ladder" && selected.classList.item(2) != "ladder" && myLadders > 0) {
+                            if (chatFocus == false && Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "ladder" && selected.classList.item(2) != "ladder" && myLadders > 0) {
                               myLadders -= 1
                               lastEnter = Date.now();
                               var boxarray = selected.id.split("_");
@@ -311,7 +320,7 @@
 
                           //p for platform placement
                           if (keys[80]) {
-                            if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "platform" && selected.classList.item(2) != "platform" && myPlatforms > 0) {
+                            if (chatFocus == false && Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "platform" && selected.classList.item(2) != "platform" && myPlatforms > 0) {
                               myPlatforms -= 1
                               lastEnter = Date.now();
                               var boxarray = selected.id.split("_");
@@ -324,7 +333,7 @@
 
                           //i for vert plank placement
                           if (keys[73]) {
-                            if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "wall" && selected.classList.item(2) != "wall" && myPlatforms > 0) {
+                            if (chatFocus == false && Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "wall" && selected.classList.item(2) != "wall" && myPlatforms > 0) {
                               myPlatforms -= 1
                               lastEnter = Date.now();
                               var boxarray = selected.id.split("_");
@@ -338,7 +347,7 @@
 
                     //s for soil placement
                     if (keys[83]) {
-                      if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && mySoil > 0) {
+                      if (chatFocus == false && Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && mySoil > 0) {
                         mySoil -= 1
                         lastEnter = Date.now();
                         var boxarray = selected.id.split("_");
@@ -351,7 +360,7 @@
 
                     //w for wood placement
                     if (keys[87]) {
-                      if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && myWood > 0) {
+                      if (chatFocus == false && Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && myWood > 0) {
                         selected.className = "wood";
                         myWood -= 1
                         lastEnter = Date.now();
@@ -365,7 +374,7 @@
 
                     //r for rock placement
                     if (keys[82]) {
-                      if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && myRocks > 0) {
+                      if (chatFocus == false && Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && myRocks > 0) {
                         myRocks -= 1
                         lastEnter = Date.now();
                         var boxarray = selected.id.split("_");
@@ -387,8 +396,9 @@
                       }
                     });
                   }
-
+if (chatFocus == false) {
                       e.preventDefault();
+                    }
 
                       movePlayer();
                     }
@@ -401,6 +411,9 @@
 window.setInterval( function(){
   divWidth = mapDiv.offsetWidth;
   divHeight = mapDiv.offsetHeight;
+  if (chatFocus == true) {
+    focusmodal.classList.remove("hidden");
+  }
   var myItems = document.getElementById('myItems');
   document.getElementById('pickaxetype').innerHTML = pickaxeName;
   document.getElementById('laddercount').innerHTML = myLadders;

@@ -27,3 +27,10 @@ window.addEventListener('load', function() {
 $(document).ready(function(){
   document.getElementById('user_time_zone').value = jstz.determine().name();
 })
+
+var chatFocus = true;
+
+function focusLobby() {
+  focusmodal.classList.remove("hidden");
+  chatFocus = true;
+}
