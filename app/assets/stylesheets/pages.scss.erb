@@ -123,7 +123,8 @@ $box-shadow2: ();
   visibility: hidden;
   max-height: 0px;
 }
-.minemap {
+
+.minemap, .minelink {
   display: grid;
   grid-template-columns: repeat(300, 30px);
   grid-template-rows: repeat(40, 30px);
@@ -136,7 +137,11 @@ $box-shadow2: ();
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 );
 
 }
-
+.minelink {
+  grid-template-columns: repeat(20, 30px);
+  grid-template-rows: repeat(7, 30px);
+overflow: hidden;
+}
 .minemap::-webkit-scrollbar {
     width: 0px;
     height: 0px;
