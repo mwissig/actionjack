@@ -55,11 +55,6 @@
                     Arrow keys and space to mine<br>
                     Mouse and L I P S R W to place ladders, planks, soil, rock, wood
                     <div class="hidden">
-
-
-
-                      character movement form
-
                       <%= form_tag('/mine/move/', method: 'get', :id => 'moveform', remote: true ) do %>
                       <%= text_field_tag :movedeltax %>
                       <%= text_field_tag :movedeltay %>
@@ -69,10 +64,6 @@
                             <% end %>
                             <% end %>
                             <br>
-
-                      block placement form
-                      <br>
-                      block removal form
                     </div>
                     <% else %>
                     You must be logged in to play
@@ -92,9 +83,9 @@
                     var deltaX = <%= @deltax %>;
                     var myLadders = 30;
                     var myPlatforms = 30;
-                    var mySoil = 0;
-                    var myWood = 0;
-                    var myRocks = 0;
+                    var mySoil = 30;
+                    var myWood = 30;
+                    var myRocks = 30;
                     var myIronOre = 0;
                     var mySilverOre = 0;
                     var myGoldOre = 0;
@@ -132,10 +123,6 @@
                       foreground = document.getElementById(mycoords + '_foreground');
                       background = document.getElementById(mycoords + '_background');
                       object = foreground.classList.item(0);
-                      console.log(userid);
-                      console.log(deltaX);
-                      console.log(deltaY);
-                      console.log(mycoords);
 
                       $.ajax({
                         method: 'POST',
@@ -222,86 +209,129 @@
 
                       //space to dig
                       if (keys[32]){
-                        if (Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "ladder") {
-                          myLadders += 1;
-                          nextbox.className = "empty"
-                          lastEnter = Date.now();
-                        }
-                        if (Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "platform") {
-                          myPlatforms += 1;
-                          nextbox.className = "empty"
-                          lastEnter = Date.now();
-                        }
-                        if (Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "wall") {
-                          myPlatforms += 1;
-                          nextbox.className = "empty"
-                          lastEnter = Date.now();
-                        }
-                      if (Date.now() - lastEnter > moveSpeed && nextbox.className == "soil") {
-                        mySoil += 1;
-                        nextbox.className = "empty"
-                        lastEnter = Date.now();
-                      }
-                      if (Date.now() - lastEnter > moveSpeed && nextbox.className == "soil2" && pickaxeLevel >= 1 ) {
-                        nextbox.className = "soil"
-                      }
-                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "wood") {
-                        myWood += 1;
-                        nextbox.className = "empty"
-                        lastEnter = Date.now();
-                      }
-                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "rock" && pickaxeLevel >= 1 ) {
-                        myRocks += 1;
-                        nextbox.className = "empty"
-                        lastEnter = Date.now();
-                      }
-                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "ironore" && pickaxeLevel >= 2 ) {
-                        myIronOre += 1;
-                        nextbox.className = "empty"
-                        lastEnter = Date.now();
-                      }
-                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "silverore" && pickaxeLevel >= 3 ) {
-                        mySilverOre += 1;
-                        nextbox.className = "empty"
-                        lastEnter = Date.now();
-                      }
-                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "goldore" && pickaxeLevel >= 3 ) {
-                        myGoldOre += 1;
-                        nextbox.className = "empty"
-                        lastEnter = Date.now();
-                      }
-                      else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "diamond" && pickaxeLevel >= 4 ) {
-                        myDiamonds += 1;
-                        nextbox.className = "empty"
-                        lastEnter = Date.now();
-                      }
+                        if (typeof nextbox != 'undefined' && nextbox) {
+                          var success = false;
+                          var tiletype;
+                          var boxarray = nextbox.id.split("_");
+                          var digcoords = boxarray[0] + "_" + boxarray[1];
+                          var changeto = "empty";
+                          var classarray = [].slice.apply(nextbox.classList);
+                          var changefrom = classarray.join(" ");
+                          if (Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "ladder") {
+                            myLadders += 1;
 
+                            success = true;
+                            changeto = "empty";
+                            lastEnter = Date.now();
+                          }
+                          if (Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "platform") {
+                            myPlatforms += 1;
+
+                            success = true;
+                            changeto = "empty";
+                            lastEnter = Date.now();
+                          }
+                          if (Date.now() - lastEnter > moveSpeed && nextbox.classList.item(1) == "wall") {
+                            myPlatforms += 1;
+
+                            success = true;
+                            changeto = "empty";
+                            lastEnter = Date.now();
+                          }
+                        if (Date.now() - lastEnter > moveSpeed && nextbox.className == "soil") {
+                          mySoil += 1;
+                          success = true;
+                          changeto = "empty";
+                          lastEnter = Date.now();
+                        }
+                        if (Date.now() - lastEnter > moveSpeed && nextbox.className == "soil2" && pickaxeLevel >= 1 ) {
+                          success = true;
+                          changeto = "soil";
+                        }
+                        else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "wood") {
+                          myWood += 1;
+                          success = true;
+                          changeto = "empty";
+                          lastEnter = Date.now();
+                        }
+                        else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "rock" && pickaxeLevel >= 1 ) {
+                          myRocks += 1;
+                          success = true;
+                          changeto = "empty";
+                          lastEnter = Date.now();
+                        }
+                        else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "ironore" && pickaxeLevel >= 2 ) {
+                          myIronOre += 1;
+                          success = true;
+                          changeto = "empty";
+                          lastEnter = Date.now();
+                        }
+                        else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "silverore" && pickaxeLevel >= 3 ) {
+                          mySilverOre += 1;
+                          success = true;
+                          changeto = "empty";
+                          lastEnter = Date.now();
+                        }
+                        else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "goldore" && pickaxeLevel >= 3 ) {
+                          myGoldOre += 1;
+                          lastEnter = Date.now();
+                        }
+                        else if (Date.now() - lastEnter > moveSpeed && nextbox.className == "diamond" && pickaxeLevel >= 4 ) {
+                          myDiamonds += 1;
+                          success = true;
+                          changeto = "empty";
+                          lastEnter = Date.now();
+                        }
+                        if (success == true) {
+                        $.ajax({
+                          method: 'POST',
+                          url: '/mine/dig',
+                          data: {
+                            'coords': digcoords,
+                            'changefrom': changefrom,
+                            'changeto': changeto,
+                          }
+                        });
+                      }
+                  }
                           }
 
                           //l for ladder placement
                           if (keys[76]) {
                             if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "ladder" && selected.classList.item(2) != "ladder" && myLadders > 0) {
-                              selected.classList.add("ladder");
                               myLadders -= 1
                               lastEnter = Date.now();
+                              var boxarray = selected.id.split("_");
+                              var placecoords = boxarray[0] + "_" + boxarray[1];
+                              var classarray = [].slice.apply(selected.classList);
+                              var changefrom = classarray.join(" ");
+                              placeTile(placecoords, changefrom, "empty ladder")
                             }
                           }
 
                           //p for platform placement
                           if (keys[80]) {
                             if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "platform" && selected.classList.item(2) != "platform" && myPlatforms > 0) {
-                              selected.classList.add("platform");
                               myPlatforms -= 1
                               lastEnter = Date.now();
+                              var boxarray = selected.id.split("_");
+                              var placecoords = boxarray[0] + "_" + boxarray[1];
+                              var classarray = [].slice.apply(selected.classList);
+                              var changefrom = classarray.join(" ");
+                              placeTile(placecoords, changefrom, "empty platform");
                             }
                           }
 
                           //i for vert plank placement
                           if (keys[73]) {
                             if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && selected.classList.item(1) != "wall" && selected.classList.item(2) != "wall" && myPlatforms > 0) {
-                              selected.classList.add("wall");
                               myPlatforms -= 1
                               lastEnter = Date.now();
+                              var boxarray = selected.id.split("_");
+                              var placecoords = boxarray[0] + "_" + boxarray[1];
+                              var classarray = [].slice.apply(selected.classList);
+                              var changefrom = classarray.join(" ");
+                              placeTile(placecoords, changefrom, "empty wall");
                             }
                           }
 
@@ -309,9 +339,13 @@
                     //s for soil placement
                     if (keys[83]) {
                       if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && mySoil > 0) {
-                        selected.className = "soil";
                         mySoil -= 1
                         lastEnter = Date.now();
+                        var boxarray = selected.id.split("_");
+                        var placecoords = boxarray[0] + "_" + boxarray[1];
+                        var classarray = [].slice.apply(selected.classList);
+                        var changefrom = classarray.join(" ");
+                        placeTile(placecoords, changefrom, "soil");
                       }
                     }
 
@@ -321,17 +355,38 @@
                         selected.className = "wood";
                         myWood -= 1
                         lastEnter = Date.now();
+                        var boxarray = selected.id.split("_");
+                        var placecoords = boxarray[0] + "_" + boxarray[1];
+                        var classarray = [].slice.apply(selected.classList);
+                        var changefrom = classarray.join(" ");
+                        placeTile(placecoords, changefrom, "wood");
                       }
                     }
 
                     //r for rock placement
                     if (keys[82]) {
                       if (Date.now() - lastEnter > moveSpeed && selected.classList.item(0) == "empty" && myRocks > 0) {
-                        selected.className = "rock";
                         myRocks -= 1
                         lastEnter = Date.now();
+                        var boxarray = selected.id.split("_");
+                        var placecoords = boxarray[0] + "_" + boxarray[1];
+                        var classarray = [].slice.apply(selected.classList);
+                        var changefrom = classarray.join(" ");
+                        placeTile(placecoords, changefrom, "rock");
                       }
                     }
+
+                  function placeTile(placecoords, changefrom, changeto) {
+                    $.ajax({
+                      method: 'POST',
+                      url: '/mine/place',
+                      data: {
+                        'coords': placecoords,
+                        'changefrom': changefrom,
+                        'changeto': changeto,
+                      }
+                    });
+                  }
 
                       e.preventDefault();
 
@@ -370,7 +425,6 @@ window.setInterval( function(){
 
   function select_box(id)
 {
-    console.log(id);
     selected = document.getElementById(id);
      selected.classList.add('highlight');
     setTimeout(function(){ selected.classList.remove('highlight') }, 500);

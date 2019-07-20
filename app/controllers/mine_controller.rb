@@ -24,8 +24,24 @@ class MineController < ApplicationController
   end
 
   def dig
+    ActionCable.server.broadcast 'minemap_channel',
+      coords: params[:coords],
+      changefrom: params[:changefrom],
+      changeto: params[:changeto]
+    head :ok
+    @tile = Minetile.find_by(coords: params[:coords])
+    @tile.fgclass = params[:changeto]
+    @tile.save!
   end
 
   def place
+    ActionCable.server.broadcast 'minemap_channel',
+      coords: params[:coords],
+      changefrom: params[:changefrom],
+      changeto: params[:changeto]
+    head :ok
+    @tile = Minetile.find_by(coords: params[:coords])
+    @tile.fgclass = params[:changeto]
+    @tile.save!
   end
 end

@@ -47,7 +47,9 @@ Rails.application.routes.draw do
   get 'mine/move'
   post 'mine/move'
   get 'mine/dig'
+  post 'mine/dig'
   get 'mine/place'
+  post 'mine/place'
 
   get 'password_resets/new'
   get 'password_resets/edit'
