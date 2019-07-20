@@ -1,6 +1,7 @@
 <div class="box">
 <h1>Log in</h1>
 <p>Not registered? <%= link_to 'Create an account', register_path %>.</p>
+<p>If you just registered, please check your email for a confirmation email from app136272442@heroku.com and follow the link in that email to activate your account.</p>
 <%= form_for(:session, url: login_path) do |f| %>
   <%= f.email_field :email, placeholder: 'email', require: true %>
   <%= f.password_field :password, placeholder: 'Password', require: true %><br>
