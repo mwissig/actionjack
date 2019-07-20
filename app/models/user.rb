@@ -39,7 +39,7 @@ class User < ApplicationRecord
       @user.set_confirmation_token
       @user.save(validate: false)
                   UserMailer.registration_confirmation(@user).deliver_now
-     flash[:success] = "Please confirm your email address to continue"
+     flash[:success] = "Please confirm your email address to continue.<br>Check your spam folder for an email from app136272442@heroku.com and follow the link in that email."
   else
      flash[:error] = "Invalid, please try again"
      render :new

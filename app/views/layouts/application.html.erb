@@ -21,16 +21,8 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="content">
-      <% if flash[:notice] %>
-    <% flash.each do |key, value| %>
-  <%= content_tag :div, value, class: "flash #{key}" %>
-  <% end %>
-  <% end %>
-  <% if flash[:error] %>
-  <% flash.each do |key, value| %>
-  <%= content_tag :div, value, class: "flash #{key}" %>
-  <% end %>
-  <% end %>
+  <%= flash[:notice].html_safe unless flash[:notice].blank? %>
+  <%= flash[:error].html_safe unless flash[:error].blank? %>
   <div class="scrollbox">
     <%= yield %>
     </div>
