@@ -13,6 +13,10 @@ Hello <%= @current_user.profile.username %>
 <li><%= link_to mine_path do %>
   Test the mine (under construction, no points)<br>
 <%= image_tag("minelogo.png", title: "Enter the mine" ) %>
+<br>Current status: Multiplayer online building is live
+<br>Items in inventory do not save yet and are generated on load.
+<br>New players do not show up when they come online without reload.
+<br>Some bugs with player movement.
 <% end %>
 </li>
 </ul>
