@@ -1,9 +1,11 @@
 <div class="box">
 <h1>Sign up</h1>
 <%= simple_form_for User.new do |f| %>
-<small>Please enter a valid email address. We will not share this information with anyone.</small><br>
+<small>Please enter a valid email address. We need this information so you can reset your password if you forget it.</small><br>
   <%= f.email_field :email, placeholder: 'Enter your email address', require: true %><br>
-  <small>We will send you a confirmation email from auto.mailer.for.developemnt@gmail.com to activate your account. Due to issues with our gmail account, your account will automatically be activated within 24 hours. If you do not recieve an activation email, please wait until you can log in or contact me and I can manually activate your account. </small><br>
+  <small>
+<p>After you register, please check your email (it may be in your spam folder!) for a confirmation email from app136272442@heroku.com and follow the link in that email to activate your account.</p>
+  </small><br>
 <%= f.hidden_field(:time_zone, value: nil) %>
   <%= f.password_field :password, placeholder: 'Create a password', require: true, minlength: 6 %><br>
   <%= f.password_field :password_confirmation, placeholder: 'Repeat password to confirm', require: true, minlength: 6 %><br>
