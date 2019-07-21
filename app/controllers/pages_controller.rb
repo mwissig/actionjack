@@ -152,6 +152,10 @@ def pic2
 end
 
 def mine
+  @gametype = "mine"
+  @gameid = 1
+  @gamechats = Gamechat.where("game_type = ? and game_id = ?", "mine", 1).last(200)
+@gamechattitle = "Mine Chat"
     @players = Mineplayer.all
     @activeplayers = @players.where('updated_at > ?', 1.hour.ago)
     @tiles = Minetile.all.order("created_at ASC")

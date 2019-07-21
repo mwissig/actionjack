@@ -6,12 +6,52 @@
   visibility: hidden !important;
   max-height: 0px;
 }
-#touchcontrols {
-  position: relative;
-
+#minetouchcontrols {
+  visibility: hidden;
+  position: absolute;
+  bottom: 3em;
+  max-width: calc(100% - 4em);
   z-index: 10;
+  margin: 0 auto;
+  display:grid;
+  grid-template-columns: 50% 50%;
 }
+#minedpad {
 
+}
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 30px);
+    grid-template-rows: repeat(3, 30px);
+}
+.dpad div {
+  display: flex;
+align-items: center;
+justify-content: center;
+}
+.dpad div:nth-child(even) {
+  background: gray;
+  border: 1px solid black;
+}
+.dpad div:nth-child(2) {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.dpad div:nth-child(4) {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.dpad div:nth-child(6) {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.dpad div:nth-child(8) {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+#minebuttons {
+
+}
 #focus, #helpmodal{
   position: absolute;
   width: 100%;

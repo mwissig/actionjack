@@ -2,11 +2,13 @@
     <%  @gamechat = @current_user.gamechats.new %>
     <% end %>
 
-<div id="gamechat">
+<div id="gamechat" onclick="focusGamechat()">
   <div id='gamechats'>
       <div id="gamechatheader">
 <% if @gametype == "tictactoe" %>
 Tic Tac Toe <%= @user_x.profile.username %> vs <%= @user_o.profile.username %> Game Chat
+<% else %>
+<%= @gamechattitle %>
 <% end %>
       </div>
       <div id="gamechatlist_<%= @gametype %>_<%= @gameid %>" class="chatlist gamechatlist">

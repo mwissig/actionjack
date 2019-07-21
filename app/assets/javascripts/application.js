@@ -34,3 +34,8 @@ function focusLobby() {
   focusmodal.classList.remove("hidden");
   chatFocus = true;
 }
+
+function focusGamechat() {
+  focusmodal.classList.remove("hidden");
+  chatFocus = true;
+}
