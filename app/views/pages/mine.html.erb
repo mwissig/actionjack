@@ -23,7 +23,9 @@
     <li>R to place rocks</li>
     <li>W to place wood</li>
   </ul>
-  Get a more powerful pickaxe to mine harder blocks.
+  Get a more powerful pickaxe to mine harder blocks.<br>
+  If you get stuck inside something, click here to respawn somwhere safe:<br>
+  <button id="panic" onclick="panic()">Help me!</button>
 </p><p>
   This game is under construction:
   <ul>
@@ -205,6 +207,12 @@
                     var keys = [];
                     var lastEnter = Date.now();
 
+function panic() {
+  deltaX = 275;
+  deltaY = 785;
+  movePlayer();
+  locatePlayer();
+}
 
                     function keysPressed(e) {
                       // store an entry for every key pressed
