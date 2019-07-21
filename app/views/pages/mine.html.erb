@@ -11,6 +11,8 @@
     <div class="closehelp" onclick="closeHelp()"><i class="fas fa-times-circle"></i></div>
 
     <h3>How to play</h3>
+    <button id="toggletouch" onclick="toggletouch()">Toggle touch controls</button>
+    <h4>Keyboard controls:</h4>
     <p>
     Use arrow keys to move<br>
     Hold space and use arrow keys to mine<br>
@@ -23,7 +25,8 @@
     <li>R to place rocks</li>
     <li>W to place wood</li>
   </ul>
-  Get a more powerful pickaxe to mine harder blocks.<br>
+  Get a more powerful pickaxe to mine harder blocks.</p>
+  <p>
   If you get stuck inside something, click here to respawn somwhere safe:<br>
   <button id="panic" onclick="panic()">Help me!</button>
 </p><p>
@@ -32,6 +35,7 @@
     <li>Items in your inventory are currently not saved.</li>
    <li>There are some bugs when interacting with ladders and platforms.</li>
    <li>Other users that come online while you are playing will not be visible unless you reload.</li>
+   <li>The only button that works for the touch controls is "up".</li>
    <li>Pickaxes above Iron have not yet been programmed into the game, making resources harder than Rock inaccessible.</li>
  </ul>
 </p>
@@ -44,19 +48,19 @@
   </div>
 </div>
 
-<div id="minetouchcontrols">
+<div id="minetouchcontrols" class="hidden">
   <div id="minedpad">
     <div class="dpad">
       <div></div>
-      <div><i class="fas fa-caret-up"></i></div>
+      <div onclick="moveUp()"><span><i class="fas fa-caret-up"></i></span></div>
       <div></div>
 
-      <div><i class="fas fa-caret-left"></i></div>
+      <div onclick="moveLeft()"><span><i class="fas fa-caret-left"></i></span></div>
       <div></div>
-      <div><i class="fas fa-caret-right"></i></div>
+      <div onclick="moveRight()"><span><i class="fas fa-caret-right"></i></span></div>
 
       <div></div>
-      <div><i class="fas fa-caret-down"></i></div>
+      <div onclick="moveDown()"><span><i class="fas fa-caret-down"></i></span></div>
       <div></div>
     </div>
 
@@ -214,6 +218,49 @@ function panic() {
   locatePlayer();
 }
 
+function toggletouch() {
+  var touchcontrols = document.getElementById('minetouchcontrols');
+  touchcontrols.classList.toggle('hidden');
+}
+function moveLeft() {
+  mybox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+  nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + Math.floor(deltaX / 30) + '_foreground');
+  if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaX > 15 && nextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "wall" && mybox.classList.item(2) != "wall" ) {
+    deltaX -= 30;
+    lastEnter = Date.now();
+  }
+}
+function moveRight() {
+  nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 2) + '_foreground');
+  if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaX < 8955 && nextbox.classList.item(0) == "empty" && nextbox.classList.item(1) != "wall" && nextbox.classList.item(2) != "wall" ) {
+    deltaX += 30;
+    lastEnter = Date.now();
+  }
+}
+function moveUp() {
+  mybox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+  nextbox = document.getElementById((40 - Math.floor(deltaY / 30)) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+  doublebox = document.getElementById((40 - Math.floor(deltaY / 30) - 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+  groundbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+  if (chatFocus == false && Date.now() - lastEnter > moveSpeed && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
+
+  if (deltaY < 1185 && nextbox.classList.item(0) == "empty" && doublebox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "platform" || mybox.classList.item(2) == "platform" ) {
+    deltaY += 60;
+    lastEnter = Date.now();
+  }
+    else if (deltaY > 45 && nextbox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder" || mybox.classList.item(1) == "platform" || mybox.classList.item(2) == "platform" ) {
+      deltaY += 30;
+      lastEnter = Date.now();
+    }
+  }
+}
+function moveDown() {
+  nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+    if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaY > 45 && nextbox.classList.item(0) == "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
+      deltaY -= 30;
+      lastEnter = Date.now();
+    }
+}
                     function keysPressed(e) {
                       // store an entry for every key pressed
                       keys[e.keyCode] = true;
@@ -259,11 +306,11 @@ function panic() {
 
                       // down
                       if (keys[40]) {
-                      nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
-                        if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaY > 45 && nextbox.classList.item(0) == "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
-                          deltaY -= 30;
-                          lastEnter = Date.now();
-                        }
+                        nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 2) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
+                          if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaY > 45 && nextbox.classList.item(0) == "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
+                            deltaY -= 30;
+                            lastEnter = Date.now();
+                          }
                       }
 
                       //space to dig
