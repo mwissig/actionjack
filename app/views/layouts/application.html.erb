@@ -10,12 +10,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+<meta property="og:title" content="Crepuscular Games">
+<meta property="og:description" content="A multiplayer online game and chat site.">
+<meta property="og:image" content="<%= image_path('fb_card.png') %>">
+<meta property="og:url" content="https://crepuscular.herokuapp.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:site_name" content="Crepuscular Games">
+<meta name="twitter:image:alt" content="Explore the mine at Crepuscular Games!">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display|Fascinate+Inline|Roboto+Condensed&display=swap" rel="stylesheet">
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '910811449272709');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=910811449272709&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
   </head>
 
   <body>
