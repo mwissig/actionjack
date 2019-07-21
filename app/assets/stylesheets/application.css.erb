@@ -713,12 +713,17 @@ canvas {
   border-radius: 3px;
   margin: 4px 2px;
 }
+.collapse {
+    max-height: 2em !important;
+  }
 
 @media only screen and (max-width: 600px) {
   body {
     font-size: 14px;
   }
-
+  .lowergamechat {
+    bottom: 2em !important;
+  }
   header {
     height: 35px;
     max-height: 35px;
@@ -743,7 +748,7 @@ canvas {
   .scrollbox {
     width: 100vw;
         margin: 0 auto;
-      height: calc(80vh - 50px);
+      height: calc(100vh - 6em);
       overflow-y: scroll;
       overflow-x: hidden;
   }
@@ -774,6 +779,8 @@ canvas {
     bottom: 20vh;
     top: auto;
   }
+
+
 
   #lobbyform input, #gamechatform input {
     width: calc(100vw - 77px);

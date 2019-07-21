@@ -4,7 +4,7 @@
 
 <div id="gamechat" onclick="focusGamechat()">
   <div id='gamechats'>
-      <div id="gamechatheader">
+      <div id="gamechatheader" onclick="collapseGamechat()">
 <% if @gametype == "tictactoe" %>
 Tic Tac Toe <%= @user_x.profile.username %> vs <%= @user_o.profile.username %> Game Chat
 <% else %>

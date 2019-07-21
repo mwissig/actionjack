@@ -1,4 +1,4 @@
-<div class="box">
+<div class="box" id="minebox">
       <% if logged_in? %>
   <div class="minecontainer" id="mapbox">
 <div id="focus" onclick="focusGame()">
@@ -485,6 +485,8 @@ window.setInterval( function(){
     setTimeout(function(){ selected.classList.remove('highlight') }, 500);
 }
 locatePlayer();
+
+
 
                   </script>
                             <% end %>

@@ -39,3 +39,37 @@ function focusGamechat() {
   focusmodal.classList.remove("hidden");
   chatFocus = true;
 }
+var lobbyOpen = true;
+var gameChatOpen = true;
+function collapseLobby() {
+  document.getElementById("lobbylist").classList.toggle("hidden");
+  document.getElementById("lobbyform").classList.toggle("hidden");
+  document.getElementById("lobby").classList.toggle("collapse");
+  lobbyOpen = !lobbyOpen;
+  if (lobbyOpen == true) {
+    document.getElementById("gamechat").classList.remove("lowergamechat");
+  }
+  if (lobbyOpen == false) {
+    document.getElementById("gamechat").classList.add("lowergamechat");
+  }
+}
+
+function collapseGamechat() {
+
+  document.getElementById("gamechatform").classList.toggle("hidden");
+  document.getElementById("gamechat").classList.toggle("collapse");
+  if (lobbyOpen == false) {
+    document.getElementById("gamechat").classList.add("lowergamechat");
+  }
+  if (lobbyOpen == true) {
+    document.getElementById("gamechat").classList.remove("lowergamechat");
+  }
+  gameChatOpen = !gameChatOpen;
+}
+
+window.onload = function() {
+if (screen.height < 800) {
+  collapseGamechat();
+  collapseLobby();
+}
+};
