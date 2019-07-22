@@ -72,4 +72,8 @@ if (screen.height < 800) {
   collapseGamechat();
   collapseLobby();
 }
+var mapbox = document.getElementById('mapbox');
+if (mapbox) {
+mapbox.classList.remove('wait');
+}
 };

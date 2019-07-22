@@ -1,6 +1,6 @@
 <div class="box" id="minebox">
       <% if logged_in? %>
-  <div class="minecontainer" id="mapbox">
+  <div class="minecontainer wait" id="mapbox">
 <div id="focus" onclick="focusGame()">
   <div id="focusinner">Controls deactivated while chat is in use.<br>
   Click the game window to resume play.
@@ -48,7 +48,7 @@
   </div>
 </div>
 
-<div id="minetouchcontrols" class="hidden">
+<div id="minetouchcontrols" class="">
   <div id="minedpad">
     <div class="dpad">
       <div></div>
@@ -542,6 +542,7 @@ window.setInterval( function(){
     setTimeout(function(){ selected.classList.remove('highlight') }, 500);
 }
 locatePlayer();
+
 
 
 

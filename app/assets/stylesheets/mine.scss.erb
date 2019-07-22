@@ -6,6 +6,9 @@
   visibility: hidden !important;
   max-height: 0px;
 }
+.wait {
+  cursor: wait;
+}
 #minetouchcontrols {
   position: absolute;
   bottom: 3em;
@@ -20,8 +23,10 @@
 }
 .dpad {
   display: grid;
+  margin-left: 1em;
   grid-template-columns: repeat(3, 30px);
     grid-template-rows: repeat(3, 30px);
+    grid-gap: 2px;
 }
 .dpad div {
   display: flex;
@@ -42,6 +47,7 @@ justify-content: center;
   -webkit-box-shadow: 0.5px 1.5px 2px 0.5px rgba(0,0,0,0.5);
 -moz-box-shadow: 0.5px 1.5px 2px 0.5px rgba(0,0,0,0.5);
 box-shadow: 0.5px 1.5px 2px 0.5px rgba(0,0,0,0.5);
+  cursor: pointer;
 
 }
 .dpad div:nth-child(2) {
@@ -89,6 +95,7 @@ position: relative;
 }
 #questionmark {
 color: black;
+cursor: help;
 }
 .closehelp {
   position: absolute;
@@ -97,6 +104,7 @@ color: black;
 
   font-size: 30px;
   color: red;
+  cursor: pointer;
 }
 .closehelp:hover {
   color: rgb(92, 0, 0);
@@ -126,7 +134,7 @@ overflow: hidden;
 }
 .minesquare {
   z-index: 1;
-
+ cursor: cell;
 }
 .mineforeground {
   width: 100%;
@@ -349,6 +357,7 @@ height: 34px;
   font-family: 'Roboto Condensed', sans-serif;
   color: black;
   text-align: center;
+    cursor: pointer;
 }
 #panic:hover {
   background-color: rgb(92, 0, 0);
