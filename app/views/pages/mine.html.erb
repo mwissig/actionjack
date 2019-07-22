@@ -215,7 +215,6 @@ function panic() {
   deltaX = 275;
   deltaY = 785;
   movePlayer();
-  locatePlayer();
 }
 
 function toggletouch() {
@@ -510,6 +509,9 @@ window.setInterval( function(){
   divHeight = mapDiv.offsetHeight;
   if (chatFocus == true) {
     focusmodal.classList.remove("hidden");
+  }
+  if deltaY <= 35 {
+    panic();
   }
   var myItems = document.getElementById('myItems');
   document.getElementById('pickaxetype').innerHTML = pickaxeName;
