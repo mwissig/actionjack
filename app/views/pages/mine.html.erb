@@ -510,7 +510,7 @@ window.setInterval( function(){
   if (chatFocus == true) {
     focusmodal.classList.remove("hidden");
   }
-  if deltaY <= 35 {
+  if (deltaY <= 35) {
     panic();
   }
   var myItems = document.getElementById('myItems');
