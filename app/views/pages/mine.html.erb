@@ -35,7 +35,7 @@
     <li>Items in your inventory are currently not saved.</li>
    <li>There are some bugs when interacting with ladders and platforms.</li>
    <li>Other users that come online while you are playing will not be visible unless you reload.</li>
-   <li>The only button that works for the touch controls is "up".</li>
+   <li>Touch controls only work for directional movement.</li>
    <li>Pickaxes above Iron have not yet been programmed into the game, making resources harder than Rock inaccessible.</li>
  </ul>
 </p>
@@ -47,7 +47,7 @@
 </p>
   </div>
 </div>
-
+<div id="questionmark" onclick="openHelp()"><i class="fas fa-question-circle"></i></div>
 <div id="minetouchcontrols" class="hidden">
   <div id="minedpad">
     <div class="dpad">
@@ -117,7 +117,7 @@
                       <div title="Silver"><%= image_tag('mine/ore_silver.png', title: 'Silver' )  %><span id="silverorecount"></span></div>
                       <div title="Gold"><%= image_tag('mine/ore_gold.png', title: 'Gold' )  %><span id="goldorecount"></span></div>
                       <div title="Diamonds"><%= image_tag('mine/ore_diamond.png', title: 'Diamonds' )  %><span id="diamondcount"></span></div>
-<span id="questionmark" onclick="openHelp()"><i class="fas fa-question-circle"></i></span>
+
 
 
                     <% else %>
@@ -221,12 +221,15 @@ function toggletouch() {
   var touchcontrols = document.getElementById('minetouchcontrols');
   touchcontrols.classList.toggle('hidden');
 }
+
+var nextbox;
 function moveLeft() {
   mybox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + (Math.floor(deltaX / 30) + 1) + '_foreground');
   nextbox = document.getElementById((40 - Math.floor(deltaY / 30) + 1) + "_" + Math.floor(deltaX / 30) + '_foreground');
   if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaX > 15 && nextbox.classList.item(0) == "empty" && mybox.classList.item(1) != "wall" && mybox.classList.item(2) != "wall" ) {
     deltaX -= 30;
     lastEnter = Date.now();
+    movePlayer();
   }
 }
 function moveRight() {
@@ -234,6 +237,7 @@ function moveRight() {
   if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaX < 8955 && nextbox.classList.item(0) == "empty" && nextbox.classList.item(1) != "wall" && nextbox.classList.item(2) != "wall" ) {
     deltaX += 30;
     lastEnter = Date.now();
+    movePlayer();
   }
 }
 function moveUp() {
@@ -246,10 +250,12 @@ function moveUp() {
   if (deltaY < 1185 && nextbox.classList.item(0) == "empty" && doublebox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "platform" || mybox.classList.item(2) == "platform" ) {
     deltaY += 60;
     lastEnter = Date.now();
+    movePlayer();
   }
     else if (deltaY > 45 && nextbox.classList.item(0) == "empty" && groundbox.classList.item(0) != "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder" || mybox.classList.item(1) == "platform" || mybox.classList.item(2) == "platform" ) {
       deltaY += 30;
       lastEnter = Date.now();
+      movePlayer();
     }
   }
 }
@@ -258,6 +264,7 @@ function moveDown() {
     if (chatFocus == false && Date.now() - lastEnter > moveSpeed && deltaY > 45 && nextbox.classList.item(0) == "empty" || mybox.classList.item(1) == "ladder" || mybox.classList.item(2) == "ladder") {
       deltaY -= 30;
       lastEnter = Date.now();
+      movePlayer();
     }
 }
                     function keysPressed(e) {
