@@ -26,6 +26,9 @@ class PagesController < ApplicationController
   def games
   end
 
+def faq
+end
+
 def slots
         @slot = Slot.first
         @last_winner = User.find_by(id: @slot.last_winner_id)

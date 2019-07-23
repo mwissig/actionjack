@@ -1,0 +1,24 @@
+<div class="box cardsuits">
+  <h2>About This Site</h2>
+<p>Crepuscular Games is a games community made by Milo Wissig with Rails and JavaScript. The project is inspired by Neopets, where I first learned HTML when I was 12, as well as 90s chat room games, Twitch, and Terraria. I will be adding more games and community features as I build the site out.</p>
+<h3>FAQ</h3>
+<p>
+  <b>I keep getting an error page when I try to register!</b></p>
+  For the first few months I ran the site, I used a gmail address to send user confirmation emails. This used to work, but gmail increased their security and no longer allows automated emails to be sent from their addresses. If you registered at that time, I automatically approved all the accounts that were created. Please try logging in with the username and password you made.</p>
+  <p>If it happened recently, it is still likely that your registration went through. There is a bug I have been unable to fix where a successful registration redirects you to a page that does not exist, and I have been unable to find where in the code this is happening and unable to replicate the problem on the test server. It is most likely because I use a different type of database on the test server that occasionally uses slightly different code. Please check your spam folder for the confirmation email. If it isn't there: is your password between 6 and 32 characters? Is your email address under 100 characters?</p>
+  <p>If you are still unable to register, please email me at mwissig@gmail.com.</p>
+  <p>
+  <b>What parts of this site did you make?</b>
+</p>
+  <p>
+  Essentially everything on the front and back end including the login and registration pages, the chat rooms, the games, and the art used in the games.
+  I'm using Rails 5, which is a framework for building web apps that have a back end written in Ruby, so I get everything that comes with, including ActionCable (this is the thing that lets you see what other people are doing on the site, live, without refreshing the page) and mailers (the things that send emails) that are fairly straightforward to set up, but don't exactly come with instructions, either.
+</p><p>
+  Certain parts are Rails gems which are add-ons for Rails that other people have made, such CKeditor for the WYSIWYG editor on some of the text fields, jsTimezoneDetect to detect your time zone and simple_form to interpret it, and will_paginate to separate content into pages. Also Sentry, which emails me about errors, and Figaro, which stores passwords to things like email accounts where you can't see them in the code. And Bcrypt, which encrypts your password, so I can't even see it in my own database. (Yes, I can see everything else in the database.) There are a few JavaScript libraries as well, like the jscolor colorpicker. I use the Fontawesome icon library for some of the icons used throughout the site, a little bit of animate.css, and a fireworks animation by Eddie Lin. I used heavily edited stock photos to make a lot of the graphics as well.
+</p><p>
+  Everything else is coded from scratch. I'm avoiding looking up tutorials on how to make games, and other people's other games, as source material for now, because I'm trying to figure out how much I can do based on my own programming knowledge. I'm still learning new things in the process, of course.</p>
+  <p>
+  <b>What is Herokuapp.com?</b></p>
+  <p>
+  Heroku is a free service for hosting apps that have a back end that makes it easy to set up servers. I'm still using a Heroku subdomain because I haven't bought a domain (such as crepusculargames.com) for this site. However, this site uses enough data that I'm currently paying $16/mo for hosting, so I'm probably moving to my own domain soon, because the cost of that is essentially nothing in comparison. Mostly it's a matter of deciding whether I want to change the name of the site before I buy a domain.</p>
+</div>

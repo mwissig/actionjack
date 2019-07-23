@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
 
 
+  get 'faq' => 'pages#faq'
   get 'admin' => 'pages#admin'
 
   get 'checkers/new'
