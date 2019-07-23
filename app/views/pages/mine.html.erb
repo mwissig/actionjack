@@ -83,8 +83,6 @@
       <% else %>
       <% @object = "" %>
       <% end %>
-
-
                           <div id="<%= tile.coords %>_background" class="minesquare <%= @type %>">
                             <div id="<%= tile.coords %>_foreground" class="<%= @object %>" onClick="select_box(this.id)"></div>
                           </div>
@@ -99,11 +97,7 @@
                           </div>
                           <% @shift -= 30 %>
                         <% end %>
-
-
-
                       </div>
-
                     </div>
 
                     <div class="mineinventory">
