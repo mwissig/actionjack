@@ -128,6 +128,7 @@ text-shadow: 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white, -1px -1px 0 wh
   grid-template-rows: repeat(40, 30px);
   overflow: scroll;
   max-height: 70vh;
+  max-width: 100%;
   background: rgb(125,185,232);
   background: -moz-linear-gradient(top,  rgba(30,87,153,1) 0%, rgba(125,185,232,1) 50%, rgba(125,185,232,1) 50%);
   background: -webkit-linear-gradient(top,  rgba(30,87,153,1) 0%,rgba(125,185,232,1) 50%,rgba(125,185,232,1) 50%);
@@ -389,10 +390,14 @@ height: 34px;
   background-color: rgb(130, 205, 160);
 }
 @media only screen and (max-width: 600px) {
-
-
+#mapbox {
+    max-width: calc(100% - 2em);
+}
+#questionmark {
+  right: 2em;
+}
 #minemap {
-  max-width: 100%;
+
   max-height: calc(100vh - 10em);
   height: calc(100vh - 10em);
 }
@@ -400,5 +405,7 @@ height: 34px;
 }
 
 @media only screen and (max-height: 800px) {
-
+#minemap {
+  max-height: calc(100vh - 12em);
+}
 }
