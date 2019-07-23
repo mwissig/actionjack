@@ -55,7 +55,8 @@ function collapseLobby() {
 }
 
 function collapseGamechat() {
-
+var gamechatform = document.getElementById("gamechatform");
+if (gamechatform) {
   document.getElementById("gamechatform").classList.toggle("hidden");
   document.getElementById("gamechat").classList.toggle("collapse");
   if (lobbyOpen == false) {
@@ -66,11 +67,19 @@ function collapseGamechat() {
   }
   gameChatOpen = !gameChatOpen;
 }
-
+}
+function removeScroll() {
+  var scrollbox = document.getElementById("scrollbox");
+  var minemap = document.getElementById("minemap");
+  if (scrollbox && minemap) {
+    scrollbox.classList.add("noscroll");
+  }
+}
 window.onload = function() {
 if (screen.height < 800) {
   collapseGamechat();
   collapseLobby();
+  removeScroll();
 }
 var mapbox = document.getElementById('mapbox');
 if (mapbox) {

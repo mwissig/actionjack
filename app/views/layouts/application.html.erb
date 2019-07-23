@@ -50,7 +50,7 @@
     <div class="content">
   <%= flash[:notice].html_safe unless flash[:notice].blank? %>
   <%= flash[:error].html_safe unless flash[:error].blank? %>
-  <div class="scrollbox">
+  <div id="scrollbox" class="scrollbox">
     <%= yield %>
     </div>
     <% if @lobbychats != nil %>
