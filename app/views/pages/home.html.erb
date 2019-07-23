@@ -90,8 +90,8 @@ Hello <%= @current_user.profile.username %>
   <h3>Log in to Explore the Mine</h3>
     <div class="minelinkbox minecontainer wait" id="mapbox">
       <div class="minelink">
-        <% @minelinktiles = Minetile.all.where("xcoord > ? AND ycoord > ? AND xcoord < ? AND ycoord < ?", 11, 20, 19, 41).limit(140)
-.each do |tile| %>
+
+<% @minelinktiles.each do |tile| %>
         <% if tile.bgclass != nil %>
           <% @type = tile.bgclass %>
         <% else %>
